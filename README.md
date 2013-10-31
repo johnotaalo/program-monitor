@@ -1,3 +1,8 @@
+=======
+platform_rb
+===========
+
+Platform Project with HMVC 
 # CodeIgniter 2.1 + HMVC + RedBean 3
 
 Setup ready to use CodeIgniter framework with:
@@ -58,3 +63,6 @@ You can find the standard welcome page in:
 - [HMVC detail page](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/overview)
 - [RedBean manual](http://www.redbeanphp.com/)
 - [RedBean forum](http://groups.google.com/group/redbeanorm)
+
+
+
