@@ -114,6 +114,7 @@
 .btn-group {
 	font-size: 20px;
 }
+
 .item label{
 	width:20%;
 }
@@ -275,6 +276,7 @@ input[type='text'], input[type='password'] {
 	border: 1px solid #aaa;
 	color: #555555;
 	padding: 4px;
+	margin: 6px;
 }
 form.login label {
 	float: left;
