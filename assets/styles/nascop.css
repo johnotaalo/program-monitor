@@ -120,6 +120,10 @@
 .item{	
 	margin-bottom:10px;
 }
+.item .input-group .input-group-addon{
+	background:#D3DCE3;
+	border: 1px solid #aaa;
+}
 .firm_name {
 	color: #28b7e8;
 	margin-top: 5px;
@@ -152,19 +156,15 @@
 	overflow: hidden;
 }
 #footer {
-	width: 95%;
-	margin: 5px 2% 5px 2%;
+	padding:2%;
+	width:100%;
+	height:10%;
+	position:fixed;
+	bottom:0;
 	text-align: center;
+	background:#D3DCE3;
 }
-#bottom_ribbon {
-	background: white;
-	height: 30px;
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-	margin: 0 auto;
-	border-top: 2px solid #DDD;
-}
+
 .sidebar-content {
 	padding: 12em 0.5% 0.5% 1%;
 	width: 15.3%;
@@ -247,10 +247,10 @@ fieldset {
 	width:auto;
 	font-size:14px;
 }
-a.logo{
+div.logo{
 	padding-top:20px;
 	padding-bottom:20px;
-	border-bottom:2px solid #DDD;
+	background:#D3DCE3;
 }
 legend {
 	display: block;
