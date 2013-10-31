@@ -6,6 +6,14 @@
 
 <title><?php echo $title; ?></title>
 
+<!--Load style files-->
+<link href="<?php echo base_url().'assets/styles/bootstrap/bootstrap.min.css'?>"  type="text/css" rel="stylesheet" media="all">
+<link href="<?php echo base_url().'assets/styles/font-awesome/css/font-awesome.css'?>"  type="text/css" rel="stylesheet" media="all">
+<link href="<?php echo base_url().'assets/styles/datatables/jquery.dataTables.css'?>"  type="text/css" rel="stylesheet" media="all">
+<link href="<?php echo base_url().'assets/styles/jquery-ui.min.css'?>"  type="text/css" rel="stylesheet" media="all">
+<link href="<?php echo base_url().'assets/styles/nascop.css'?>"  type="text/css" rel="stylesheet" media="all">
+<link href="<?php echo base_url().'assets/images/favicon.ico'?>" rel="shortcut icon">
+
 <!--Load script files-->
 <script src="<?php echo base_url().'assets/scripts/jquery-1.10.2.min.js'?>" type="text/javascript"></script>
 <script src="<?php echo base_url().'assets/scripts/jquery-migrate-1.2.1.min.js'?>" type="text/javascript"></script>
@@ -14,11 +22,6 @@
 <script src="<?php echo base_url().'assets/scripts/bootstrap/bootstrap.min.js'?>" type="text/javascript"></script>
 <script src="<?php echo base_url().'assets/scripts/nascop.js'?>" type="text/javascript"></script>
 
-<!--Load style files-->
-<link href="<?php echo base_url().'assets/styles/bootstrap/bootstrap.min.css'?>"  type="text/css" rel="stylesheet" media="all">
-<link href="<?php echo base_url().'assets/styles/datatables/jquery.dataTables.css'?>"  type="text/css" rel="stylesheet" media="all">
-<link href="<?php echo base_url().'assets/styles/jquery-ui.min.css'?>"  type="text/css" rel="stylesheet" media="all">
-<link href="<?php echo base_url().'assets/styles/nascop.css'?>"  type="text/css" rel="stylesheet" media="all">
-<link href="<?php echo base_url().'assets/images/favicon.ico'?>" rel="shortcut icon">
+
 
 

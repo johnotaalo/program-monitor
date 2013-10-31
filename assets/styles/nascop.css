@@ -114,6 +114,12 @@
 .btn-group {
 	font-size: 20px;
 }
+.item label{
+	width:20%;
+}
+.item{	
+	margin-bottom:10px;
+}
 .firm_name {
 	color: #28b7e8;
 	margin-top: 5px;
@@ -269,7 +275,6 @@ input[type='text'], input[type='password'] {
 	border: 1px solid #aaa;
 	color: #555555;
 	padding: 4px;
-	margin: 6px;
 }
 form.login label {
 	float: left;
