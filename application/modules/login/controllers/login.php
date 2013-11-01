@@ -60,7 +60,7 @@ class Login extends MX_Controller {
 		return $message;
 	}
 
-	public function authenticate() {
+	public function process_credentials() {
 		$validated = $this -> form_validation -> run();
 		if ($validated) {
 			$username = $this -> input -> post("username", TRUE);
