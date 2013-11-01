@@ -39,10 +39,11 @@ class Login extends MX_Controller {
 
 	}
 
-	public function attempt() {
+	public function attempt($user_id) {
 		$username = $this -> input -> post("username", TRUE);
 		$attempt_limit = 4;
 		$message = "The username or password you entered is incorrect.";
+		$access_type = "denied";
 
 		if (!$this -> session -> userdata($username . '_attempt')) {
 			$attempt = 1;
@@ -53,7 +54,8 @@ class Login extends MX_Controller {
 			$this -> session -> set_userdata($username . '_attempt', $attempt);
 		} else {
 			$this -> deactivate_user($username);
-			$message = "This Account has been deactivated. Contact the administrator for assistance.";
+			$this -> write_log($user_id, $access_type);
+			$message = "This Account has been deactivated.<br/> Contact the administrator for assistance.";
 		}
 		return $message;
 	}
@@ -124,37 +126,60 @@ class Login extends MX_Controller {
 
 	public function encrypt_password($password) {
 		$key = $this -> encrypt -> get_key();
-		$encrypted_password = $this -> encrypt -> encode($password, $key);
+		$encrypted_password = $key . $password;
 		$password = md5($encrypted_password);
 		return $password;
 	}
 
+	public function logout() {
+		$user_id = $this -> session -> userdata("id");
+		$access_type = "logout";
+		$this -> write_log($user_id, $access_type);
+		$this -> session -> sess_destroy();
+		redirect("login");
+	}
+
 	public function user_variables($credentials) {
 		$session_data = array();
+		$access_type = "login";
+		$user_id = $credentials[0]['id'];
+
 		foreach ($credentials[0] as $index => $credential) {
 			if ($index != "Password") {
 				$session_data[$index] = $credential;
 			}
 		}
 		$this -> session -> set_userdata($session_data);
+		$this -> write_log($user_id, $access_type);
 	}
 
 	public function verify($credentials) {
 		$error_message = "The username or password you entered is incorrect.";
 		$access_level = $credentials[0]['indicator'];
+		$user_id = $credentials[0]['id'];
 
 		if ($credentials[0]['total'] == 0) {
 			$this -> session -> set_flashdata('error_message', $error_message);
 			redirect("login");
 		} else if ($credentials[0]['total'] == 1) {
 			if ($access_level != "admin") {
-				$error_message = $this -> attempt();
+				$error_message = $this -> attempt($user_id);
 			}
 			$this -> session -> set_flashdata('error_message', $error_message);
 			redirect("login");
 		} else {
 			$this -> clear_user($credentials);
 		}
+	}
+
+	public function write_log($user_id, $access_type) {
+		$log = R::dispense('userlog');
+		$log -> user = $user_id;
+		$log -> access_type = $access_type;
+		$log -> timestamp = date('Y-m-d H:i:s');
+		$log -> ip_address = $this -> input -> ip_address();
+		$log -> agent = $this -> input -> user_agent();
+		R::store($log);
 	}
 
 	public function template($data) {
