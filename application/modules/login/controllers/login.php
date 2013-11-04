@@ -7,14 +7,16 @@ class Login extends MX_Controller {
 	var $user_table = "users";
 	var $access_level_table = "access_level";
 	var $user_log_table = "userlog";
+	var $password_log_table = "passwordlog";
 
-	var $username_column = "username";
+	var $username_column = "Username";
 	var $password_column = "Password";
 	var $access_level_column = "access_level";
 	var $active_column = "Active";
 	var $authentication_column = "Signature";
 	var $time_updated_column = "Time_Created";
 	var $email_column = "Email_Address";
+	var $fullname_column = "Name";
 
 	var $access_level_indicator = "indicator";
 	var $admin_indicator = "admin";
@@ -24,16 +26,22 @@ class Login extends MX_Controller {
 	var $normal_expiry = 30;
 	var $temp_expiry = 14;
 	var $password_min_length = 8;
+
 	var $alpha_password_pool = "abcdefghijklmnopqrstuvwxyz";
 	var $numeric_password_pool = "0123456789";
+
 	var $email_sender = "webadt.chai@gmail.com";
 	var $email_sender_title = "NASCOP SYSTEM";
+	var $reset_mail_subject = "NASCOP User Account Password Reset";
 
 	var $module_after_login = "home";
 
 	function __construct() {
 		parent::__construct();
 
+		date_default_timezone_set('Africa/Nairobi');
+
+		ini_set("max_execution_time", "1000000");
 		ini_set("SMTP", "ssl://smtp.gmail.com");
 		ini_set("smtp_port", "465");
 
@@ -90,8 +98,8 @@ class Login extends MX_Controller {
 				WHERE $user_table.$email_column=:e";
 		$users = R::getAll($sql, array(':e' => $email_address));
 		if ($users) {
-			$error_message = 'Check your email to reset this account.';
-			$this -> reset_account($email_address);
+			$error_message = $this -> reset_account($users[0]);
+			$error_message .= 'Check your email to reset this account.';
 		} else {
 			$error_message = 'This Credentials are invalid.';
 		}
@@ -99,17 +107,34 @@ class Login extends MX_Controller {
 		redirect("login/recovery");
 	}
 
-	public function reset_account($email_address) {
+	public function reset_account($users = array()) {
 		$characters = strtoupper($this -> alpha_password_pool);
 		$characters .= strtolower($this -> alpha_password_pool);
 		$characters .= $this -> numeric_password_pool;
 		$password = "";
+		$user_id = $users['id'];
+		$email_address = $users[$this -> email_column];
+		$full_name = $users[$this -> fullname_column];
+		$username = $users[$this -> username_column];
+		$email_sender_title = strtolower($this -> email_sender_title);
 
 		$string = '';
 		for ($i = 0; $i < $this -> password_min_length; $i++) {
 			$password .= $characters[rand(0, strlen($characters) - 1)];
 		}
-		$message=$this -> send_mail($email_address, $subject, $message);
+		$this -> change_password($user_id, $password);
+
+		$first_message = "Dear $full_name, <br/><br/>
+		                Your username for the $email_sender_title is <b> $username </b><br/>
+						This email will be followed by a default password for this account.<br/>
+						You are advised after first login to change this password.<br/><br/>
+						Regards,<br/>
+						$email_sender_title team.";
+
+		$message = $this -> send_mail($email_address, $this -> reset_mail_subject, $first_message);
+		$second_message = $password;
+		$message = $this -> send_mail($email_address, $this -> reset_mail_subject, $second_message);
+		return $message;
 	}
 
 	public function send_mail($email_address, $subject, $message) {
@@ -120,13 +145,32 @@ class Login extends MX_Controller {
 		$this -> email -> message($message);
 
 		if ($this -> email -> send()) {
-			$data['error_message'] = 'Email address was sent to <b>' . $email_address . '</b> <br/>';
 			$this -> email -> clear(TRUE);
+			$error_message = 'Email was sent to <b>' . $email_address . '</b> <br/>';
 		} else {
-			$data['error_message'] = $this -> email -> print_debugger();
+			$error_message = $this -> email -> print_debugger();
 		}
-		
-		return $data['error_message'];
+
+		return $error_message;
+	}
+
+	public function change_password($user_id, $password) {
+		$user_table = $this -> user_table;
+		$password_column = $this -> password_column;
+		$password = $this -> encrypt_password($password);
+		$time_updated_column = $this -> time_updated_column;
+		$today=date('Y-m-d H:i:s');
+
+		$sql = "UPDATE $user_table SET $password_column='$password',$time_updated_column='$today' WHERE id=:u";
+		R::getAll($sql, array(':u' => $user_id));
+
+		$log = R::dispense($this -> password_log_table);
+		$log -> user = $user_id;
+		$log -> password = $password;
+		$log -> date_changed = date('Y-m-d H:i:s');
+		$log -> ip_address = $this -> input -> ip_address();
+		$log -> agent = $this -> input -> user_agent();
+		R::store($log);
 	}
 
 	public function authenticate_user($username, $password) {
@@ -148,11 +192,10 @@ class Login extends MX_Controller {
 				        AND $password_column=:p) as auth ON auth.id=identity.id				
 				WHERE identity.id=$user_table.id";
 		$users = R::getAll($sql, array(':u' => $username, ':p' => $password));
-
 		if ($users[0]['authentication_level'] == 2) {
 			$this -> apply_security($users[0]);
 		} else {
-			$this -> perform_attempts($users[0]);
+			$this -> perform_attempt($users[0]);
 		}
 
 	}
@@ -171,7 +214,7 @@ class Login extends MX_Controller {
 			if (!$this -> session -> userdata($username . '_attempt')) {
 				$attempt = 1;
 				$this -> session -> set_userdata($username . '_attempt', $attempt);
-			} else if ($this -> session -> userdata($username . '_attempt') && $this -> session -> userdata($username . '_attempt') < $attempt_limit) {
+			} else if ($this -> session -> userdata($username . '_attempt') && $this -> session -> userdata($username . '_attempt') < $this -> attempt_limit) {
 				$attempt = $this -> session -> userdata($username . '_attempt');
 				$attempt++;
 				$this -> session -> set_userdata($username . '_attempt', $attempt);
@@ -231,19 +274,22 @@ class Login extends MX_Controller {
 			} else {
 				$expiry_duration = $this -> normal_expiry;
 			}
-		}
 
-		$today = date('Y-m-d');
-		$datetime1 = date_create($today);
-		$datetime2 = date_create($this -> time_updated);
-		$interval = date_diff($datetime2, $datetime1);
-		$period = $interval -> format('%a');
+			$today = date('Y-m-d');
+			$datetime1 = date_create($today);
+			$datetime2 = date_create($time_updated);
+			$interval = date_diff($datetime2, $datetime1);
+			$period = $interval -> format('%a');
 
-		if ($period >= $expiry_duration) {
-			return true;
+			if ($period >= $expiry_duration) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
+
 	}
 
 	public function deactivate_user($username) {
