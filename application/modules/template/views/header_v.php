@@ -13,10 +13,10 @@
 <title><?php echo $title; ?></title>
 
 <!--Load style files-->
-<link href="<?php echo base_url().'assets/styles/bootstrap/bootstrap.min.css'?>"  type="text/css" rel="stylesheet" media="all">
+<link href="<?php echo base_url().'assets/styles/bootstrap/bootstrap.css'?>"  type="text/css" rel="stylesheet" media="all">
 <link href="<?php echo base_url().'assets/styles/font-awesome/css/font-awesome.css'?>"  type="text/css" rel="stylesheet" media="all">
 <link href="<?php echo base_url().'assets/styles/datatables/jquery.dataTables.css'?>"  type="text/css" rel="stylesheet" media="all">
-<link href="<?php echo base_url().'assets/styles/jquery-ui.min.css'?>"  type="text/css" rel="stylesheet" media="all">
+<!--link href="<?php echo base_url().'assets/styles/jquery-ui.min.css'?>"  type="text/css" rel="stylesheet" media="all"-->
 <link href="<?php echo base_url().'assets/styles/nascop.css'?>"  type="text/css" rel="stylesheet" media="all">
 <link href="<?php echo base_url().'assets/images/favicon.ico'?>" rel="shortcut icon">
 
