@@ -1,11 +1,13 @@
 <div class="logo" id="title-page">Default Template</div> <!--img src="<?php echo base_url().'assets/images/logo.jpg' ?>"  /--> 
 <div class="container">
-	<?php echo form_open('login/authenticate');?>
+	<?php echo form_open('login/process_credentials');?>
 	<?php echo form_fieldset('', array('id' => 'login_legend'));?>
 	<legend id="login_legend">
 		<i class="fa fa-info-circle" style="padding-right:5px"></i>Log In
 	</legend>
-	<div class="item">
+
+	<?php echo $this->session->flashdata('error_message');?>
+	<div class="item">	
 		<?php echo form_error('username', '<div class="error_message">', '</div>');?>
 		<?php echo form_label('Username:', 'username');?>
 		<div class="input-group">
