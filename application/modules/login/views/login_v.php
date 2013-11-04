@@ -18,6 +18,7 @@
 	</div>
 	<?php echo form_fieldset_close();?>
 	<?php echo form_fieldset('', array('class' => 'tblFooters'));?>
+	<a href='<?php echo base_url().'login/recovery'; ?>'>Can't Access My Account?</a>
 	<?php echo form_submit('input_go', 'Go');?>
 	<?php echo form_fieldset_close();?>
 	<?php echo form_close();?>
