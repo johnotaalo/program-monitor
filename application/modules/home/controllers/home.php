@@ -16,6 +16,7 @@ class Home extends MX_Controller {
 
 	public function template($data) {
 		$data['show_menu'] =1;
+		$data['show_sidemenu']=1;
 		$this -> load -> module('template');
 		$this -> template -> index($data);
 	}

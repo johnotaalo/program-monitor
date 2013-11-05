@@ -10,6 +10,8 @@ class Login extends MX_Controller {
 	var $password_log_table = "passwordlog";
 	var $menu_rights_table = "user_right";
 	var $menu_table = "menu";
+	var $sidemenu_rights_table = "sidemenu_user_right";
+	var $sidemenu_table = "sidemenu";
 
 	var $username_column = "Username";
 	var $password_column = "Password";
@@ -263,8 +265,10 @@ class Login extends MX_Controller {
 		$session_data = array();
 		$access_type = "login";
 		$user_id = $users['id'];
-		echo $access_level = $users[$this -> access_level_column];
+		$access_level = $users[$this -> access_level_column];
 		$this -> set_menus($access_level);
+		$this -> set_sidemenus($access_level);
+		$this -> notifications($access_level);
 
 		foreach ($users as $index => $user) {
 			if ($index != $this -> password_column) {
@@ -299,6 +303,41 @@ class Login extends MX_Controller {
 			}
 		}
 		$this -> session -> set_userdata($menu_items);
+	}
+
+	public function set_sidemenus($access_level) {
+		$sidemenu_rights_table = $this -> sidemenu_rights_table;
+		$sidemenu_table = $this -> sidemenu_table;
+		$menu_column = $this -> menu_column;
+		$menu_access_column = $this -> menu_access_column;
+		$menu_label_column = $this -> menu_label_column;
+		$menu_url_column = $this -> menu_url_column;
+		$counter = 0;
+		$sidemenu_items = array();
+
+		$sql = "SELECT $menu_label_column as label,$menu_url_column as url 
+		        FROM $sidemenu_rights_table mr
+		        LEFT JOIN $sidemenu_table m ON m.id=mr.$menu_column
+		        WHERE mr.$menu_access_column=:al";
+		$menus = R::getAll($sql, array(':al' => $access_level));
+
+		if ($menus) {
+			foreach ($menus as $menu) {
+				$sidemenu_items['sidemenu_items'][$counter]['url'] = $menu['url'];
+				$sidemenu_items['sidemenu_items'][$counter]['text'] = $menu['label'];
+				$counter++;
+			}
+		}
+		$this -> session -> set_userdata($sidemenu_items);
+	}
+
+	public function notifications($access_level) {
+		$counter=0;
+		$notifications=array();
+		
+		$notifications['notifications'][$counter]['url'] ="notification/deactivated_users";
+		$notifications['notifications'][$counter]['text'] ="Deactivated Users(0)";
+		$this -> session -> set_userdata($notifications);
 	}
 
 	public function check_if_expired($indicator, $time_updated) {
@@ -362,6 +401,7 @@ class Login extends MX_Controller {
 
 	public function template($data) {
 		$data['show_menu'] = 0;
+		$data['show_sidemenu'] = 0;
 		$this -> load -> module('template');
 		$this -> template -> index($data);
 	}
