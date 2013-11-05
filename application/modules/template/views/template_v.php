@@ -5,6 +5,11 @@
 		<?php $this -> load -> view('header_v'); ?>
 	</head>
 	<body>
+		<!--Load Menu-->
+		<?php if($show_menu==1){
+			$this -> load -> view('toppanel_v');
+		}?>
+		
 		<!--Load Content-->
 		<?php $this -> load -> view($content_view); ?>
 

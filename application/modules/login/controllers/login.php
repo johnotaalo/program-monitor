@@ -8,15 +8,21 @@ class Login extends MX_Controller {
 	var $access_level_table = "access_level";
 	var $user_log_table = "userlog";
 	var $password_log_table = "passwordlog";
+	var $menu_rights_table = "user_right";
+	var $menu_table = "menu";
 
 	var $username_column = "Username";
 	var $password_column = "Password";
-	var $access_level_column = "access_level";
+	var $access_level_column = "Access_Level";
 	var $active_column = "Active";
 	var $authentication_column = "Signature";
 	var $time_updated_column = "Time_Created";
 	var $email_column = "Email_Address";
 	var $fullname_column = "Name";
+	var $menu_column = "menu";
+	var $menu_access_column = "access_level";
+	var $menu_label_column = "menu_text";
+	var $menu_url_column = "menu_url";
 
 	var $access_level_indicator = "indicator";
 	var $admin_indicator = "admin";
@@ -159,7 +165,7 @@ class Login extends MX_Controller {
 		$password_column = $this -> password_column;
 		$password = $this -> encrypt_password($password);
 		$time_updated_column = $this -> time_updated_column;
-		$today=date('Y-m-d H:i:s');
+		$today = date('Y-m-d H:i:s');
 
 		$sql = "UPDATE $user_table SET $password_column='$password',$time_updated_column='$today' WHERE id=:u";
 		R::getAll($sql, array(':u' => $user_id));
@@ -257,6 +263,8 @@ class Login extends MX_Controller {
 		$session_data = array();
 		$access_type = "login";
 		$user_id = $users['id'];
+		echo $access_level = $users[$this -> access_level_column];
+		$this -> set_menus($access_level);
 
 		foreach ($users as $index => $user) {
 			if ($index != $this -> password_column) {
@@ -265,6 +273,32 @@ class Login extends MX_Controller {
 		}
 		$this -> session -> set_userdata($session_data);
 		$this -> write_log($user_id, $access_type);
+	}
+
+	public function set_menus($access_level) {
+		$menu_rights_table = $this -> menu_rights_table;
+		$menu_table = $this -> menu_table;
+		$menu_column = $this -> menu_column;
+		$menu_access_column = $this -> menu_access_column;
+		$menu_label_column = $this -> menu_label_column;
+		$menu_url_column = $this -> menu_url_column;
+		$counter = 0;
+		$menu_items = array();
+
+		$sql = "SELECT $menu_label_column as label,$menu_url_column as url 
+		        FROM $menu_rights_table mr
+		        LEFT JOIN $menu_table m ON m.id=mr.$menu_column
+		        WHERE mr.$menu_access_column=:al";
+		$menus = R::getAll($sql, array(':al' => $access_level));
+
+		if ($menus) {
+			foreach ($menus as $menu) {
+				$menu_items['menu_items'][$counter]['url'] = $menu['url'];
+				$menu_items['menu_items'][$counter]['text'] = $menu['label'];
+				$counter++;
+			}
+		}
+		$this -> session -> set_userdata($menu_items);
 	}
 
 	public function check_if_expired($indicator, $time_updated) {
@@ -327,6 +361,7 @@ class Login extends MX_Controller {
 	}
 
 	public function template($data) {
+		$data['show_menu'] = 0;
 		$this -> load -> module('template');
 		$this -> template -> index($data);
 	}

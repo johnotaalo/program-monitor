@@ -1,6 +1,6 @@
 <div class="banner-title">
-	I-Max Global
+	<?php echo $banner_title;?>
 </div>
 <div class="banner-subtitle">
-	Ticket Management System
+	<?php echo $banner_subtitle;?>
 </div>
