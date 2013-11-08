@@ -53,7 +53,7 @@ body {
 	font-weight: bold;
 	display: block;
 	text-align: center;
-	background: #28b7e8;
+	background: #2B597E;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
 	position: relative;
@@ -140,12 +140,12 @@ body {
 	margin-bottom: 10px;
 }
 .item .input-group .input-group-addon {
-	background: #D3DCE3;
+	background: #2B597E;
 	border: 1px solid #aaa;
 }
 
 .firm_name {
-	color: #28b7e8;
+	color: #2B597E;
 	margin-top: 5px;
 	font-weight: bold;
 	font-size: 1.1em;
@@ -161,7 +161,7 @@ body {
 	color: #fff;
 	font-size: 1em;
 	padding: 0 0 0 1em;
-	background: #28b7e8;
+	background: #2B597E;
 	box-shadow: 0 1.2px 3px 1px #000;
 	-webkit-box-shadow: 0 1.2px 3px 1px #000;
 }
@@ -182,7 +182,7 @@ body {
 	position: fixed;
 	bottom: 0;
 	text-align: center;
-	background: #D3DCE3;
+	background: #2B597E;
 }
 
 .sidebar-content {
@@ -222,7 +222,7 @@ body {
 	-moz-transform: scale(0.9);
 }
 .breadcrumb {
-	background: #28b7e8;
+	background: #2B597E;
 	color: #FFF      :
 }
 div.container {
@@ -283,7 +283,7 @@ fieldset {
 div.logo{
 	padding-top:20px;
 	padding-bottom:20px;
-	background:#D3DCE3;
+	background:#2B597E;
 }
 legend {
 	display: block;
@@ -329,7 +329,7 @@ fieldset.tblFooters {
 .tblFooters {
 	font-weight: normal;
 	color: #000000;
-	background: #D3DCE3;
+	background: #2B597E;
 }
 input[type='submit'] {
 	font-weight: bold;
@@ -386,3 +386,8 @@ legend[Attributes Style] {
 #date{
 	font-size:1.2em;
 	padding:0 10px 2px 5px;
+}
+.breadcrumb > .active {
+color: #000;
+font-weight:bold;
+}
