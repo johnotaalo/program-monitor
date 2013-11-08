@@ -2,66 +2,10 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class Login extends MX_Controller {
-
-	var $user_table = "users";
-	var $access_level_table = "access_level";
-	var $user_log_table = "userlog";
-	var $password_log_table = "passwordlog";
-	var $menu_rights_table = "user_right";
-	var $menu_table = "menu";
-	var $sidemenu_rights_table = "sidemenu_user_right";
-	var $sidemenu_table = "sidemenu";
-
-	var $username_column = "Username";
-	var $password_column = "Password";
-	var $access_level_column = "Access_Level";
-	var $active_column = "Active";
-	var $authentication_column = "Signature";
-	var $time_updated_column = "Time_Created";
-	var $email_column = "Email_Address";
-	var $fullname_column = "Name";
-	var $menu_column = "menu";
-	var $menu_access_column = "access_level";
-	var $menu_label_column = "menu_text";
-	var $menu_url_column = "menu_url";
-
-	var $access_level_indicator = "indicator";
-	var $admin_indicator = "admin";
-	var $temp_indicator = "temp";
-
-	var $attempt_limit = 4;
-	var $normal_expiry = 30;
-	var $temp_expiry = 14;
-	var $password_min_length = 8;
-
-	var $alpha_password_pool = "abcdefghijklmnopqrstuvwxyz";
-	var $numeric_password_pool = "0123456789";
-
-	var $email_sender = "webadt.chai@gmail.com";
-	var $email_sender_title = "NASCOP SYSTEM";
-	var $reset_mail_subject = "NASCOP User Account Password Reset";
-
-	var $module_after_login = "home";
+class Login extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
-
-		date_default_timezone_set('Africa/Nairobi');
-
-		ini_set("max_execution_time", "1000000");
-		ini_set("SMTP", "ssl://smtp.gmail.com");
-		ini_set("smtp_port", "465");
-
-		$config['mailtype'] = "html";
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
-		$config['smtp_port'] = 465;
-		$config['smtp_user'] = stripslashes($this -> email_sender);
-		$config['smtp_pass'] = stripslashes('WebAdt_052013');
-
-		$this -> load -> library('email', $config);
-
 	}
 
 	public function index() {
@@ -98,8 +42,8 @@ class Login extends MX_Controller {
 	}
 
 	public function validate_email($email_address) {
-		$user_table = $this -> user_table;
-		$email_column = $this -> email_column;
+		$user_table = $this -> config -> item('user_table');
+		$email_column = $this -> config -> item('email_column');
 
 		$sql = "SELECT *
 				FROM $user_table		
@@ -116,15 +60,15 @@ class Login extends MX_Controller {
 	}
 
 	public function reset_account($users = array()) {
-		$characters = strtoupper($this -> alpha_password_pool);
-		$characters .= strtolower($this -> alpha_password_pool);
-		$characters .= $this -> numeric_password_pool;
+		$characters = strtoupper($this -> config -> item('alpha_password_pool'));
+		$characters .= strtolower($this -> config -> item('alpha_password_pool'));
+		$characters .= $this -> config -> item('numeric_password_pool');
 		$password = "";
 		$user_id = $users['id'];
-		$email_address = $users[$this -> email_column];
-		$full_name = $users[$this -> fullname_column];
-		$username = $users[$this -> username_column];
-		$email_sender_title = strtolower($this -> email_sender_title);
+		$email_address = $users[$this -> config -> item('email_column')];
+		$full_name = $users[$this -> config -> item('fullname_column')];
+		$username = $users[$this -> config -> item('username_column')];
+		$email_sender_title = strtolower($this -> config -> item('email_sender_title'));
 
 		$string = '';
 		for ($i = 0; $i < $this -> password_min_length; $i++) {
@@ -139,14 +83,26 @@ class Login extends MX_Controller {
 						Regards,<br/>
 						$email_sender_title team.";
 
-		$message = $this -> send_mail($email_address, $this -> reset_mail_subject, $first_message);
+		$message = $this -> send_mail($email_address, $this -> config -> item('reset_mail_subject'), $first_message);
 		$second_message = $password;
-		$message = $this -> send_mail($email_address, $this -> reset_mail_subject, $second_message);
+		$message = $this -> send_mail($email_address, $this -> config -> item('reset_mail_subject'), $second_message);
 		return $message;
 	}
 
 	public function send_mail($email_address, $subject, $message) {
-		$this -> email -> from($this -> email_sender, $this -> email_sender_title);
+		ini_set("max_execution_time", "1000000");
+		ini_set("SMTP", "ssl://smtp.gmail.com");
+		ini_set("smtp_port", "465");
+
+		$config['mailtype'] = "html";
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
+		$config['smtp_port'] = 465;
+		$config['smtp_user'] = stripslashes($this -> config -> item('email_sender'));
+		$config['smtp_pass'] = stripslashes('WebAdt_052013');
+		$this -> load -> library('email', $config);
+
+		$this -> email -> from($this -> config -> item('email_sender'), $this -> config -> item('email_sender_title'));
 		$this -> email -> to($email_address);
 		$this -> email -> subject($subject);
 		$this -> email -> set_newline("\r\n");
@@ -163,16 +119,16 @@ class Login extends MX_Controller {
 	}
 
 	public function change_password($user_id, $password) {
-		$user_table = $this -> user_table;
-		$password_column = $this -> password_column;
+		$user_table = $this -> config -> item('user_table');
+		$password_column = $this -> config -> item('password_column');
 		$password = $this -> encrypt_password($password);
-		$time_updated_column = $this -> time_updated_column;
+		$time_updated_column = $this -> config -> item('time_updated_column');
 		$today = date('Y-m-d H:i:s');
 
 		$sql = "UPDATE $user_table SET $password_column='$password',$time_updated_column='$today' WHERE id=:u";
 		R::getAll($sql, array(':u' => $user_id));
 
-		$log = R::dispense($this -> password_log_table);
+		$log = R::dispense($this -> config -> item('password_log_table'));
 		$log -> user = $user_id;
 		$log -> password = $password;
 		$log -> date_changed = date('Y-m-d H:i:s');
@@ -183,11 +139,11 @@ class Login extends MX_Controller {
 
 	public function authenticate_user($username, $password) {
 		$password = $this -> encrypt_password($password);
-		$user_table = $this -> user_table;
-		$access_level_table = $this -> access_level_table;
-		$username_column = $this -> username_column;
-		$password_column = $this -> password_column;
-		$access_level_column = $this -> access_level_column;
+		$user_table = $this -> config -> item('user_table');
+		$access_level_table = $this -> config -> item('access_level_table');
+		$username_column = $this -> config -> item('username_column');
+		$password_column = $this -> config -> item('password_column');
+		$access_level_column = $this -> config -> item('access_level_column');
 
 		$sql = "SELECT $user_table.*,al.*,count(identity.id)+ count(auth.id) as authentication_level
 				FROM $user_table
@@ -210,19 +166,19 @@ class Login extends MX_Controller {
 
 	public function perform_attempt($users = array()) {
 		$error_message = "The username or password you entered is incorrect.";
-		$access_level_indicator = $this -> access_level_indicator;
+		$access_level_indicator = $this -> config -> item('access_level_indicator');
 		$access_level = $users[$access_level_indicator];
 		$user_id = $users['id'];
-		$username_column = $this -> username_column;
+		$username_column = $this -> config -> item('username_column');
 		$username = $users[$username_column];
 		$access_type = "denied";
-		$admin_indicator = $this -> admin_indicator;
+		$admin_indicator = $this -> config -> item('admin_indicator');
 
 		if ($users['authentication_level'] == 1 && $access_level != $admin_indicator) {
 			if (!$this -> session -> userdata($username . '_attempt')) {
 				$attempt = 1;
 				$this -> session -> set_userdata($username . '_attempt', $attempt);
-			} else if ($this -> session -> userdata($username . '_attempt') && $this -> session -> userdata($username . '_attempt') < $this -> attempt_limit) {
+			} else if ($this -> session -> userdata($username . '_attempt') && $this -> session -> userdata($username . '_attempt') < $this -> config -> item('attempt_limit')) {
 				$attempt = $this -> session -> userdata($username . '_attempt');
 				$attempt++;
 				$this -> session -> set_userdata($username . '_attempt', $attempt);
@@ -237,10 +193,10 @@ class Login extends MX_Controller {
 	}
 
 	public function apply_security($users = array()) {
-		$active = $users[$this -> active_column];
-		$authentication = $users[$this -> authentication_column];
-		$time_updated = $users[$this -> time_updated_column];
-		$indicator = $users[$this -> access_level_indicator];
+		$active = $users[$this -> config -> item('active_column')];
+		$authentication = $users[$this -> config -> item('authentication_column')];
+		$time_updated = $users[$this -> config -> item('time_updated_column')];
+		$indicator = $users[$this -> config -> item('access_level_indicator')];
 		$user_id = $users['id'];
 		$expired = $this -> check_if_expired($indicator, $time_updated);
 		$link = "login";
@@ -253,7 +209,7 @@ class Login extends MX_Controller {
 			$error_message = 'This Password for this Account has expired.<br/> Please click the <a href="' . base_url() . 'home/change_password/' . $user_id . '">link</a> to change your password';
 		} else {
 			$this -> set_session_data($users);
-			$link = $this -> module_after_login;
+			$link = $this -> config -> item('module_after_login');
 		}
 		if ($link == "login") {
 			$this -> session -> set_flashdata('error_message', $error_message);
@@ -265,13 +221,13 @@ class Login extends MX_Controller {
 		$session_data = array();
 		$access_type = "login";
 		$user_id = $users['id'];
-		$access_level = $users[$this -> access_level_column];
+		$access_level = $users[$this -> config -> item('access_level_column')];
 		$this -> set_menus($access_level);
 		$this -> set_sidemenus($access_level);
 		$this -> notifications($access_level);
 
 		foreach ($users as $index => $user) {
-			if ($index != $this -> password_column) {
+			if ($index != $this -> config -> item('password_column')) {
 				$session_data[$index] = $user;
 			}
 		}
@@ -280,12 +236,12 @@ class Login extends MX_Controller {
 	}
 
 	public function set_menus($access_level) {
-		$menu_rights_table = $this -> menu_rights_table;
-		$menu_table = $this -> menu_table;
-		$menu_column = $this -> menu_column;
-		$menu_access_column = $this -> menu_access_column;
-		$menu_label_column = $this -> menu_label_column;
-		$menu_url_column = $this -> menu_url_column;
+		$menu_rights_table = $this -> config -> item('menu_rights_table');
+		$menu_table = $this -> config -> item('menu_table');
+		$menu_column = $this -> config -> item('menu_column');
+		$menu_access_column = $this -> config -> item('menu_access_column');
+		$menu_label_column = $this -> config -> item('menu_label_column');
+		$menu_url_column = $this -> config -> item('menu_url_column');
 		$counter = 0;
 		$menu_items = array();
 
@@ -306,12 +262,12 @@ class Login extends MX_Controller {
 	}
 
 	public function set_sidemenus($access_level) {
-		$sidemenu_rights_table = $this -> sidemenu_rights_table;
-		$sidemenu_table = $this -> sidemenu_table;
-		$menu_column = $this -> menu_column;
-		$menu_access_column = $this -> menu_access_column;
-		$menu_label_column = $this -> menu_label_column;
-		$menu_url_column = $this -> menu_url_column;
+		$sidemenu_rights_table = $this -> config -> item('sidemenu_rights_table');
+		$sidemenu_table = $this -> config -> item('sidemenu_table');
+		$menu_column = $this -> config -> item('menu_column');
+		$menu_access_column = $this -> config -> item('menu_access_column');
+		$menu_label_column = $this -> config -> item('menu_label_column');
+		$menu_url_column = $this -> config -> item('menu_url_column');
 		$counter = 0;
 		$sidemenu_items = array();
 
@@ -332,20 +288,20 @@ class Login extends MX_Controller {
 	}
 
 	public function notifications($access_level) {
-		$counter=0;
-		$notifications=array();
-		
-		$notifications['notifications'][$counter]['url'] ="notification/deactivated_users";
-		$notifications['notifications'][$counter]['text'] ="Deactivated Users(0)";
+		$counter = 0;
+		$notifications = array();
+
+		$notifications['notifications'][$counter]['url'] = "notification/deactivated_users";
+		$notifications['notifications'][$counter]['text'] = "Deactivated Users(0)";
 		$this -> session -> set_userdata($notifications);
 	}
 
 	public function check_if_expired($indicator, $time_updated) {
-		if ($indicator != $this -> admin_indicator) {
-			if ($indicator == $this -> temp_indicator) {
-				$expiry_duration = $this -> temp_expiry;
+		if ($indicator != $this -> config -> item('admin_indicator')) {
+			if ($indicator == $this -> config -> item('temp_indicator')) {
+				$expiry_duration = $this -> config -> item('temp_expiry');
 			} else {
-				$expiry_duration = $this -> normal_expiry;
+				$expiry_duration = $this -> config -> item('normal_expiry');
 			}
 
 			$today = date('Y-m-d');
@@ -366,9 +322,9 @@ class Login extends MX_Controller {
 	}
 
 	public function deactivate_user($username) {
-		$active_column = $this -> active_column;
-		$username_column = $this -> username_column;
-		$user_table = $this -> user_table;
+		$active_column = $this -> config -> item('active_column');
+		$username_column = $this -> config -> item('username_column');
+		$user_table = $this -> config -> item('user_table');
 
 		$sql = "UPDATE $user_table SET $active_column='0' WHERE $username_column=:u";
 		R::getAll($sql, array(':u' => $username));
@@ -390,7 +346,7 @@ class Login extends MX_Controller {
 	}
 
 	public function write_log($user_id, $access_type) {
-		$log = R::dispense($this -> user_log_table);
+		$log = R::dispense($this -> config -> item('user_log_table'));
 		$log -> user = $user_id;
 		$log -> access_type = $access_type;
 		$log -> timestamp = date('Y-m-d H:i:s');

@@ -13,7 +13,7 @@
 	</div>
 	<?php echo form_fieldset_close();?>
 	<?php echo form_fieldset('', array('class' => 'tblFooters'));?>
-	<a href='<?php echo base_url().'login'; ?>'>Go Back Home</a>
+	<a href='<?php echo base_url().'login'; ?>'>Go To Login</a>
 	<?php echo form_submit('input_go', 'Submit');?>
 	<?php echo form_fieldset_close();?>
 	<?php echo form_close();?>

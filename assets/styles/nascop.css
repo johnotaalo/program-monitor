@@ -208,9 +208,9 @@ body {
 }
 .center-content {
 	float: right;
-	padding: 13em 1% 1% 1%;
+	padding: 8em 0.5% 0.5% 1%;
 	width: 83%;
-	margin: 0 0 0 1%;
+	margin: 0.5% 0 0 1%;
 	padding-bottom: 5%;
 	display: inline-block;
 }

@@ -2,23 +2,32 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class Template extends MX_Controller {
-
-	var $banner_title = "Ministry of Health ";
-	var $banner_subtitle = "ARV Drugs Supply Chain Management Tool";
-	var $firm_name = "NASCOP";
-	var $default_home_controller = "home";
+class Template extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
 	}
 
 	public function index($data) {
-		$data['banner_title'] = $this -> banner_title;
-		$data['banner_subtitle'] = $this -> banner_subtitle;
-		$data['firm_name'] = $this -> firm_name;
-		$data['default_home_controller'] = $this -> default_home_controller;
+		$user_session = $this -> check_session();
+		if($user_session){
+		$data['banner_title'] = $this -> config -> item('banner_title');
+		$data['banner_subtitle'] = $this -> config -> item('banner_subtitle');
+		$data['firm_name'] = $this -> config -> item('firm_name');
+		$data['default_home_controller'] = $this -> config -> item('default_home_controller');
 		$this -> load -> view('template_v', $data);
+		}else{
+			redirect("login");
+		}
+	}
+
+	public function check_session() {
+		$current_url = $this -> router -> class;
+		if ($current_url != "login" && $this -> session -> userdata("id") == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
