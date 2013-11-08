@@ -8,12 +8,24 @@ class Table extends MY_Controller {
 		parent::__construct();
 	}
 
-	public function load_table($columns = array(), $table_data = array()) {
+	public function load_table($columns = array(), $table_data = array(), $set_options = 1) {
 		$this -> load -> library('table');
+		array_unshift($columns, "#");
+		$tmpl = array('table_open' => '<table id="dyn_table" class="table table-striped table-bordered table-condensed">');
+		$this -> table -> set_template($tmpl);
 		$this -> table -> set_heading($columns);
-		$this -> table -> add_row(array('Fred', 'Blue', 'Small'));
-		echo $this -> table -> generate();
-		die();
+		$options = "<a href='#'>View</a>";
+		$counter = 1;
+
+		foreach ($table_data as $table) {
+			array_unshift($table, $counter);
+			if ($set_options == 1) {
+				$table['options'] = $options;
+			}
+			$this -> table -> add_row($table);
+			$counter++;
+		}
+		return $this -> table -> generate();
 	}
 
 }

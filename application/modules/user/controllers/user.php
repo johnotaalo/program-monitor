@@ -39,7 +39,7 @@ class User extends MY_Controller {
 
 		$table_data = R::getAll($sql, array(':a' => $user_access_level));
 		$this -> load -> module('table');
-		$this -> table -> load_table($user_headings, $table_data);
+		return $this -> table -> load_table($user_headings, $table_data);
 	}
 
 	public function template($data) {
