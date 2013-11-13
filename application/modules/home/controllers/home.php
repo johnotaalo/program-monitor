@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class Home extends MX_Controller {
+class Home extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -15,6 +15,8 @@ class Home extends MX_Controller {
 	}
 
 	public function template($data) {
+		$data['show_menu'] =1;
+		$data['show_sidemenu']=1;
 		$this -> load -> module('template');
 		$this -> template -> index($data);
 	}

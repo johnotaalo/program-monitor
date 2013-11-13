@@ -1,8 +1,21 @@
+@font-face {
+	font-family: SourceSansPro-Regular;
+	src: url('fonts/SourceSansPro-Regular.otf');
+}
+@font-face {
+	font-family: SourceSansPro-Bold;
+	src: url('fonts/SourceSansPro-Bold.otf');
+}
+body {
+	font-family: SourceSansPro-Regular;
+	background: #F0F0F0;
+}
+
 #top-panel {
 	overflow: visible;
 	border-bottom: 2px solid #DDD;
 	width: 100%;
-	height: 10em;
+	height: 8em;
 	position: fixed;
 	background: white;
 	z-index: 5;
@@ -17,12 +30,19 @@
 	font-size: 0.9em;
 }
 #system_title {
-	top: 1em;
 	position: absolute;
-	left: 14em;
+	top:1em;
+	left:8em;
 	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
 	letter-spacing: 1px;
 }
+
+#facility_name {
+	color: #D5D5D5;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
 .top_menu_link {
 	float: left;
 	min-width: 115px;
@@ -34,7 +54,7 @@
 	font-weight: bold;
 	display: block;
 	text-align: center;
-	background: #28b7e8;
+	background: #D5D5D5;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
 	position: relative;
@@ -64,7 +84,7 @@
 .welcome_msg {
 	clear: left;
 	text-align: right;
-	color: #2B597E;
+	color: #D5D5D5;
 	padding: 20px;
 }
 .welcome_msg a {
@@ -117,24 +137,24 @@
 
 .item label{
 	width:20%;
+
 }
-.item{	
-	margin-bottom:10px;
+.item {
+	margin-bottom: 10px;
 }
-.item .input-group .input-group-addon{
-	background:#D3DCE3;
+.item .input-group .input-group-addon {
+	background: #D5D5D5;
 	border: 1px solid #aaa;
 }
 
 .firm_name {
-	color: #28b7e8;
+	color: #D5D5D5;
 	margin-top: 5px;
 	font-weight: bold;
 	font-size: 1.1em;
 }
 .main-content {
 	width: 100%;
-	height: 100%;
 	background: #F0F0F0;
 }
 .center-content h3, .full-content h3, .main-content h3, .sidebar-content h3 {
@@ -143,7 +163,7 @@
 	color: #fff;
 	font-size: 1em;
 	padding: 0 0 0 1em;
-	background: #28b7e8;
+	background: #D5D5D5;
 	box-shadow: 0 1.2px 3px 1px #000;
 	-webkit-box-shadow: 0 1.2px 3px 1px #000;
 }
@@ -158,17 +178,17 @@
 	overflow: hidden;
 }
 #footer {
-	padding:2%;
-	width:100%;
-	height:10%;
-	position:fixed;
-	bottom:0;
+	padding: 2%;
+	width: 100%;
+	height: 10%;
+	position: fixed;
+	bottom: 0;
 	text-align: center;
-	background:#D3DCE3;
+	background: #D5D5D5;
 }
 
 .sidebar-content {
-	padding: 12em 0.5% 0.5% 1%;
+	padding: 8em 0.5% 0.5% 1%;
 	width: 15.3%;
 	float: left;
 	margin-bottom: 2%;
@@ -190,9 +210,9 @@
 }
 .center-content {
 	float: right;
-	padding: 13em 1% 1% 1%;
+	padding: 8em 0.5% 0.5% 1%;
 	width: 83%;
-	margin: 0 0 0 1%;
+	margin: 0.5% 0 0 1%;
 	padding-bottom: 5%;
 	display: inline-block;
 }
@@ -204,15 +224,15 @@
 	-moz-transform: scale(0.9);
 }
 .breadcrumb {
-	background: #28b7e8;
-	color: #FFF     :
+	background: #D5D5D5;
+	color: #FFF      :
 }
 div.container {
 	text-align: left;
 	width: 40em;
-	height:auto;
+	height: auto;
 	margin: 0 auto;
-	font-size:90%;
+	font-size: 90%;
 	padding-top: 5%;
 }
 h1, a.logo {
@@ -245,14 +265,27 @@ fieldset {
 	text-shadow: 0 1px 0 #fff;
 }
 
-#login_legend{
-	width:auto;
-	font-size:14px;
+#login_legend {
+	width: auto;
+	font-size: 14px;
 }
+.top_logo{
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #555;
+  background: url("../images/top_logo.png") no-repeat;
+}
+
+.top_logo h1 {
+  position: relative;
+  left:5em;
+}
+
 div.logo{
 	padding-top:20px;
 	padding-bottom:20px;
-	background:#D3DCE3;
+	background:#D5D5D5;
 }
 legend {
 	display: block;
@@ -277,7 +310,6 @@ input[type='text'], input[type='password'] {
 	border: 1px solid #aaa;
 	color: #555555;
 	padding: 4px;
-	margin: 6px;
 }
 form.login label {
 	float: left;
@@ -286,66 +318,86 @@ form.login label {
 }
 
 fieldset.tblFooters {
-margin-top: 0;
-margin-bottom: 0.5em;
-border-top: 0;
-text-align: right;
-float: none;
-clear: both;
--webkit-border-radius: 0 0 4px 4px;
--moz-border-radius: 0 0 4px 4px;
-border-radius: 0 0 4px 5px;
+	margin-top: 0;
+	margin-bottom: 0.5em;
+	border-top: 0;
+	text-align: right;
+	float: none;
+	clear: both;
+	-webkit-border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 5px;
 }
 .tblFooters {
-font-weight: normal;
-color: #000000;
-background: #D3DCE3;
+	font-weight: normal;
+	color: #000000;
+	background: #D5D5D5;
 }
+.tblFooters a { 
+	text-decoration:none;
+	color:black;
+	font-weight: bold;
+	 }
+	 .tblFooters a:hover { 
+	text-decoration:underline;
+	 }
 input[type='submit'] {
-font-weight: bold;
-margin-left: 14px;
-border: 1px solid #aaa;
-padding: 3px 7px;
-color: #111;
-text-decoration: none;
-background: #ddd;
-border-radius: 12px;
--webkit-border-radius: 12px;
--moz-border-radius: 12px;
-text-shadow: 0 1px 0 #fff;
-background-size: 100% 100%;
-background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
-background: -webkit-linear-gradient(top, #ffffff, #cccccc);
-background: -moz-linear-gradient(top, #ffffff, #cccccc);
-background: -ms-linear-gradient(top, #ffffff, #cccccc);
-background: -o-linear-gradient(top, #ffffff, #cccccc);
+	font-weight: bold;
+	margin-left: 14px;
+	border: 1px solid #aaa;
+	padding: 3px 7px;
+	color: #111;
+	text-decoration: none;
+	background: #ddd;
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	text-shadow: 0 1px 0 #fff;
+	background-size: 100% 100%;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
+	background: -webkit-linear-gradient(top, #ffffff, #cccccc);
+	background: -moz-linear-gradient(top, #ffffff, #cccccc);
+	background: -ms-linear-gradient(top, #ffffff, #cccccc);
+	background: -o-linear-gradient(top, #ffffff, #cccccc);
 }
 fieldset legend {
-font-weight: bold;
-color: #444;
-padding: 5px 10px;
-border-radius: 2px;
--moz-border-radius: 2px;
--webkit-border-radius: 2px;
-border: 1px solid #aaa;
-background-color: #fff;
--moz-box-shadow: 3px 3px 15px #bbb;
--webkit-box-shadow: 3px 3px 15px #bbb;
-box-shadow: 3px 3px 15px #bbb;
+	font-weight: bold;
+	color: #444;
+	padding: 5px 10px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border: 1px solid #aaa;
+	background-color: #fff;
+	-moz-box-shadow: 3px 3px 15px #bbb;
+	-webkit-box-shadow: 3px 3px 15px #bbb;
+	box-shadow: 3px 3px 15px #bbb;
 }
 
 legend[Attributes Style] {
-direction: ltr;
-unicode-bidi: embed;
+	direction: ltr;
+	unicode-bidi: embed;
 }
 
-.error_message{
-	background:#FF6666;
-	border-radius:10px;
-	padding:0.5em;
-	color:#FFF;
-	text-align:center;
-	font-size:1em;
-	margin:0 auto;
+.error_message {
+	background: #FF6666;
+	border-radius: 10px;
+	padding: 0.5em;
+	color: #FFF;
+	text-align: center;
+	font-size: 1em;
+	margin: 0 auto;
 }
-
+#title-page {
+	text-align: center;
+	font-size: 3em;
+	/**text-shadow: 3px 2px 0 #0779B3,6px 5px 0 rgba(0,0,0,0.15);*/
+}
+#date{
+	font-size:1.2em;
+	padding:0 10px 2px 5px;
+}
+.breadcrumb > .active {
+color: #000;
+font-weight:bold;
+}
