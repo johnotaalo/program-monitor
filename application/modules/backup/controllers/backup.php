@@ -16,7 +16,7 @@ class Backup extends MY_Controller {
 
 	public function backup_app() {
 		$user = "Marete";
-		$project_name = "ADT";
+		$project_name = "platform_rb";
 		$source = $_SERVER['DOCUMENT_ROOT'] . "/" . $project_name . "/";
 		$root_label = explode("\\", $_SERVER['WINDIR']);
 
