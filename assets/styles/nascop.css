@@ -54,7 +54,7 @@ body {
 	font-weight: bold;
 	display: block;
 	text-align: center;
-	background: #D5D5D5;
+	background: #2B597E;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
 	position: relative;
@@ -84,7 +84,7 @@ body {
 .welcome_msg {
 	clear: left;
 	text-align: right;
-	color: #D5D5D5;
+	color: #2B597E;
 	padding: 20px;
 }
 .welcome_msg a {
@@ -134,8 +134,10 @@ body {
 .btn-group {
 	font-size: 20px;
 }
-.item label {
-	width: 20%;
+
+.item label{
+	width:20%;
+
 }
 .item {
 	margin-bottom: 10px;
@@ -146,7 +148,7 @@ body {
 }
 
 .firm_name {
-	color: #D5D5D5;
+	color: #2B597E;
 	margin-top: 5px;
 	font-weight: bold;
 	font-size: 1.1em;
@@ -161,7 +163,7 @@ body {
 	color: #fff;
 	font-size: 1em;
 	padding: 0 0 0 1em;
-	background: #D5D5D5;
+	background: #2B597E;
 	box-shadow: 0 1.2px 3px 1px #000;
 	-webkit-box-shadow: 0 1.2px 3px 1px #000;
 }
