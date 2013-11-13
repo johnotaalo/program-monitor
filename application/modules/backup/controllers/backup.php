@@ -8,31 +8,13 @@ class Backup extends MY_Controller {
 		parent::__construct();
 	}
 
-	public function perform_backup() {
-		$backup_folder = "backup";
-		$inner_file = "webadt.sql";
-		$outer_file = "webadt-" . date('d-M-Y h-i-sa') . ".zip";
-		$prefs = array('format' => 'zip', 'filename' => $inner_file, 'add_drop' => TRUE, 'add_insert' => TRUE, 'newline' => "\n");
-
-		//Assign Folder location and filename
-		$write_location = $backup_folder . "/" . $outer_file;
-		// Load the DB utility class
-		$this -> load -> dbutil();
-		// Backup your entire database and assign it to a variable
-		$db_backup = &$this -> dbutil -> backup($prefs);
-		// Load the file helper and write the file to your server
-		$this -> load -> helper('file');
-		write_file($write_location, $db_backup);
-		echo "Database Backup Succesful";
-	}
-
-	public function zip() {
-		$user="Marete";
-		$project_name="ADT";
-		$source = $_SERVER['DOCUMENT_ROOT'] . "/".$project_name."/";
+	public function backup_app() {
+		$user = "Marete";
+		$project_name = "ADT";
+		$source = $_SERVER['DOCUMENT_ROOT'] . "/" . $project_name . "/";
 		$root_label = explode("\\", $_SERVER['WINDIR']);
-		
-		$destination = $root_label[0] . "\\Users\\".$user."\\Desktop\\".$project_name.".zip";
+
+		$destination = $root_label[0] . "\\Users\\" . $user . "\\Desktop\\" . $project_name . ".zip";
 
 		if (!extension_loaded('zip') || !file_exists($source)) {
 			return false;
@@ -60,6 +42,37 @@ class Backup extends MY_Controller {
 			$zip -> addFromString(basename($source), file_get_contents($source));
 		}
 		return $zip -> close();
+	}
+
+	public function backup_db() {
+		$backup_folder = "backup";
+		$inner_file = "webadt.sql";
+		$outer_file = "webadt-" . date('d-M-Y h-i-sa') . ".zip";
+		$prefs = array('format' => 'zip', 'filename' => $inner_file, 'add_drop' => TRUE, 'add_insert' => TRUE, 'newline' => "\n");
+
+		//Assign Folder location and filename
+		$write_location = $backup_folder . "/" . $outer_file;
+		// Load the DB utility class
+		$this -> load -> dbutil();
+		// Backup your entire database and assign it to a variable
+		$db_backup = &$this -> dbutil -> backup($prefs);
+		// Load the file helper and write the file to your server
+		$this -> load -> helper('file');
+		write_file($write_location, $db_backup);
+		echo "Database Backup Succesful";
+	}
+
+	public function recover() {
+		$data['content_view'] = "backup/recover_v";
+		$data['title'] = "Dashboard | System Recovery";
+		$this -> template($data);
+	}
+
+	public function template($data) {
+		$data['show_menu'] =0;
+		$data['show_sidemenu'] =0;
+		$this -> load -> module('template');
+		$this -> template -> index($data);
 	}
 
 }

@@ -9,6 +9,8 @@
 		<?php
 		if ($show_menu == 1) {
 			$this -> load -> view('toppanel_v');
+		} else {
+			$this -> load -> view('template/external_header_v');
 		}
 		?>
 		<!--Main Content-->

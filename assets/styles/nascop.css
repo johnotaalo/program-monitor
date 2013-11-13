@@ -8,6 +8,7 @@
 }
 body {
 	font-family: SourceSansPro-Regular;
+	background: #F0F0F0;
 }
 
 #top-panel {
@@ -37,7 +38,7 @@ body {
 }
 
 #facility_name {
-	color: #2B597E;
+	color: #D5D5D5;
 	font-weight: bold;
 	font-size: 1.1em;
 }
@@ -53,7 +54,7 @@ body {
 	font-weight: bold;
 	display: block;
 	text-align: center;
-	background: #2B597E;
+	background: #D5D5D5;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
 	position: relative;
@@ -83,7 +84,7 @@ body {
 .welcome_msg {
 	clear: left;
 	text-align: right;
-	color: #2B597E;
+	color: #D5D5D5;
 	padding: 20px;
 }
 .welcome_msg a {
@@ -140,19 +141,18 @@ body {
 	margin-bottom: 10px;
 }
 .item .input-group .input-group-addon {
-	background: #2B597E;
+	background: #D5D5D5;
 	border: 1px solid #aaa;
 }
 
 .firm_name {
-	color: #2B597E;
+	color: #D5D5D5;
 	margin-top: 5px;
 	font-weight: bold;
 	font-size: 1.1em;
 }
 .main-content {
 	width: 100%;
-	height: 100%;
 	background: #F0F0F0;
 }
 .center-content h3, .full-content h3, .main-content h3, .sidebar-content h3 {
@@ -161,7 +161,7 @@ body {
 	color: #fff;
 	font-size: 1em;
 	padding: 0 0 0 1em;
-	background: #2B597E;
+	background: #D5D5D5;
 	box-shadow: 0 1.2px 3px 1px #000;
 	-webkit-box-shadow: 0 1.2px 3px 1px #000;
 }
@@ -182,7 +182,7 @@ body {
 	position: fixed;
 	bottom: 0;
 	text-align: center;
-	background: #2B597E;
+	background: #D5D5D5;
 }
 
 .sidebar-content {
@@ -222,7 +222,7 @@ body {
 	-moz-transform: scale(0.9);
 }
 .breadcrumb {
-	background: #2B597E;
+	background: #D5D5D5;
 	color: #FFF      :
 }
 div.container {
@@ -283,7 +283,7 @@ fieldset {
 div.logo{
 	padding-top:20px;
 	padding-bottom:20px;
-	background:#2B597E;
+	background:#D5D5D5;
 }
 legend {
 	display: block;
@@ -329,8 +329,16 @@ fieldset.tblFooters {
 .tblFooters {
 	font-weight: normal;
 	color: #000000;
-	background: #2B597E;
+	background: #D5D5D5;
 }
+.tblFooters a { 
+	text-decoration:none;
+	color:black;
+	font-weight: bold;
+	 }
+	 .tblFooters a:hover { 
+	text-decoration:underline;
+	 }
 input[type='submit'] {
 	font-weight: bold;
 	margin-left: 14px;

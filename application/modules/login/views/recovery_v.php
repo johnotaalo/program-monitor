@@ -1,4 +1,3 @@
-<div class="logo" id="title-page">Default Template</div> <!--img src="<?php echo base_url().'assets/images/logo.jpg' ?>"  /--> 
 <div class="container">
 	<?php echo form_open('login/recover_credentials');?>
 	<?php echo form_fieldset('', array('id' => 'login_legend'));?>

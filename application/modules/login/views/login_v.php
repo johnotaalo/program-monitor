@@ -1,4 +1,3 @@
-<div class="logo" ><h4 id="title-page"><i class="fa fa-adjust"></i>Default Template</h4><p id="date"><i class="fa fa-calendar"></i><?php echo date('l,M Y')?></p></div> <!--img src="<?php echo base_url().'assets/images/logo.jpg' ?>"  /--> 
 <div class="container">
 	<?php echo form_open('login/process_credentials');?>
 	<?php echo form_fieldset('', array('id' => 'login_legend'));?>

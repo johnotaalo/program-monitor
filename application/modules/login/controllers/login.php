@@ -305,10 +305,10 @@ class Login extends MY_Controller {
 			}
 
 			$today = date('Y-m-d');
-			$datetime1 = date_create($today);
-			$datetime2 = date_create($time_updated);
-			$interval = date_diff($datetime2, $datetime1);
-			$period = $interval -> format('%a');
+			$diff = abs(strtotime($today) - strtotime($time_updated));
+			$years = floor($diff / (365 * 60 * 60 * 24));
+			$months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+			$period = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
 
 			if ($period >= $expiry_duration) {
 				return true;

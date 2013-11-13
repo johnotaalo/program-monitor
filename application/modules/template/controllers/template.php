@@ -23,12 +23,16 @@ class Template extends MY_Controller {
 
 	public function check_session() {
 		$current_url = $this -> router -> class;
-		if ($current_url != "login" && $this -> session -> userdata("id") == null) {
-			return false;
-		} else if ($current_url == "login" && $this -> session -> userdata("id") != null) {
-			redirect($this -> config -> item('module_after_login'));
-		} else {
+		if ($current_url == "backup") {
 			return true;
+		} else {
+			if ($current_url != "login" && $this -> session -> userdata("id") == null) {
+				return false;
+			} else if ($current_url == "login" && $this -> session -> userdata("id") != null) {
+				redirect($this -> config -> item('module_after_login'));
+			} else {
+				return true;
+			}
 		}
 	}
 
