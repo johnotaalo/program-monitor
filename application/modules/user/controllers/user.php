@@ -22,14 +22,14 @@ class User extends MY_Controller {
 	public function listing($user_access_level) {
 		$user_table = $this -> config -> item('user_table');
 		$access_level_table = $this -> config -> item('access_level_table');
-		$access_level_column =$this -> config -> item('access_level_column');
-		$creator_column =$this -> config -> item('creator_column');
-		$access_level_position_column =$this -> config -> item('access_level_position_column');
-		
+		$access_level_column = $this -> config -> item('access_level_column');
+		$creator_column = $this -> config -> item('creator_column');
+		$access_level_position_column = $this -> config -> item('access_level_position_column');
+		$options = '<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view">View</button>';
+
 		$select_variables = $this -> select_variables;
 		$user_headings = $this -> user_headings;
 		$select_variables = implode($select_variables, ",");
-		
 
 		$sql = "SELECT $select_variables 
 		        FROM $user_table u 
@@ -39,7 +39,7 @@ class User extends MY_Controller {
 
 		$table_data = R::getAll($sql, array(':a' => $user_access_level));
 		$this -> load -> module('table');
-		return $this -> table -> load_table($user_headings, $table_data);
+		return $this -> table -> load_table($user_headings, $table_data, $options);
 	}
 
 	public function template($data) {

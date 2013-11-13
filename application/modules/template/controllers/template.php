@@ -23,7 +23,7 @@ class Template extends MY_Controller {
 
 	public function check_session() {
 		$current_url = $this -> router -> class;
-		if ($current_url == "backup") {
+		if ($current_url == "recover") {
 			return true;
 		} else {
 			if ($current_url != "login" && $this -> session -> userdata("id") == null) {

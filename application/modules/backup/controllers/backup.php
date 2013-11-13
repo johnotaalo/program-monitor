@@ -8,6 +8,12 @@ class Backup extends MY_Controller {
 		parent::__construct();
 	}
 
+	public function index() {
+		$data['content_view'] = "backup/backup_v";
+		$data['title'] = "Dashboard | System Backup";
+		$this -> template($data);
+	}
+
 	public function backup_app() {
 		$user = "Marete";
 		$project_name = "ADT";
@@ -45,7 +51,7 @@ class Backup extends MY_Controller {
 	}
 
 	public function backup_db() {
-		$backup_folder = "backup";
+		$backup_folder = "backup_db";
 		$inner_file = "webadt.sql";
 		$outer_file = "webadt-" . date('d-M-Y h-i-sa') . ".zip";
 		$prefs = array('format' => 'zip', 'filename' => $inner_file, 'add_drop' => TRUE, 'add_insert' => TRUE, 'newline' => "\n");
@@ -62,15 +68,9 @@ class Backup extends MY_Controller {
 		echo "Database Backup Succesful";
 	}
 
-	public function recover() {
-		$data['content_view'] = "backup/recover_v";
-		$data['title'] = "Dashboard | System Recovery";
-		$this -> template($data);
-	}
-
 	public function template($data) {
-		$data['show_menu'] =0;
-		$data['show_sidemenu'] =0;
+		$data['show_menu'] = 0;
+		$data['show_sidemenu'] = 0;
 		$this -> load -> module('template');
 		$this -> template -> index($data);
 	}

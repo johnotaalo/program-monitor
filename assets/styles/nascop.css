@@ -214,6 +214,13 @@ body {
 	padding-bottom: 5%;
 	display: inline-block;
 }
+.external-content {
+	width: 90%;
+	margin: auto;
+	padding: 2% 1% 5% 1%;
+	zoom: 0.8;
+	-moz-transform: scale(0.9);
+}
 .full-content {
 	width: 90%;
 	margin: auto;
