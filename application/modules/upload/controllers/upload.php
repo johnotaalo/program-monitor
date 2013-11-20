@@ -2,12 +2,17 @@
 /**
  * @author Maestro
  */
-class Excel extends MY_Controller {
+class Upload extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
 		//$this -> load -> model('models_sugar/M_Sugar_ExternalFort_B3');
 		$this -> load -> library('PHPexcel');
+	}
+
+	function index() {
+		$dataArr['contentView']='upload/upload_v';
+		$this -> load -> view('template_v',$dataArr);
 	}
 
 	public function data_upload() {
@@ -21,13 +26,13 @@ class Excel extends MY_Controller {
 		$data = array();
 		for ($i = 14; $i < 42; $i++) {
 			$input = $arr[$i]['E'];
-			if($input!=""){
+			if ($input != "") {
 				$data[] = array('indicator_name' => $input);
 			}
-			
+
 		}
 		//$this -> load -> database();
-		$this->db->insert_batch('indicators',$data);
+		$this -> db -> insert_batch('indicators', $data);
 		/*for ($i = 2; $i <= $highestRow; $i++) {
 		 for ($j = 2; $j <= $highestColumm; $j++) {
 		 }
@@ -55,10 +60,6 @@ class Excel extends MY_Controller {
 		 }*/
 		echo "data saved! Thanks";
 
-	}
-
-	function index() {
-		$this -> load -> view('phpexcelview');
 	}
 
 }

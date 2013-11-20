@@ -12,5 +12,6 @@
 		<div id="footer">
 			<?php $this -> load -> view('footer'); ?>
 		</div>
+		<?php $this -> load -> view('modals'); ?>
 	</body>
 </html>
