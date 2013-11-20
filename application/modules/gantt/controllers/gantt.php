@@ -77,26 +77,6 @@ class Gantt extends MY_Controller {
 			$this -> users -> setAttr('user_name', 'Test') -> setAttr('user_email', 'user@example.com') -> setAttr('user_phone', '0000000000') -> setAttr('user_password', 'secret') -> setAttr('user_rights', 1) -> setAttr('user_active', 1) -> setAttr('user_created', time());
 			R::store($this -> users);
 		}
-		/*$this -> activities ->  setAttr('activity_name','test') -> setAttr('activity_start','2013-07-20') -> setAttr('activity_end','2013-09-01') -> setAttr('activity_created','test') -> setAttr('activity_partners','test') -> setAttr('activity_creator','test') -> setAttr('activity_type',1) -> setAttr('activity_responsible',1) -> setAttr('activity_indicator',1) -> setAttr('activity_objective',1);
-		 R::store($this -> activities);
-
-		 $this -> assignedType ->  setAttr('assigned_name','test') ;
-		 R::store($this -> assignedType);
-
-		 $this -> indicators -> setAttr('indicator_name', 'Test');
-		 R::store($this -> indicators);
-
-		 $this -> objectives -> setAttr('objective_name', 'Test') -> setAttr('objective_created', time()) -> setAttr('objective_creator', '1');
-		 R::store($this -> objectives);
-
-		 $this -> partners -> setAttr('partner_name', 'Test') -> setAttr('partner_type', 1);
-		 R::store($this -> partners);
-
-		 $this -> targets -> setAttr('target_value', 'Test') -> setAttr('target_created', time())-> setAttr('target_creator', 1)-> setAttr('target_indicator', 1);
-		 R::store($this -> targets);
-
-		 $this -> users -> setAttr('user_name', 'Test') -> setAttr('user_email', 'user@example.com')-> setAttr('user_phone', '0000000000')-> setAttr('user_password', 'secret')-> setAttr('user_rights', 1)-> setAttr('user_active', 1)-> setAttr('user_created', time());
-		 R::store($this -> users);*/
 	}
 
 }

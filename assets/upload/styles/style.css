@@ -1,0 +1,20 @@
+body{
+	
+}
+#upload{
+	width:50%;
+	margin:auto;
+	margin-top:10%;
+	
+}
+#upload h3{
+	font-size:2em;
+	color:#D9534F;
+}
+#upload .inner{
+	background:#eaeaea;
+	padding:5%;
+	border-top:4px solid #D9534F;
+	
+	border-bottom:2px solid #D9534F;
+}
