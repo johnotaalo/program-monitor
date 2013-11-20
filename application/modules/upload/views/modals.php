@@ -14,10 +14,10 @@
 			</div>
 			<div class="modal-footer" style="height:45px">
 				<button type="button" class="btn btn-primary">
-					<i class="glyphicon glyphicon-upload"></i> Upload Data
+					<i class="fa fa-arrow-up"></i> Upload Data
 				</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">
-					<i class="glyphicon glyphicon-remove-circle"></i> Close
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<i class="fa fa-times"></i> Close
 				</button>
 			</div>
 			<?php   echo form_close(); ?>
