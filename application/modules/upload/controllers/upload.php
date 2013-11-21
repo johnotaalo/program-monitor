@@ -8,24 +8,38 @@ class Upload extends MY_Controller {
 		parent::__construct();
 		//$this -> load -> model('models_sugar/M_Sugar_ExternalFort_B3');
 		$this -> load -> library('PHPexcel');
+		ini_set('memory_size', '2048M');
 	}
 
 	function index() {
-		$dataArr['contentView']='upload/upload_v';
-		$this -> load -> view('template_v',$dataArr);
+		$dataArr['contentView'] = 'upload/upload_v';
+		$this -> load -> view('template_v', $dataArr);
 	}
 
-	public function data_upload($file_1,$start,$type) {		//convert .slk file to xlsx for upload
+	public function data_upload() {//convert .slk file to xlsx for upload
+		$type = "slk";
+		$start = 1;
+		$config['upload_path'] = '././uploads/';
+		$config['allowed_types'] = 'csv';
+		$config['max_size'] = '1000000000';
+		$this -> load -> library('upload', $config);
+
+		echo "<pre>";
+		print_r($_FILES);
+		echo "</pre>";
+		//die();
+		$file_1 = "upload_button";
+		$activesheet = 0;
 		if ($type == 'slk') {
-			$edata = new Spreadsheet_Excel_Reader();
+			//$edata = new Spreadsheet_Excel_Reader();
 
 			// Set output Encoding.
-			$edata -> setOutputEncoding("CP1251");
+			//$edata -> setOutputEncoding("CP1251");
 
-			if ($_FILES[$file_1]['tmp_name']) {
+			if ($_FILES['file_1']['tmp_name']) {
 				$excelReader = PHPExcel_IOFactory::createReader('Excel2007');
 				$excelReader -> setReadDataOnly(true);
-				$objPHPExcel = PHPExcel_IOFactory::load($_FILES[$file_1]['tmp_name']);
+				$objPHPExcel = PHPExcel_IOFactory::load($_FILES['file_1']['tmp_name']);
 
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 				$objWriter -> save(str_replace('.php', '.xlsx', __FILE__));
@@ -34,15 +48,15 @@ class Upload extends MY_Controller {
 
 			$objPHPExcel = PHPExcel_IOFactory::load(str_replace('.php', '.xlsx', __FILE__));
 		} else {
-			$objPHPExcel = PHPExcel_IOFactory::load($_FILES[$file_1]['tmp_name']);
+			$objPHPExcel = PHPExcel_IOFactory::load($_FILES['file_1']['tmp_name']);
 		}
 		$objReader = new PHPExcel_Reader_Excel5();
 		$arr = $objPHPExcel -> setActiveSheetIndex($activesheet) -> toArray(null, true, true, true);
-		$highestColumm = $objPHPExcel -> setActiveSheetIndex(1) -> getHighestColumn();
-		$highestRow = $objPHPExcel -> setActiveSheetIndex(1) -> getHighestRow();
+		$highestColumm = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestColumn();
+		$highestRow = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestRow();
 		$data = array();
 
-		for ($i = $start; $i < $highestRow; $i++) {
+		for ($row = $start; $row < $highestRow; $row++) {
 			//fields you want to save in DB
 			$test = $arr[$row]["A"];
 			$deviceNo = $arr[$row]["B"];
@@ -51,36 +65,23 @@ class Upload extends MY_Controller {
 			$cd = $arr[$row]["F"];
 			$rdate = $arr[$row]["I"];
 			$resultDate = date('Y-m-d', strtotime($arr[$row]["I"]));
-			$resultTime = convertresulttime(time($arr[$row]["J"]));
 			$operator = $arr[$row]["H"];
-			$barcode = checkQAQC($arr[$row]["K"]);
-			$expire = checkQAQC($arr[$row]["L"]);
-			$volume = checkQAQC($arr[$row]["M"]);
-			$device = checkQAQC($arr[$row]["N"]);
-			$reagent = checkQAQC($arr[$row]["O"]);
-			$error = getErrorId(substr($arr[$row]["G"], -3));
-			
+
 			//create the array with the respective fields
 			$data[] = array('testNO' => $test);
 			$data[] = array('deviceID' => $deviceNo);
 			$data[] = array('asayID' => $assay);
 			$data[] = array('sampleNumber' => $sample);
-			$data[] = array('errorID' => $error);
 			$data[] = array('cdCount' => $cd);
 			$data[] = array('resultDate' => $resultDate);
-			$data[] = array('resultTime' => $resultTime);
 			$data[] = array('operatorId' => $operator);
-			$data[] = array('barcode' => $barcode);
-			$data[] = array('expiryDate' => $expire);
-			$data[] = array('volume' => $volume);
-			$data[] = array('uploadDate' => date("Y-m-d"));
-			$data[] = array('device' =>$device);
-			$data[] = array('reagent' => $reagent);
 
 		}
-          var_dump($data);
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
 		//$this -> load -> database();
-		$this -> db -> insert_batch('test', $data);
+		//$this -> db -> insert_batch('test', $data);
 		//$this -> load -> database();
 		/*for ($i = 2; $i <= $highestRow; $i++) {
 		 for ($j = 2; $j <= $highestColumm; $j++) {

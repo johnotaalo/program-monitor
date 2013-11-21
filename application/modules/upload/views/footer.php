@@ -7,8 +7,11 @@ $('#upload_button').change(function(){
 	if($('#upload_button').val()!=''){
 		$('#data').modal('show');
 	}
-	
+	$("#upload_form").submit();
 });
+/*$(".upload").click(function(){
+	alert("sdhvgikl")
+});*/
 
 	}); 
 </script>
