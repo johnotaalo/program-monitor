@@ -14,11 +14,11 @@
 			$('.gantt-block-label').popover('toggle');
 		});
 
-		$("span.gantt-block").click(function() {
+		$("strong.gantt-block-label").click(function() {
 			$('#data').modal('show');
-
-			$('#data').delay(4000).queue(function(nxt) {
-				//$("#event_name").text();
+			blockID = $(this).attr("id");
+			$('#data').delay(2000).queue(function(nxt) {
+				$("#eventName").val(blockID);
 				nxt();
 			});
 

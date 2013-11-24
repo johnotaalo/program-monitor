@@ -140,7 +140,7 @@ class Gantti {
 			$width = round($days * $this -> options['cellwidth'] - 9);
 			$height = round($this -> options['cellheight'] - 8);
 			$class = ($block['class']) ? ' ' . $block['class'] : '';
-			$html[] = '<span class="gantt-block' . $class . '" style="left: ' . $left . 'px; width: ' . $width . 'px; height: ' . $height . 'px"><strong id="' . rand(1, 100000) . '" class="gantt-block-label" data-placement="top" data-content="Start :'
+			$html[] = '<span class="gantt-block' . $class . '" style="left: ' . $left . 'px; width: ' . $width . 'px; height: ' . $height . 'px"><strong id="' .$block['label']  . '" class="gantt-block-label" data-placement="top" data-content="Start :'
 			 .date("Y-m-d",$block['start']) . '&nbsp&nbsp&nbsp&nbsp End :' . date("Y-m-d",$block['end']) . '"data-toggle="popover" title="' . $block['label'] . '">' . $days . '</strong></span>';
 			$html[] = '</li>';
 

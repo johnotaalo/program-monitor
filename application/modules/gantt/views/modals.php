@@ -14,7 +14,7 @@
 				<label>Event Name</label>
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-					<input type="text" class="form-control" >
+					<input id="eventName" type="text" class="form-control" >
 
 				</div>
 
