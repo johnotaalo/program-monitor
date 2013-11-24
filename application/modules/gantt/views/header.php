@@ -18,11 +18,11 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
-			<form class="navbar-form navbar-left">
-				<button type="submit" class="btn btn-primary">
+			<div class="navbar-form navbar-left">
+				<button id="addEvent" class="btn btn-primary">
 					<i class="fa fa-plus"></i>Add Event
 				</button>
-			</form>
+			</div>
 			
 		</ul>
 	</div>

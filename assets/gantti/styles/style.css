@@ -18,3 +18,11 @@ body{
 button i{
 	padding-right:5%;
 }
+.myGroup{
+	margin-top:5px;
+	display:inline-block !important;
+	vertical-align:top;
+}
+.myGroup:nth-child(even){
+	float:right;
+}

@@ -4,8 +4,8 @@
 <script>
 	$(document).ready(function() {
 
-		$(".eventItem").click(function() {
-			$('#reportingCountiesModal').modal('show');
+		$("#addEvent").click(function() {
+			$('#addEventModal').modal('show');
 		});
 		$("li.gantt-label").hover(function() {
 			$('li.gantt-label').popover('toggle');
@@ -15,8 +15,6 @@
 		});
 
 		$("span.gantt-block").click(function() {
-			eventName = $(this).attr('data-title');
-			alert(eventName);
 			$('#data').modal('show');
 
 			$('#data').delay(4000).queue(function(nxt) {
