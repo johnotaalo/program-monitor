@@ -1,6 +1,7 @@
 /* Sass Variables */
 /* gantt styles */
 .gantt {
+	margin-top:10%;
   position: relative;
   overflow: hidden;
   color: #93a1a1;

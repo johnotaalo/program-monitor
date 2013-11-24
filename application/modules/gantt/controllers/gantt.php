@@ -28,13 +28,13 @@ class Gantt extends MY_Controller {
 		 $data[] = array('label' => 'Project 3', 'start' => '2012-05-25', 'end' => '2013-06-20', 'class' => 'urgent', );
 		 $data[] = array('label' => 'Project 3', 'start' => '2012-05-25', 'end' => '2013-06-20', 'class' => 'urgent', );
 		 */
-		$gantti = new Gantti($data, array('title' => 'Demo', 'cellwidth' => 25, 'cellheight' => 35));
+		$gantti = new Gantti($data, array('title' => 'Schedule', 'cellwidth' => 25, 'cellheight' => 35));
 
-		$datas['gantt'] = $gantti;
+		$data['gantt'] = $gantti;
 		//$gantti = new Gantti();
-		$datas['contentView'] = "gantt/gantt_v";
-		$datas['title'] = "Dashboard | System Backup";
-		$this -> load -> view('template_v', $datas);
+		$data['contentView'] = "gantt/gantt_v";
+		$data['title'] = "Dashboard | System Backup";
+		$this -> load -> view('template_v', $data);
 	}
 
 	public function createTables() {
