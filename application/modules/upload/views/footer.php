@@ -19,7 +19,10 @@ $('#upload_button').change(function(){
 	
 
 });
-$('.dataTable').dataTable();
+$('.dataTable').dataTable({
+	
+	
+});
 
 
 /*$(".upload").click(function(){

@@ -91,37 +91,26 @@ class Upload extends MY_Controller {
 		$dataArr['posted']=1;
 		$dataArr['contentView'] = 'upload/upload_v';
 		$this -> load -> view('template_v', $dataArr);
-		//$this -> load -> database();
-		//$this -> db -> insert_batch('test', $data);
-		//$this -> load -> database();
-		/*for ($i = 2; $i <= $highestRow; $i++) {
-		 for ($j = 2; $j <= $highestColumm; $j++) {
-		 }
-
-		 $inspectionRegistry = $arr[$i]['B'];
-		 $factoryName = $arr[$i]['C'];
-		 $dates = $arr[$i]['D'];
-		 $areasVisited = $arr[$i]['E'];
-		 $nonCompliances = $arr[$i]['F'];
-		 $suggestionsForImprovement = $arr[$i]['G'];
-		 $publicHealthOfficer = $arr[$i]['H'];
-		 $receivedBy = $arr[$i]['I'];
-		 $inspectorDate = $arr[$i]['J'];
-		 $receivedDate = $arr[$i]['L'];
-		 $supervisorName = $arr[$i]['N'];
-		 $supervisorDate = $arr[$i]['M'];
-
-		 $data = array('inspectionRegistry' => $inspectionRegistry, 'factoryName' => $factoryName, 'dates' => $dates, 'areasVisited' => $areasVisited, 'nonCompliances' => $nonCompliances, 'suggestionsForImprovement' => $suggestionsForImprovement, 'publicHealthOfficer' => $publicHealthOfficer, 'receivedBy' => $receivedBy, 'inspectorDate' => $inspectorDate, 'receivedDate' => $receivedDate, 'supervisorName' => $supervisorName, 'supervisorDate' => $supervisorDate);
-		 //                                echo '<pre>';
-		 //                                json_encode($data);
-		 //                                var_dump($data);
-		 //                                $this->M_Sugar_ExternalFort_B3->excelupload($data);
-		 $this -> load -> database();
-		 $this -> db -> query("INSERT INTO `fortification`.`sugar_externalfortb3` (`sugar_externalfortB3ID`, `inspectionRegistry`, `factoryName`, `dates`, `areasVisited`, `nonCompliances`, `suggestionsForImprovement`, `publicHealthOfficer`, `receivedBy`, `inspectorDate`, `receivedDate`, `supervisorName`, `supervisorDate`) VALUES (NULL, '$inspectionRegistry', '$factoryName', '$dates','$areasVisited', '$nonCompliances', '$suggestionsForImprovement','$publicHealthOfficer','$receivedBy', '$inspectorDate','$receivedDate','$supervisorName','$supervisorDate');");
-		 }*/
-		//echo "data saved! Thanks";
+		
+	}
+	public function upload_commit(){
+		
+		$size=$this->input->post('size');
+		for($i=1;$i<=$size;$i++){
+			$data['testNO'][$i]=	$this->input->post('testNO'.$i);
+			$data['deviceID'][$i]=	$this->input->post('deviceID'.$i);
+			$data['asayID'][$i]=	$this->input->post('asayID'.$i);
+			$data['sampleNumber'][$i]=	$this->input->post('sampleNumber'.$i);
+			$data['cdCount'][$i]=	$this->input->post('cdCount'.$i);
+			$data['resultDate'][$i]=	$this->input->post('resultDate'.$i);
+			$data['operatorId'][$i]=	$this->input->post('operatorId'.$i);
+			
+		}
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>";
+	   //save to DB
+		//$this->db->insert_batch("test",$data);
 
 	}
-
 }
-?>
