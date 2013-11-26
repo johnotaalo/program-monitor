@@ -13,6 +13,8 @@ class Upload extends MY_Controller {
 
 	function index() {
 		$dataArr['contentView'] = 'upload/upload_v';
+		$dataArr['uploaded']='';
+		$dataArr['posted']=0;
 		$this -> load -> view('template_v', $dataArr);
 	}
 
@@ -77,9 +79,13 @@ class Upload extends MY_Controller {
 			$data[] = array('operatorId' => $operator);
 
 		}
-		echo '<pre>';
-		print_r($data);
-		echo '</pre>';
+		$data =json_encode($data);
+		//echo($data);die;
+		$dataArr['uploaded']=$data;
+		
+		$dataArr['posted']=1;
+		$dataArr['contentView'] = 'upload/upload_v';
+		$this -> load -> view('template_v', $dataArr);
 		//$this -> load -> database();
 		//$this -> db -> insert_batch('test', $data);
 		//$this -> load -> database();
@@ -108,7 +114,7 @@ class Upload extends MY_Controller {
 		 $this -> load -> database();
 		 $this -> db -> query("INSERT INTO `fortification`.`sugar_externalfortb3` (`sugar_externalfortB3ID`, `inspectionRegistry`, `factoryName`, `dates`, `areasVisited`, `nonCompliances`, `suggestionsForImprovement`, `publicHealthOfficer`, `receivedBy`, `inspectorDate`, `receivedDate`, `supervisorName`, `supervisorDate`) VALUES (NULL, '$inspectionRegistry', '$factoryName', '$dates','$areasVisited', '$nonCompliances', '$suggestionsForImprovement','$publicHealthOfficer','$receivedBy', '$inspectorDate','$receivedDate','$supervisorName','$supervisorDate');");
 		 }*/
-		echo "data saved! Thanks";
+		//echo "data saved! Thanks";
 
 	}
 
