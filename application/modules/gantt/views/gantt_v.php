@@ -1,3 +1,4 @@
+
 <div class="col-md12">
 	<div id="gantt">
 		<?php echo $gantt; ?>

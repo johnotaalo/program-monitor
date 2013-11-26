@@ -4,7 +4,7 @@
   position: relative;
   overflow: hidden;
   color: #333;
-  background: #f8f8f8; 
+  background: #d5d5d5; 
   border:1px solid #aaa;}
 
 .gantt * {
@@ -73,7 +73,7 @@
   overflow: hidden; }
 
 .gantt header .gantt-month {
-	background:#f8f8f8;
+	background:#d5d5d5;
   float: left;
   text-align: center; }
 
@@ -87,7 +87,8 @@
   text-align: center; }
 
 .gantt header .gantt-day.today span {
-  color: white; }
+  color: red;
+  font-weight:bold; }
 
 /* data items */
 .gantt-item {
@@ -100,14 +101,14 @@
   float: left; }
 
 .gantt-day span {
-	background:#f8f8f8;
+	background:#d5d5d5;
   display: block;
   border-right: 1px solid #001f27;
   border-bottom: 1px solid #001f27;
   text-indent: -12000px; }
 
 .gantt-day.weekend span {
-  background: #e7e7e7; }
+  background: #c5c5c5; }
 
 /* data blocks */
 .gantt-block {
@@ -141,7 +142,7 @@
   position: absolute;
   top: 0;
   width: 2px;
-  background: white;
+  background: red;
   bottom: 0;
   z-index: 1000;
   text-indent: -12000px;
@@ -160,7 +161,7 @@
 
 /* scrollbar styles */
 .gantt ::-webkit-scrollbar {
-  background: #f8f8f8;
+  background: #d5d5d5;
   height: 10px; }
 
 .gantt ::-webkit-scrollbar-thumb {

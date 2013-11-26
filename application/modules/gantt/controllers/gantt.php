@@ -19,7 +19,8 @@ class Gantt extends MY_Controller {
 		$data = array();
 		foreach ($values as $val) {
 			//$this->activities
-			$data[] = array('label' => $val['activity_name'], 'start' => $val['activity_start'], 'end' => $val['activity_end']);
+			//var_dump($val);
+			$data[] = array('label' => $val['activity_name'], 'start' => (int)$val['activity_start'], 'end' => (int)$val['activity_end']);
 		}
 		/*	$data[] = array('label' => 'Project 1', 'start' => '2012-04-20', 'end' => '2012-05-12');
 		 $data[] = array('label' => 'Project 2', 'start' => '2012-04-22', 'end' => '2012-05-22', 'class' => 'important', );
@@ -37,6 +38,9 @@ class Gantt extends MY_Controller {
 		$this -> load -> view('template_v', $data);
 	}
 
+	/**
+	 * Loads Beans of the Respective Tables
+	 */
 	public function createTables() {
 		$this -> activities = R::dispense('activities');
 		$this -> assignedType = R::dispense('assignedtype');
@@ -47,10 +51,13 @@ class Gantt extends MY_Controller {
 		$this -> users = R::dispense('users');
 	}
 
+	/**
+	 * Initializes Tables in the Database
+	 */
 	public function setProperties() {
 		//R::count($this -> activities);
 		if (R::count('activities') < 1) {
-			$this -> activities -> setAttr('activity_name', 'test') -> setAttr('activity_start', '2013-07-20') -> setAttr('activity_end', '2013-09-01') -> setAttr('activity_created', 'test') -> setAttr('activity_partners', 'test') -> setAttr('activity_creator', 'test') -> setAttr('activity_type', 1) -> setAttr('activity_responsible', 1) -> setAttr('activity_indicator', 1) -> setAttr('activity_objective', 1);
+			$this -> activities -> setAttr('activity_name', 'Event One') -> setAttr('activity_start', strtotime('2013-11-01')) -> setAttr('activity_end', strtotime('2013-11-30')) -> setAttr('activity_created', 'test') -> setAttr('activity_partners', 'test') -> setAttr('activity_creator', 'test') -> setAttr('activity_type', 1) -> setAttr('activity_responsible', 1) -> setAttr('activity_indicator', 1) -> setAttr('activity_objective', 1);
 			R::store($this -> activities);
 		}
 		if (R::count('assignedType') < 1) {
@@ -78,5 +85,8 @@ class Gantt extends MY_Controller {
 			R::store($this -> users);
 		}
 	}
+
+	
+	
 
 }

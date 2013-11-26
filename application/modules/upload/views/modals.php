@@ -10,10 +10,10 @@
 				<h4 class="modal-title">File contents:</h4>
 			</div>
 			<div class="modal-body">
-				
+				hello world
 			</div>
 			<div class="modal-footer" style="height:45px">
-				<button type="button" class="btn btn-primary">
+				<button type="button" class="btn btn-primary upload">
 					<i class="fa fa-arrow-up"></i> Upload Data
 				</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">

@@ -35,7 +35,7 @@ class Gantti {
 
 		foreach ($this->data as $d) {
 
-			$this -> blocks[] = array('label' => $d['label'], 'start' => $start = strtotime($d['start']), 'end' => $end = strtotime($d['end']), 'class' => @$d['class']);
+			$this -> blocks[] = array('label' => $d['label'], 'start' => $start = $d['start'], 'end' => $end = $d['end'], 'class' => @$d['class']);
 
 			if (!$this -> first || $this -> first > $start)
 				$this -> first = $start;
@@ -133,6 +133,14 @@ class Gantti {
 			$html[] = '</ul>';
 
 			// the block
+			//Calculating Days Left
+			$daystoEnd = date("z",$block["end"]);
+			$daysToday = date("z");
+			$daysLeft = $daystoEnd-$daysToday;
+			if($daysToday>$daystoEnd){
+				$daysLeft+=365;
+			}
+			
 			$days = (($block['end'] - $block['start']) / $this -> seconds);
 			$offset = (($block['start'] - $this -> first -> month() -> timestamp) / $this -> seconds);
 			$top = round($i * ($this -> options['cellheight'] + 1));
@@ -141,7 +149,8 @@ class Gantti {
 			$height = round($this -> options['cellheight'] - 8);
 			$class = ($block['class']) ? ' ' . $block['class'] : '';
 			$html[] = '<span class="gantt-block' . $class . '" style="left: ' . $left . 'px; width: ' . $width . 'px; height: ' . $height . 'px"><strong id="' .$block['label']  . '" class="gantt-block-label" data-placement="top" data-content="Start :'
-			 .date("Y-m-d",$block['start']) . '&nbsp&nbsp&nbsp&nbsp End :' . date("Y-m-d",$block['end']) . '"data-toggle="popover" title="' . $block['label'] . '">' . $days . '</strong></span>';
+			 .date("Y-m-d",$block['start']) . '&nbsp&nbsp&nbsp&nbsp End :' . date("Y-m-d",$block['end']) . '"data-toggle="popover" title="' . $block['label'] . '">' 
+			 . $days . ' Days ('.$daysLeft.' left)</strong></span>';
 			$html[] = '</li>';
 
 		}

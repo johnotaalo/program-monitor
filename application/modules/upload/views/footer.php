@@ -3,12 +3,26 @@
 <script src="<?php echo base_url().'assets/scripts/modernizr.js'?>"></script>
 <script>
 	$(document).ready(function() {
-$('#upload_button').change(function(){
-	if($('#upload_button').val()!=''){
+		posted = <?php echo($posted);?>;
+	if(posted!=0){
 		$('#data').modal('show');
+		
+		$('#data').delay(4000,function(nxt){
+			$('#data').text('<?php echo($uploaded);?>');
+			nxt();
+			});
 	}
+$('#upload_button').change(function(){
 	
+	$("#upload_form").submit();
+	
+
 });
+
+
+/*$(".upload").click(function(){
+	alert("sdhvgikl")
+});*/
 
 	}); 
 </script>

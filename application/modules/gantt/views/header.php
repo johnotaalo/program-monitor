@@ -19,6 +19,7 @@
 
 		<ul class="nav navbar-nav navbar-right">
 			<div class="navbar-form navbar-left">
+				Today: &nbsp; <?php echo date('D, M Y')?>&nbsp;&nbsp;
 				<button id="addEvent" class="btn btn-primary">
 					<i class="fa fa-plus"></i>Add Event
 				</button>
