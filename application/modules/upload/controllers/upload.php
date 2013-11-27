@@ -95,6 +95,24 @@ class Upload extends MY_Controller {
 		$this -> load -> view('template_v', $dataArr);
 		
 	}
+	public function upload_commit(){
+		
+		$size=$this->input->post('size');
+		for($i=1;$i<=$size;$i++){
+			$data['testNO'][$i]=	$this->input->post('testNO'.$i);
+			$data['deviceID'][$i]=	$this->input->post('deviceID'.$i);
+			$data['asayID'][$i]=	$this->input->post('asayID'.$i);
+			$data['sampleNumber'][$i]=	$this->input->post('sampleNumber'.$i);
+			$data['cdCount'][$i]=	$this->input->post('cdCount'.$i);
+			$data['resultDate'][$i]=	$this->input->post('resultDate'.$i);
+			$data['operatorId'][$i]=	$this->input->post('operatorId'.$i);
+			
+		}
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>";
+	   //save to DB
+		//$this->db->insert_batch("test",$data);
 
+	}
 }
-?>

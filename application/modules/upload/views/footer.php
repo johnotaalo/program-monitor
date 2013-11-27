@@ -5,7 +5,7 @@
 <script src="<?php echo base_url().'assets/scripts/datatables/jquery.dataTables.min.js'?>"></script>
 <script>
 	$(document).ready(function() {
-posted = <?php echo($posted); ?>
+	posted = <?php echo($posted); ?>
 	;
 	if (posted != 0) {
 		$('#data').modal('show');
@@ -17,21 +17,24 @@ posted = <?php echo($posted); ?>
 	}
 	$('#upload_button').change(function() {
 
-		$("#upload_form").submit();
+	});
+	$('.dataTable').dataTable({
+
+	});
 
 	});
 	$('.dataTable').dataTable({
-		 "sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
+		"sDom" : "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
 	});
-	
+
 	/*$().();
-	$().(function(){
-	
-	});*/
-$('.dataTables_filter label input').addClass('form-control');
-$('.dataTables_filter').addClass('form-inline');
-$('.dataTables_length').addClass('form-inline');
-$('.dataTables_length select').addClass('form-control');
+	 $().(function(){
+
+	 });*/
+	$('.dataTables_filter label input').addClass('form-control');
+	$('.dataTables_filter').addClass('form-inline');
+	$('.dataTables_length').addClass('form-inline');
+	$('.dataTables_length select').addClass('form-control');
 	/*$(".upload").click(function(){
 	 alert("sdhvgikl")
 	 });*/
