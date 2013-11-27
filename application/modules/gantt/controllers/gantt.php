@@ -18,6 +18,7 @@ class Gantt extends MY_Controller {
 		//var_dump($values);die;
 		$data = array();
 		foreach ($values as $val) {
+			
 			//$this->activities
 			//var_dump($val);
 			$data[] = array('label' => $val['activity_name'], 'start' => (int)$val['activity_start'], 'end' => (int)$val['activity_end']);

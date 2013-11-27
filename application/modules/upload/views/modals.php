@@ -9,8 +9,38 @@
 				</button>
 				<h4 class="modal-title">File contents:</h4>
 			</div>
-			<div class="modal-body">
-				hello world
+			<div class="modal-body" id="dataBody">
+				<table class="table table-bordered table-hover table-striped dataTable">
+				<?php
+				echo '<thead>';
+				for($i=0;$i<1;$i++){
+					echo '<tr>'.
+					'<th width="100px">'.$uploaded['testNO'][$i].'</th>'.
+					'<th width="400px">'.$uploaded['deviceID'][$i].'</th>'.
+					'<th>'.$uploaded['asayID'][$i].'</th>'.
+					'<th>'.$uploaded['sampleNumber'][$i].'</th>'.
+					'<th>'.$uploaded['cdCount'][$i].'</th>'.
+					'<th>'.$uploaded['resultDate'][$i].'</th>'.
+					'<th>'.$uploaded['operatorId'][$i].'</th>'.
+					'</tr>';
+					
+				}
+				echo '<thead>';
+				echo '<tbody>';
+				for($i=1;$i<sizeof($uploaded['testNO']);$i++){
+					echo '<tr>'.
+					'<td>'.$uploaded['testNO'][$i].'</td>'.
+					'<td>'.$uploaded['deviceID'][$i].'</td>'.
+					'<td>'.$uploaded['asayID'][$i].'</td>'.
+					'<td>'.$uploaded['sampleNumber'][$i].'</td>'.
+					'<td>'.$uploaded['cdCount'][$i].'</td>'.
+					'<td>'.$uploaded['resultDate'][$i].'</td>'.
+					'<td>'.$uploaded['operatorId'][$i].'</td>'.
+					'</tr>';
+				}
+				echo '</tbody>';
+				?>
+				</table>
 			</div>
 			<div class="modal-footer" style="height:45px">
 				<button type="button" class="btn btn-primary upload">

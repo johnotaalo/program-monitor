@@ -20,16 +20,14 @@ class Upload extends MY_Controller {
 	}
 
 	public function data_upload() {//convert .slk file to xlsx for upload
-		$type = "slk";
+		$type = "";
 		$start = 1;
 		$config['upload_path'] = '././uploads/';
 		$config['allowed_types'] = 'csv';
 		$config['max_size'] = '1000000000';
 		$this -> load -> library('upload', $config);
 
-		echo "<pre>";
-		print_r($_FILES);
-		echo "</pre>";
+		
 		//die();
 		$file_1 = "upload_button";
 		$activesheet = 0;
@@ -58,7 +56,7 @@ class Upload extends MY_Controller {
 		$highestColumm = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestColumn();
 		$highestRow = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestRow();
 		$data = array();
-
+        $mytab="";
 		for ($row = $start; $row < $highestRow; $row++) {
 			//fields you want to save in DB
 			$test = $arr[$row]["A"];
@@ -67,19 +65,28 @@ class Upload extends MY_Controller {
 			$sample = $arr[$row]["E"];
 			$cd = $arr[$row]["F"];
 			$rdate = $arr[$row]["I"];
+			if($row<1){
 			$resultDate = date('Y-m-d', strtotime($arr[$row]["I"]));
+			}
+			else{
+			$resultDate = $arr[$row]["I"];
+			}
 			$operator = $arr[$row]["H"];
 
 			//create the array with the respective fields
-			$data[] = array('testNO' => $test);
-			$data[] = array('deviceID' => $deviceNo);
-			$data[] = array('asayID' => $assay);
-			$data[] = array('sampleNumber' => $sample);
-			$data[] = array('cdCount' => $cd);
-			$data[] = array('resultDate' => $resultDate);
-			$data[] = array('operatorId' => $operator);
+
+			$data['testNO'][] =  $test;
+			$data['deviceID'][] = $deviceNo;
+			$data['asayID'][] =  $assay;
+			$data['sampleNumber'][] =  $sample;
+			$data['cdCount'][] = $cd;
+			$data['resultDate'][] = $resultDate;
+			$data['operatorId'][] =  $operator;
+			
+			
+
 		}
-		$data = json_encode($data);
+		//$data =json_encode($data);
 		//echo($data);die;
 		$dataArr['uploaded'] = $data;
 
