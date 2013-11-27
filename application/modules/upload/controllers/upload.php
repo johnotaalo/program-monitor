@@ -27,7 +27,6 @@ class Upload extends MY_Controller {
 		$config['max_size'] = '1000000000';
 		$this -> load -> library('upload', $config);
 
-		
 		//die();
 		$file_1 = "upload_button";
 		$activesheet = 0;
@@ -56,63 +55,73 @@ class Upload extends MY_Controller {
 		$highestColumm = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestColumn();
 		$highestRow = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestRow();
 		$data = array();
-        $mytab="";
-		for ($row = $start; $row < $highestRow; $row++) {
-			//fields you want to save in DB
-			$test = $arr[$row]["A"];
-			$deviceNo = $arr[$row]["B"];
-			$assay = $arr[$row]["C"];
-			$sample = $arr[$row]["E"];
-			$cd = $arr[$row]["F"];
-			$rdate = $arr[$row]["I"];
-			if($row<1){
-			$resultDate = date('Y-m-d', strtotime($arr[$row]["I"]));
-			}
-			else{
-			$resultDate = $arr[$row]["I"];
-			}
-			$operator = $arr[$row]["H"];
+		$mytab = "";
 
-			//create the array with the respective fields
-
-			$data['testNO'][] =  $test;
-			$data['deviceID'][] = $deviceNo;
-			$data['asayID'][] =  $assay;
-			$data['sampleNumber'][] =  $sample;
-			$data['cdCount'][] = $cd;
-			$data['resultDate'][] = $resultDate;
-			$data['operatorId'][] =  $operator;
-			
-			
-
-		}
+		//echo $highestColumm;
+		$data = $this -> getData($arr, $start, $highestColumm, $highestRow);
 		//$data =json_encode($data);
 		//echo($data);die;
+		$data = $this->formatData($data);
+			
 		$dataArr['uploaded'] = $data;
 
 		$dataArr['posted'] = 1;
 		$dataArr['contentView'] = 'upload/upload_v';
 		$this -> load -> view('template_v', $dataArr);
-		
+
 	}
-	public function upload_commit(){
-		
-		$size=$this->input->post('size');
-		for($i=1;$i<=$size;$i++){
-			$data['testNO'][$i]=	$this->input->post('testNO'.$i);
-			$data['deviceID'][$i]=	$this->input->post('deviceID'.$i);
-			$data['asayID'][$i]=	$this->input->post('asayID'.$i);
-			$data['sampleNumber'][$i]=	$this->input->post('sampleNumber'.$i);
-			$data['cdCount'][$i]=	$this->input->post('cdCount'.$i);
-			$data['resultDate'][$i]=	$this->input->post('resultDate'.$i);
-			$data['operatorId'][$i]=	$this->input->post('operatorId'.$i);
-			
+
+	public function upload_commit() {
+
+		$size = $this -> input -> post('size');
+		for ($i = 1; $i <= $size; $i++) {
+			$data['testNO'][$i] = $this -> input -> post('testNO' . $i);
+			$data['deviceID'][$i] = $this -> input -> post('deviceID' . $i);
+			$data['asayID'][$i] = $this -> input -> post('asayID' . $i);
+			$data['sampleNumber'][$i] = $this -> input -> post('sampleNumber' . $i);
+			$data['cdCount'][$i] = $this -> input -> post('cdCount' . $i);
+			$data['resultDate'][$i] = $this -> input -> post('resultDate' . $i);
+			$data['operatorId'][$i] = $this -> input -> post('operatorId' . $i);
+
 		}
 		echo "<pre>";
 		print_r($data);
 		echo "</pre>";
-	   //save to DB
+		//save to DB
 		//$this->db->insert_batch("test",$data);
 
 	}
+
+	public function getData($arr, $start, $highestColumn, $highestRow) {
+
+		//possible columns
+		for ($col = $start; $col < PHPExcel_Cell::columnIndexFromString($highestColumn) + 1; $col++) {
+
+			for ($row = $start; $row < $highestRow; $row++) {
+				$colString = PHPExcel_Cell::stringFromColumnIndex($col - 1);
+				$title = $title = $arr[$start][$colString];
+				//fields you want to save in DB
+				$data[$title][] = $arr[$row + 1][$colString];
+
+			}
+		}
+
+		return $data;
+	}
+
+	public function formatData($data) {
+		$rows = array();
+
+		foreach ($data as $key => $value) {
+			$title[] = $key;
+			$rowCounter = 0;
+			for ($rowCounter = 0; $rowCounter < sizeof($value); $rowCounter++) {
+				$rows[$rowCounter][$key] = $value[$rowCounter];
+			}
+
+		}
+		return $rows;
+		
+	}
+
 }
