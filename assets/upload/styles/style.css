@@ -11,10 +11,9 @@ body {
 	color: #D9534F;
 }
 #upload .inner {
-	background: #eaeaea;
+	background: #d4d4d4;
 	padding: 5%;
-	border-top: 4px solid #D9534F;
-	border-bottom: 2px solid #D9534F;
+	border-radius:5px;
 }
 
 div.dataTables_length label {

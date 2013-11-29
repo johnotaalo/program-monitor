@@ -156,41 +156,28 @@ class Upload extends MY_Controller {
 		return $table;
 	}
 
-	
-
 	/**
 	 * Initializes Tables in the Database
 	 */
 	public function createAndSetProperties($data) {
-		$dataTables = array('testtable');
+		$dataTables = array('testtable3');
 		$title = $data['title'];
 		$rowCounter = 0;
 		$tableObj = array();
 		foreach ($dataTables as $table) {
-			
+
 			foreach ($data['data'] as $data1) {
-			
-				//echo '<pre>';print_r($data1);echo'</pre>';
 				$currentTable = R::dispense($table);
 				foreach ($title as $val) {
-						
-					//echo $data1[$val];
-					$valN = str_replace(" ", "_", $val);
+					$valN = strtolower($val);
+					$valN = str_replace(" ", "_", $valN);
 					//echo $data1[$val];
 					$currentTable -> setAttr($valN, $data1[$val]);
-					
+
 				}
 				R::store($currentTable);
-				echo '<pre>';
-				print_r($currentTable);
-				echo '</pre>';
-				//$tableObj[]=$table;
-
 			}
-			//echo '<pre>';print_r($tableObj);echo'</pre>';
-			//var_dump($tableObj);die;
 		}
-		//$this -> saveData($tableObj);
 
 	}
 
