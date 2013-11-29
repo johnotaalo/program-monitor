@@ -32,7 +32,6 @@ $('.dataTables_filter label input').addClass('form-control');
 $('.dataTables_filter').addClass('form-inline');
 $('.dataTables_length').addClass('form-inline');
 $('.dataTables_length select').addClass('form-control');
-$('.dataTables_paginate a').addClass('btn btn-default');
 	/*$(".upload").click(function(){
 	 alert("sdhvgikl")
 	 });*/

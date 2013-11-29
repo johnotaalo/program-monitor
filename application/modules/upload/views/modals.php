@@ -11,47 +11,12 @@
 			</div>
 			<div class="modal-body" id="dataBody">
 
-				
 				<table class="table table-bordered dataTable">
 					<?php
-					echo '<thead>';
-					echo '<pre>';
-		print_r($uploaded);
-		echo '</pre>';
-		die ;
-					/*for($i=0;$i<1;$i++){
-					 echo '<tr>'.
-					 '<th width="100px">'.$uploaded['testNO'][$i].'</th>'.
-					 '<th width="400px">'.$uploaded['deviceID'][$i].'</th>'.
-					 '<th>'.$uploaded['asayID'][$i].'</th>'.
-					 '<th>'.$uploaded['sampleNumber'][$i].'</th>'.
-					 '<th>'.$uploaded['cdCount'][$i].'</th>'.
-					 '<th>'.$uploaded['resultDate'][$i].'</th>'.
-					 '<th>'.$uploaded['operatorId'][$i].'</th>'.
-					 '</tr>';
-
-					 }*/
-					echo '<thead>';
-					echo '<tbody>';
-					$j = 0;
-					/*for($i=1;$i<sizeof($uploaded['testNO']);$i++){
-					 echo '<tr>'.
-					 '<td>'.$uploaded['testNO'][$i].' </td>'.
-					 '<td>'.$uploaded['deviceID'][$i].'</td>'.
-					 '<td>'.$uploaded['asayID'][$i].'</td>'.
-					 '<td>'.$uploaded['sampleNumber'][$i].'</td>'.
-					 '<td>'.$uploaded['cdCount'][$i].'</td>'.
-					 '<td>'.$uploaded['resultDate'][$i].'</td>'.
-					 '<td>'.$uploaded['operatorId'][$i].'</td>'.
-					 '</tr>';
-					 $j++;
-					 }*/
-					echo '</tbody>';
-				?>
-</table>
-<?php
-echo '<input type="hidden" name="size" value="' . $j . '">';
+					echo $uploaded;
 					?>
+				</table>
+
 			</div>
 			<div class="modal-footer" style="height:45px">
 				<button type="submit" class="btn btn-primary upload">
