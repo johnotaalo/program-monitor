@@ -181,11 +181,42 @@ class Upload extends MY_Controller {
 
 	}
 
-	public function saveData($data) {
-		//var_dump($data);die;
-		foreach ($data as $tableObject) {
-			R::store($tableObject);
+	/**
+	 * Reading the contents of a CSV
+	 */
+	public function readCSV() {
+		$row = 1;
+		if (($handle = fopen(base_url() . 'test.csv', "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+				//echo "<p> $num fields in line $row: <br /></p>\n";
+
+				for ($c = 0; $c < $num; $c++) {
+
+					$oldData[$row][] = $data[$c];
+
+				}
+				$row++;
+			}
+			fclose($handle);
 		}
+		$newData = array();
+		foreach ($oldData as $key => $value) {
+			if ($value[2] != "") {
+				//exit ;
+			} else {
+				if($value[0]==""||$value[1]==""){
+					
+				} else{
+					$newData[]=$value;
+
+			}
+
+		}
+		echo '<pre>';
+		print_r($newData);
+		echo '</pre>';
+
 	}
 
 }
