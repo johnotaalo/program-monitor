@@ -13,20 +13,20 @@ $config['sidemenu_rights_table'] = "sidemenu_user_right";
 $config['sidemenu_table'] = "sidemenu";
 
 /*Columns*/
-$config['username_column'] = "Username";
-$config['password_column'] = "Password";
-$config['access_level_column'] = "Access_Level";
-$config['active_column'] = "Active";
-$config['authentication_column'] = "Signature";
-$config['time_updated_column'] = "Time_Created";
-$config['email_column'] = "Email_Address";
-$config['fullname_column'] = "Name";
+$config['username_column'] = "user_name";
+$config['password_column'] = "user_password";
+$config['access_level_column'] = "user_rights";
+$config['active_column'] = "user_active";
+$config['authentication_column'] = "user_signature";
+$config['time_updated_column'] = "user_created";
+$config['email_column'] = "user_email";
+/*$config['fullname_column'] = "Name";
 $config['menu_column'] = "menu";
-$config['menu_access_column'] = "access_level";
+$config['menu_access_column'] = "user_rights";
 $config['menu_label_column'] = "menu_text";
 $config['menu_url_column'] = "menu_url";
 $config['access_level_position_column'] = "position";
-$config['creator_column'] = "Created_By";
+$config['creator_column'] = "Created_By";*/
 
 /*Column Indicators*/
 $config['access_level_indicator'] = "indicator";

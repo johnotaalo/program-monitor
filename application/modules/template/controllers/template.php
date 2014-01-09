@@ -9,8 +9,8 @@ class Template extends MY_Controller {
 	}
 
 	public function index($data) {
-		$user_session = $this -> check_session();
-		if ($user_session) {
+		//$user_session = $this -> check_session();
+		/*if ($user_session) {
 			$data['banner_title'] = $this -> config -> item('banner_title');
 			$data['banner_subtitle'] = $this -> config -> item('banner_subtitle');
 			$data['firm_name'] = $this -> config -> item('firm_name');
@@ -18,7 +18,8 @@ class Template extends MY_Controller {
 			$this -> load -> view('template_v', $data);
 		} else {
 			redirect("login");
-		}
+		}*/
+		$this -> load -> view('template_v', $data);
 	}
 
 	public function check_session() {

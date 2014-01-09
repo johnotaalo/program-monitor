@@ -9,34 +9,28 @@ class Gantt extends MY_Controller {
 	}
 
 	public function index() {
-		$this -> createTables();
+		//$this -> createTables();
 		$this -> setProperties();
-		date_default_timezone_set('UTC');
+		//date_default_timezone_set('UTC');
 		setlocale(LC_ALL, 'en_US');
 		//$query = "SELECT * FROM activities";
 		$values = $this -> db -> get('activities') -> result_array();
 		//var_dump($values);die;
 		$data = array();
 		foreach ($values as $val) {
-			
+
 			//$this->activities
 			//var_dump($val);
 			$data[] = array('label' => $val['activity_name'], 'start' => (int)$val['activity_start'], 'end' => (int)$val['activity_end']);
 		}
-		/*	$data[] = array('label' => 'Project 1', 'start' => '2012-04-20', 'end' => '2012-05-12');
-		 $data[] = array('label' => 'Project 2', 'start' => '2012-04-22', 'end' => '2012-05-22', 'class' => 'important', );
-		 $data[] = array('label' => 'Project 3', 'start' => '2012-05-25', 'end' => '2013-06-20', 'class' => 'urgent', );
-		 $data[] = array('label' => 'Project 3', 'start' => '2012-05-25', 'end' => '2013-06-20', 'class' => 'urgent', );
-		 $data[] = array('label' => 'Project 3', 'start' => '2012-05-25', 'end' => '2013-06-20', 'class' => 'urgent', );
-		 $data[] = array('label' => 'Project 3', 'start' => '2012-05-25', 'end' => '2013-06-20', 'class' => 'urgent', );
-		 */
+
 		$gantti = new Gantti($data, array('title' => 'Schedule', 'cellwidth' => 25, 'cellheight' => 35));
 
 		$data['gantt'] = $gantti;
 		//$gantti = new Gantti();
 		$data['contentView'] = "gantt/gantt_v";
 		$data['title'] = "Dashboard | System Backup";
-		$this -> load -> view('template_v', $data);
+		$this -> load -> template($data);
 	}
 
 	/**
@@ -87,7 +81,11 @@ class Gantt extends MY_Controller {
 		}
 	}
 
-	
-	
+	public function template($data) {
+		$data['show_menu'] = 0;
+		$data['show_sidemenu'] = 0;
+		$this -> load -> module('template');
+		$this -> template -> index($data);
+	}
 
 }

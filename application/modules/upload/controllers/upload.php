@@ -62,11 +62,70 @@ class Upload extends MY_Controller {
 		//$data =json_encode($data);
 		//echo($data);die;
 		$data = $this -> formatData($data);
-
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>";
 		//$this -> createTables();
 		$this -> createAndSetProperties($data);
 		$data = $this -> makeTable($data);
 
+		$dataArr['uploaded'] = $data;
+
+		$dataArr['posted'] = 1;
+		$dataArr['contentView'] = 'upload/upload_v';
+		$this -> load -> view('template_v', $dataArr);
+
+	}
+
+	public function data_uploadSpecific() {
+		//convert .slk file to xlsx for upload
+		$type = "";
+		$start = 1;
+		$config['upload_path'] = '././uploads/';
+		$config['allowed_types'] = 'csv';
+		$config['max_size'] = '1000000000';
+		$this -> load -> library('upload', $config);
+
+		//die();
+		$file_1 = "upload_button";
+		$activesheet = 0;
+		if ($type == 'slk') {
+			//$edata = new Spreadsheet_Excel_Reader();
+
+			// Set output Encoding.
+			//$edata -> setOutputEncoding("CP1251");
+
+			if ($_FILES['file_1']['tmp_name']) {
+				$excelReader = PHPExcel_IOFactory::createReader('Excel2007');
+				$excelReader -> setReadDataOnly(true);
+				$objPHPExcel = PHPExcel_IOFactory::load($_FILES['file_1']['tmp_name']);
+
+				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+				$objWriter -> save(str_replace('.php', '.xlsx', __FILE__));
+
+			}
+
+			$objPHPExcel = PHPExcel_IOFactory::load(str_replace('.php', '.xlsx', __FILE__));
+		} else {
+			$objPHPExcel = PHPExcel_IOFactory::load($_FILES['file_1']['tmp_name']);
+		}
+		$objReader = new PHPExcel_Reader_Excel5();
+		$arr = $objPHPExcel -> setActiveSheetIndex($activesheet) -> toArray(null, true, true, true);
+		$highestColumm = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestColumn();
+		$highestRow = $objPHPExcel -> setActiveSheetIndex($activesheet) -> getHighestRow();
+		$data = array();
+		$mytab = "";
+
+		//echo $highestColumm;
+		$data = $this -> getDataSpecific($arr, '23', '149', 'C');
+		
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>";//die;
+		//$this -> createTables();
+		//$this -> createAndSetProperties($data);
+		//$data = $this -> makeTable($data);
+$this->db->insert_batch('activities',$data);
 		$dataArr['uploaded'] = $data;
 
 		$dataArr['posted'] = 1;
@@ -107,6 +166,19 @@ class Upload extends MY_Controller {
 				//fields you want to save in DB
 				$data[$title][] = $arr[$row][$colString];
 
+			}
+		}
+
+		return $data;
+	}
+
+	public function getDataSpecific($arr, $start, $end, $colString) {
+$data=array();
+		//possible columns
+		for ($row = $start; $row < $end; $row++) {
+
+			if ($arr[$row][$colString] != "") {
+							$data[] = array('activity_name'=>$arr[$row][$colString],'activity_start'=>strtotime('2013-09-01'),'activity_end'=>strtotime('2013-12-01'));
 			}
 		}
 
@@ -205,17 +277,19 @@ class Upload extends MY_Controller {
 			if ($value[2] != "") {
 				//exit ;
 			} else {
-				if($value[0]==""||$value[1]==""){
-					
-				} else{
-					$newData[]=$value;
+				if ($value[0] == "" || $value[1] == "") {
+
+				} else {
+					$newData[] = $value;
+
+				}
 
 			}
+			echo '<pre>';
+			print_r($newData);
+			echo '</pre>';
 
 		}
-		echo '<pre>';
-		print_r($newData);
-		echo '</pre>';
 
 	}
 
