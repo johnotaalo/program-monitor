@@ -19,7 +19,7 @@ class Upload extends MY_Controller {
 		$this -> load -> view('template_v', $dataArr);
 	}
 
-	public function data_upload($activesheet = 0) {//convert .slk file to xlsx for upload
+	public function data_upload($activesheet = 0, $current_module) {//convert .slk file to xlsx for upload
 		$type = "";
 		$start = 1;
 		$config['upload_path'] = '././uploads/';
@@ -62,9 +62,9 @@ class Upload extends MY_Controller {
 		//$data =json_encode($data);
 		//echo($data);die;
 		$data = $this -> formatData($data);
-		echo "<pre>";
-		print_r($data);
-		echo "</pre>";
+		//echo "<pre>";
+		//print_r($data);
+		//echo "</pre>";
 		//$this -> createTables();
 		$this -> createAndSetProperties($data);
 		$data = $this -> makeTable($data);
@@ -73,7 +73,8 @@ class Upload extends MY_Controller {
 
 		$dataArr['posted'] = 1;
 		$dataArr['contentView'] = 'upload/upload_v';
-		$this -> load -> view('template_v', $dataArr);
+		$this -> load -> module('home');
+		$this -> home -> index();
 
 	}
 
@@ -255,7 +256,7 @@ class Upload extends MY_Controller {
 					foreach ($results->result() as $training) {
 						$data1['TRAINING'] = $training -> training_id;
 					}
-					
+
 					//remove excess columns
 					unset($data1['county']);
 					unset($data1['district']);
@@ -301,9 +302,9 @@ class Upload extends MY_Controller {
 				}
 
 			}
-			echo '<pre>';
-			print_r($newData);
-			echo '</pre>';
+			//echo '<pre>';
+			//print_r($newData);
+			//echo '</pre>';
 
 		}
 

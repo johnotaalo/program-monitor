@@ -37,7 +37,7 @@ body {
 	overflow: hidden;
 }
 #contentView {
-	padding: 75px 2% 1% 2%;
+	padding: 75px 2% 0 2%;
 }
 
 .inner {

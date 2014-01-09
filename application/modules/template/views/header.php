@@ -4,19 +4,19 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="navbar-collapse collapse" id="">
-		<a class="navbar-brand"> Project Monitor </a>
+		<a class="navbar-brand"> <?php echo $brand ?> </a>
 		<ul class="nav navbar-nav">
 			<li >
-				<a class="" href="#">Home</a>
+				<a class="" href="<?php echo base_url(); ?>">Home</a>
 			</li>
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Training<b class="caret"></b></a>
+				<a href=""class="dropdown-toggle" data-toggle="dropdown">Sub-Programs<b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="#">IMCI</a>
+						<a href="<?php echo base_url(); ?>imci">IMCI</a>
 					</li>
 					<li>
-						<a href="#">ICCM</a>
+						<a href="<?php echo base_url(); ?>hcmp">HCMP</a>
 					</li>
 				</ul>
 			</li>
@@ -24,11 +24,11 @@
 
 		<ul class="nav navbar-nav navbar-right">
 			<div class="navbar-form navbar-left">
-				Today: &nbsp; <?php echo date('D, M Y')?>&
-				nbsp;&nbsp;
-				<button id="addEvent" class="btn btn-primary">
+			<?php echo date('l, d M Y')?>
+				
+				<!--button id="addEvent" class="btn btn-primary">
 					<i class="fa fa-plus"></i>Add Event
-				</button>
+				</button-->
 			</div>
 
 		</ul>

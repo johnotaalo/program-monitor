@@ -1,13 +1,7 @@
 <?php
 $formAttr=array('enctype'=>'multipart/form-data','name'=>'upload_form','id'=>"upload_form");;
-echo form_open('trainings/upload', $formAttr);
+echo form_open('imci/upload', $formAttr);
 ?>
-<label>Training Type</label>
-<?php echo form_error('training_type'); ?>
-<div class="input-group">
-	<span class="input-group-addon"><i class="fa"></i></span>
-	<select name="item_name" type="text" class="form-control"><?php echo $this -> training_list; ?></select>
-</div>
 <label>Training Sign Sheet</label>
 <?php echo form_error('training_sign_sheet'); ?>
 <div class="input-group">
