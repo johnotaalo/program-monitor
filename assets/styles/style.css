@@ -53,7 +53,7 @@ body {
 	font-size: 0.8em !important;
 	overflow: hidden;
 }
-.inner h3, .inner h4 {
+.inner h3, .inner h4,h3,h4 {
 	width: 100%;
 	font-family: SourceSansPro-Regular;
 	margin-top: 0;
@@ -96,5 +96,9 @@ td a:hover {
 
 .myModal{
 	top:100px !important;
+	overflow:hidden !important;
+}
+.modal{
+	top:150px !important;
 	overflow:hidden !important;
 }

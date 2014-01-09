@@ -4,7 +4,8 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="navbar-collapse collapse" id="">
-		<a class="navbar-brand"> <?php echo $brand ?> </a>
+		<a class="navbar-brand"> <?php echo $brand ?>
+		</a>
 		<ul class="nav navbar-nav">
 			<li >
 				<a class="" href="<?php echo base_url(); ?>">Home</a>
@@ -12,22 +13,18 @@
 			<li class="dropdown">
 				<a href=""class="dropdown-toggle" data-toggle="dropdown">Sub-Programs<b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li>
-						<a href="<?php echo base_url(); ?>imci">IMCI</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url(); ?>hcmp">HCMP</a>
-					</li>
+					<?php echo $this -> sub_program_list; ?>
 				</ul>
 			</li>
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
 			<div class="navbar-form navbar-left">
-			<?php echo date('l, d M Y')?>
-				
+				<?php echo date('l, d M Y')
+				?>
+
 				<!--button id="addEvent" class="btn btn-primary">
-					<i class="fa fa-plus"></i>Add Event
+				<i class="fa fa-plus"></i>Add Event
 				</button-->
 			</div>
 

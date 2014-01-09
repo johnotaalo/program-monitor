@@ -21,7 +21,7 @@
 <div class="row">
 	<div class="col-md-4">
 		<div class="inner">
-			<h4>Add Training</h4>
+			<h4>Add Sub-Program</h4>
 			<div id="popular"></div>
 		</div>
 	</div>

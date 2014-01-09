@@ -6,10 +6,15 @@ class Global_Model extends CI_Model {
 
 	}
 
-	public function getTrainings() {
-		$trainings = $this -> db -> get('trainings');
+	public function getSubPrograms() {
+		$subPrograms = $this -> db -> get('subprograms');
 
-		return $trainings;
+		return $subPrograms;
+	}
+
+	public function getActivities() {
+		$activities = $this -> db -> get('activities');
+		return $activities;
 	}
 
 }

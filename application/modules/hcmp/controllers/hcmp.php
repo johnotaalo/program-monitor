@@ -11,15 +11,16 @@ class HCMP extends MY_Controller {
 	public function index() {
 		$data['contentView'] = "hcmp/index";
 		$data['title'] = "Program Monitor :: HCMP";
-		$data['brand']='HCMP';
+		$data['brand'] = 'HCMP';
 		$this -> template($data);
 	}
-	
-	public function upload(){
-		$this->load->module('upload');
+
+	public function upload() {
+		$this -> load -> module('upload');
 		$current_module = 'trainings';
-		$this->upload->data_upload(0,$current_module);
+		$this -> upload -> data_upload(0, $current_module);
 	}
+
 	public function template($data) {
 		$data['show_menu'] = 0;
 		$data['show_sidemenu'] = 0;
@@ -27,5 +28,8 @@ class HCMP extends MY_Controller {
 		$this -> template -> index($data);
 	}
 
-	
+	public function load_upload_form() {
+		$this -> load -> view('hcmp/forms/upload_training');
+	}
+
 }

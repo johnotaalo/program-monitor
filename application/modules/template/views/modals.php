@@ -104,3 +104,79 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!-- Add Event modal -->
+<div class="modal fade" id="update_activity" >
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+			<?php echo form_open(); ?>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">Update Activity</h4>
+			</div>
+			<div class="modal-body">
+
+				<label>Activity Name</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+					<input type="text" class="form-control" >
+
+				</div>
+
+				<label>Progress</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
+					<input type="text" class="form-control" placeholder="">
+
+				</div>
+				<label>Responsible</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					<input type="text" class="form-control" placeholder="Please Enter Person Responsible..." >
+
+				</div>
+
+			</div>
+			<div class="modal-footer" style="height:45px">
+				<button id="addEvent" type="submit" class="btn btn-primary">
+					<i class="fa fa-plus"></i>Update Activity
+				</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<i class="fa fa-times"></i> Close
+				</button>
+			</div>
+			<?php   echo form_close(); ?>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="upload_activity" >
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">Upload Activity</h4>
+			</div>
+			<div class="modal-body">
+				<?php echo Modules::run('hcmp/hcmp/load_upload_form'); ?>
+
+			</div>
+			<div class="modal-footer" style="height:45px">
+				<button id="addEvent" type="submit" class="btn btn-primary">
+					<i class="fa fa-plus"></i>Upload 
+				</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<i class="fa fa-times"></i> Close
+				</button>
+			</div>
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -9,7 +9,4 @@ echo form_open('hcmp/upload', $formAttr);
 	echo form_upload($btnAttr);?>
 </div>
 
-<button form-action="submit" class="btn btn-primary">
-	Add
-</button>
 <?php echo form_close(); ?>
