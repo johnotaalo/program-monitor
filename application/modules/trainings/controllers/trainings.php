@@ -13,6 +13,11 @@ class Trainings extends MY_Controller {
 		$data['title'] = "Dashboard | System Login";
 		$this -> template($data);
 	}
+	
+	public function upload(){
+		$this->load->module('upload');
+		$this->upload->data_upload(0);
+	}
 	public function template($data) {
 		$data['show_menu'] = 0;
 		$data['show_sidemenu'] = 0;

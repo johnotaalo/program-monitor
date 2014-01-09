@@ -1,5 +1,5 @@
 <?php
-$formAttr = '';
+$formAttr=array('enctype'=>'multipart/form-data','name'=>'upload_form','id'=>"upload_form");;
 echo form_open('trainings/upload', $formAttr);
 ?>
 <label>Training Type</label>

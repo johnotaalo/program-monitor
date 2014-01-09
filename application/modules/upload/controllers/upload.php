@@ -19,7 +19,7 @@ class Upload extends MY_Controller {
 		$this -> load -> view('template_v', $dataArr);
 	}
 
-	public function data_upload() {//convert .slk file to xlsx for upload
+	public function data_upload($activesheet = 0) {//convert .slk file to xlsx for upload
 		$type = "";
 		$start = 1;
 		$config['upload_path'] = '././uploads/';
@@ -29,7 +29,7 @@ class Upload extends MY_Controller {
 
 		//die();
 		$file_1 = "upload_button";
-		$activesheet = 0;
+
 		if ($type == 'slk') {
 			//$edata = new Spreadsheet_Excel_Reader();
 
@@ -118,14 +118,15 @@ class Upload extends MY_Controller {
 
 		//echo $highestColumm;
 		$data = $this -> getDataSpecific($arr, '23', '149', 'C');
-		
+
 		echo "<pre>";
 		print_r($data);
-		echo "</pre>";//die;
+		echo "</pre>";
+		//die;
 		//$this -> createTables();
 		//$this -> createAndSetProperties($data);
 		//$data = $this -> makeTable($data);
-$this->db->insert_batch('activities',$data);
+		$this -> db -> insert_batch('activities', $data);
 		$dataArr['uploaded'] = $data;
 
 		$dataArr['posted'] = 1;
@@ -147,9 +148,9 @@ $this->db->insert_batch('activities',$data);
 			$data['operatorId'][$i] = $this -> input -> post('operatorId' . $i);
 
 		}
-		echo "<pre>";
-		print_r($data);
-		echo "</pre>";
+		//echo "<pre>";
+		//print_r($data);
+		//echo "</pre>";
 		//save to DB
 		//$this->db->insert_batch("test",$data);
 
@@ -173,12 +174,12 @@ $this->db->insert_batch('activities',$data);
 	}
 
 	public function getDataSpecific($arr, $start, $end, $colString) {
-$data=array();
+		$data = array();
 		//possible columns
 		for ($row = $start; $row < $end; $row++) {
 
 			if ($arr[$row][$colString] != "") {
-							$data[] = array('activity_name'=>$arr[$row][$colString],'activity_start'=>strtotime('2013-09-01'),'activity_end'=>strtotime('2013-12-01'));
+				$data[] = array('activity_name' => $arr[$row][$colString], 'activity_start' => strtotime('2013-09-01'), 'activity_end' => strtotime('2013-12-01'));
 			}
 		}
 
@@ -232,7 +233,7 @@ $data=array();
 	 * Initializes Tables in the Database
 	 */
 	public function createAndSetProperties($data) {
-		$dataTables = array('testtable3');
+		$dataTables = array('traininglog');
 		$title = $data['title'];
 		$rowCounter = 0;
 		$tableObj = array();
@@ -243,7 +244,22 @@ $data=array();
 				foreach ($title as $val) {
 					$valN = strtolower($val);
 					$valN = str_replace(" ", "_", $valN);
-					//echo $data1[$val];
+					//link FacilityName to MFC
+					$results = $this -> db -> get_where('facility', array('facilityName' => $data1['WORK STATION']));
+					foreach ($results->result() as $facility) {
+						$data1['WORK STATION'] = $facility -> facilityMFC;
+					}
+
+					//link Training Name to Training ID
+					$results = $this -> db -> get_where('trainings', array('training_name' => $data1['TRAINING']));
+					foreach ($results->result() as $training) {
+						$data1['TRAINING'] = $training -> training_id;
+					}
+					
+					//remove excess columns
+					unset($data1['county']);
+					unset($data1['district']);
+
 					$currentTable -> setAttr($valN, $data1[$val]);
 
 				}
