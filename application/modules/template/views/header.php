@@ -4,16 +4,31 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="navbar-collapse collapse" id="">
-		<a class="navbar-brand"> <?php echo $brand ?>
-		</a>
+		<a class="navbar-brand"> <?php echo $brand
+		?></a>
 		<ul class="nav navbar-nav">
 			<li >
 				<a class="" href="<?php echo base_url(); ?>">Home</a>
 			</li>
 			<li class="dropdown">
 				<a href=""class="dropdown-toggle" data-toggle="dropdown">Sub-Programs<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<?php echo $this -> sub_program_list; ?>
+				<ul class="dropdown-menu">					
+					<li class="dropdown-submenu">
+						<a tabindex="-1" href="#">Commodity Management</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a tabindex="-1" href="<?php echo base_url(); ?>hcmp">HCMP</a>
+							</li>
+							<li>
+								<a tabindex="-1" href="<?php echo base_url(); ?>bundling">Bundling</a>
+							</li>
+							
+						</ul>
+						<li class="divider"></li>
+					</li>
+					<li>
+						<a href="<?php echo base_url(); ?>imci">IMCI</a>
+					</li>
 				</ul>
 			</li>
 		</ul>

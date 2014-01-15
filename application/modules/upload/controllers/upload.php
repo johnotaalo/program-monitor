@@ -234,7 +234,7 @@ class Upload extends MY_Controller {
 	 * Initializes Tables in the Database
 	 */
 	public function createAndSetProperties($data) {
-		$dataTables = array('traininglog');
+		$dataTables = array('subprogramlog');
 		$title = $data['title'];
 		$rowCounter = 0;
 		$tableObj = array();
@@ -251,12 +251,17 @@ class Upload extends MY_Controller {
 						$data1['WORK STATION'] = $facility -> facilityMFC;
 					}
 
-					//link Training Name to Training ID
-					$results = $this -> db -> get_where('trainings', array('training_name' => $data1['TRAINING']));
-					foreach ($results->result() as $training) {
-						$data1['TRAINING'] = $training -> training_id;
+					//link subprogram Name to subprogram ID
+					$results = $this -> db -> get_where('subprograms', array('sub_program_name' => $data1['TRAINING']));
+					foreach ($results->result() as $subprogram) {
+						$data1['TRAINING'] = $subprogram -> sub_program_id;
 					}
-
+					//convert date to timestamp
+					$newDate = str_replace('/', '-', $data1['DATES']);
+					$newDate=strtotime($newDate);
+					
+					$data1['DATES'] = $newDate;
+					echo 	$data1['DATES'];die;
 					//remove excess columns
 					unset($data1['county']);
 					unset($data1['district']);

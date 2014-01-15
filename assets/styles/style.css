@@ -53,7 +53,8 @@ body {
 	font-size: 0.8em !important;
 	overflow: hidden;
 }
-.inner h3, .inner h4,h3,h4 {
+.inner h3, .inner h4, h3, h4 {
+	font-size:2em;
 	width: 100%;
 	font-family: SourceSansPro-Regular;
 	margin-top: 0;
@@ -62,20 +63,25 @@ body {
 .inner > h3 > i {
 	font-size: 0.8em;
 }
+.inner ul li {
+	list-style: square;
+	font-size: 1.5em;
+}
 /** Form
  *
  */
-.inner form, .inner ul, .inner table {
+.inner form, .inner ul, .table-container {
 	width: 100%;
 	height: 90%;
-	padding: 2%;
+	padding: 0 2% 0 2%;
 	overflow-y: auto;
+	font-size:1em;
 }
-.btn{
+.btn {
 	margin-top: 10px;
 }
-.modal-footer > button{
-	margin-top:-15px;
+.modal-footer > button {
+	margin-top: -15px;
 }
 .date {
 	padding-right: 2%;
@@ -94,11 +100,65 @@ td a:hover {
 	text-decoration: none;
 }
 
-.myModal{
-	top:100px !important;
-	overflow:hidden !important;
+.myModal {
+	top: 100px !important;
+	overflow: hidden !important;
 }
-.modal{
-	top:150px !important;
-	overflow:hidden !important;
+.modal {
+	top: 150px !important;
+	overflow: hidden !important;
+}
+.navbar-brand {
+	font-size: 2em !important;
+}
+
+/*
+ * DropDown Submenu
+ */
+.dropdown-submenu {
+	position: relative;
+}
+.dropdown-submenu > .dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -6px;
+	margin-left: -1px;
+	-webkit-border-radius: 0 6px 6px 6px;
+	-moz-border-radius: 0 6px 6px 6px;
+	border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover > .dropdown-menu {
+	display: block;
+}
+.dropdown-submenu > a:after {
+	display: block;
+	content: " ";
+	float: right;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 5px 0 5px 5px;
+	border-left-color: #cccccc;
+	margin-top: 5px;
+	margin-right: -10px;
+}
+.dropdown-submenu:hover > a:after {
+	border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+	float: none;
+}
+.dropdown-submenu.pull-left > .dropdown-menu {
+	left: -100%;
+	margin-left: 10px;
+	-webkit-border-radius: 6px 0 6px 6px;
+	-moz-border-radius: 6px 0 6px 6px;
+	border-radius: 6px 0 6px 6px;
+}
+/**
+ * 	Table
+ */
+table{
+	font-size:1em !important;
 }

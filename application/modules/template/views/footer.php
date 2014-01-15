@@ -1,6 +1,7 @@
-<script src="<?php echo base_url(). 'assets/scripts/jquery-1.10.2.min.js'?>" type="text/javascript"></script>
+
 <script src="<?php echo base_url(). 'assets/scripts/bootstrap/bootstrap.js'?>" type="text/javascript"></script>
 <script src="<?php echo base_url(). 'assets/scripts/modernizr.js'?>"></script>
+<script src='<?php echo base_url(); ?>assets/scripts/globalize.min.js'></script>
 <script>
 	$(document).ready(function() {
 
