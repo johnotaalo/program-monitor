@@ -1,5 +1,5 @@
 <?php
-$formAttr=array('enctype'=>'multipart/form-data','name'=>'upload_form','id'=>"upload_form");;
+$formAttr=array('enctype'=>'multipart/form-data','name'=>'upload_form','id'=>"hcmp_upload_form");;
 echo form_open('hcmp/upload', $formAttr);
 ?>
 <label>Training Sign Sheet</label>

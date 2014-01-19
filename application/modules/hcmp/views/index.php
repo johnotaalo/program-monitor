@@ -1,12 +1,12 @@
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-9">
 		<div class="inner">
 			<h3>Update Activities</h3>
 			<?php echo $activity_table; ?>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="inner">
+	<div class="col-md-3">
+		<div class="inner guide">
 			<h3>Guide</h3>
 			<ul>
 				<li>
@@ -30,24 +30,71 @@
 
 </div>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="inner">
-			<h3>System Usage</h3>
+			<h4>System Usage</h4>
 			<div id="hcmp_log"></div>
 		</div>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="inner">
-			<h3>...</h3>
+			<h4>Lead Time (Ordering-Approval)</h4>
+			<div id="lead_time"></div>
+
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="inner">
+			<h4>...</h4>
+			
+
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="inner">
+			<h4>...</h4>
 			
 
 		</div>
 	</div>
 
 </div>
+<div class="modal fade" id="hcmp_upload_activity" >
+	<div class="modal-dialog">
 
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">Upload Activity</h4>
+			</div>
+			<div class="modal-body">
+				<?php $this->load->view('forms/upload_training')?>
+
+			</div>
+			<div class="modal-footer" style="height:45px">
+				<button id="hcmp_uploadActivityBtn" type="submit" class="btn btn-primary">
+					<i class="fa fa-plus"></i>Upload 
+				</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					<i class="fa fa-times"></i> Close
+				</button>
+			</div>
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
 	$(document).ready(function(){
+		$(".activity_upload").click(function() {
+			$('#upload_activity').modal('show');
+		});
+		$("#hcmp_uploadActivityBtn").click(function() {
+			$('#hcmp_upload_form').submit();
+		});
 		$('#hcmp_log').load('<?php echo base_url();?>hcmp/hcmp_log/2013-09');
+		$('#lead_time').load('<?php echo base_url();?>hcmp/hcmp_lead_time');
 	});
 </script>

@@ -2,9 +2,19 @@
 $(function () {
 var dataSource = <?php echo $dataSource;?>;
 
-$("#<?php echo $container;?>").dxChart({
+$("#chartContainer").dxChart({
     dataSource: dataSource,
-  
+  	commonSeriesSettings: {
+        argumentField: <?php echo $argument?>,
+        type: <?php echo $type?>,
+        hoverMode: "allArgumentPoints",
+        selectionMode: "allArgumentPoints",
+        label: {
+            visible: <?php echo $label?>,
+            format: "fixedPoint",
+            precision: 0
+        }
+    },
     series: <?php echo $series;?>,
     argumentAxis:{
         grid:{
@@ -12,16 +22,12 @@ $("#<?php echo $container;?>").dxChart({
         }
     },
     tooltip:{
-        enabled: true,
-        customizeText: function(value){
-            return value.valueText +' in '+ value.argumentText;
-        }
+        enabled: true
     },
     //title: "Historic, Current and Future Population",
     legend: {
         verticalAlignment: "bottom",
-        horizontalAlignment: "center",
-       visible:<?php echo $legendVisible?>
+        horizontalAlignment: "center"
     },
     commonPaneSettings: {
         border:{
@@ -32,6 +38,6 @@ $("#<?php echo $container;?>").dxChart({
 });
 });
 </script>
-<div id="<?php echo $container;?>" class="graph" style="height:90%">
+<div id="chartContainer" class="graph" style="height:90%">
 	
 </div>

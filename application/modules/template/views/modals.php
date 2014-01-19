@@ -169,7 +169,7 @@
 
 			</div>
 			<div class="modal-footer" style="height:45px">
-				<button id="addEvent" type="submit" class="btn btn-primary">
+				<button id="uploadActivityBtn" type="submit" class="btn btn-primary">
 					<i class="fa fa-plus"></i>Upload 
 				</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">

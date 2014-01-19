@@ -12,16 +12,12 @@ $("#chartContainer").dxChart({
         }
     },
     tooltip:{
-        enabled: true,
-        customizeText: function(value){
-            return value.valueText +' in '+ value.argumentText;
-        }
+        enabled: true
     },
     //title: "Historic, Current and Future Population",
     legend: {
         verticalAlignment: "bottom",
-        horizontalAlignment: "center",
-       visible:<?php echo $legendVisible?>
+        horizontalAlignment: "center"
     },
     commonPaneSettings: {
         border:{

@@ -19,7 +19,10 @@ class Upload extends MY_Controller {
 		$this -> load -> view('template_v', $dataArr);
 	}
 
-	public function data_upload($activesheet = 0, $current_module) {//convert .slk file to xlsx for upload
+	public function data_upload($activesheet = 0, $activity_id) {//convert .slk file to xlsx for upload
+
+		//get activity ID
+
 		$type = "";
 		$start = 1;
 		$config['upload_path'] = '././uploads/';
@@ -66,7 +69,9 @@ class Upload extends MY_Controller {
 		//print_r($data);
 		//echo "</pre>";
 		//$this -> createTables();
-		$this -> createAndSetProperties($data);
+
+		$this -> createAndSetProperties($data, $activity_id);
+		//echo $activity_id;die;
 		$data = $this -> makeTable($data);
 
 		$dataArr['uploaded'] = $data;
@@ -233,42 +238,53 @@ class Upload extends MY_Controller {
 	/**
 	 * Initializes Tables in the Database
 	 */
-	public function createAndSetProperties($data) {
+	public function createAndSetProperties($data, $activity_id) {
 		$dataTables = array('subprogramlog');
 		$title = $data['title'];
+		//add to title
+		$title[] = 'UPLOAD DATE';
+		$title[] = 'ACTIVITY ID';
 		$rowCounter = 0;
 		$tableObj = array();
 		foreach ($dataTables as $table) {
 
 			foreach ($data['data'] as $data1) {
+			//	echo'<pre>';print_r($data1);echo'</pre>';
 				$currentTable = R::dispense($table);
+
+				//link Cadre Name to Cadre ID
+				$results = $this -> db -> get_where('cadre', array('cadre_name' => $data1['CADRE']));
+				foreach ($results->result() as $cadre) {
+					$data1['CADRE'] = $cadre -> cadre_id;
+				}
+
+				//convert date to timestamp
+				$newDate = str_replace('/', '-', $data1['DATES']);
+				$newDate = strtotime($newDate);
+				$data1['DATES'] = $newDate;
+
+				//set update time
+				$data1['UPLOAD DATE'] = time();
+
+				//set activity id
+				$data1['ACTIVITY ID'] = $activity_id;
+				//link FacilityName to MFC
+				$results = $this -> db -> get_where('facility', array('facilityName' => $data1['WORK STATION']));
+				foreach ($results->result() as $facility) {
+					$data1['WORK STATION'] = $facility -> facilityMFC;
+				}
+
+				//remove excess columns
+				unset($data1['county']);
+				unset($data1['district']);
 				foreach ($title as $val) {
 					$valN = strtolower($val);
 					$valN = str_replace(" ", "_", $valN);
-					//link FacilityName to MFC
-					$results = $this -> db -> get_where('facility', array('facilityName' => $data1['WORK STATION']));
-					foreach ($results->result() as $facility) {
-						$data1['WORK STATION'] = $facility -> facilityMFC;
-					}
-
-					//link subprogram Name to subprogram ID
-					$results = $this -> db -> get_where('subprograms', array('sub_program_name' => $data1['TRAINING']));
-					foreach ($results->result() as $subprogram) {
-						$data1['TRAINING'] = $subprogram -> sub_program_id;
-					}
-					//convert date to timestamp
-					$newDate = str_replace('/', '-', $data1['DATES']);
-					$newDate=strtotime($newDate);
-					
-					$data1['DATES'] = $newDate;
-					echo 	$data1['DATES'];die;
-					//remove excess columns
-					unset($data1['county']);
-					unset($data1['district']);
 
 					$currentTable -> setAttr($valN, $data1[$val]);
 
 				}
+
 				R::store($currentTable);
 			}
 		}

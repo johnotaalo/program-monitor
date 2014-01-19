@@ -9,13 +9,13 @@
 			$('#addEventModal').modal('show');
 		});
 		
+		
+		
 		$(".activity_update").click(function() {
 			$('#update_activity').modal('show');
 		});
 		
-		$(".activity_upload").click(function() {
-			$('#upload_activity').modal('show');
-		});
+		
 		
 		$("li.gantt-label").hover(function() {
 			$(this).popover('toggle');

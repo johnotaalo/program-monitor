@@ -21,7 +21,8 @@ class HCMP extends MY_Controller {
 	public function upload() {
 		$this -> load -> module('upload');
 		$current_module = 'trainings';
-		$this -> upload -> data_upload(0, $current_module);
+		$subprogram = 'HCMP';
+		$this -> upload -> data_upload(0, $subprogram);
 	}
 
 	public function template($data) {
@@ -42,10 +43,29 @@ class HCMP extends MY_Controller {
 		$this -> table -> set_template($tmpl);
 
 		//set table headers
-		$this -> table -> set_heading('Activity', 'Action');
+		$this -> table -> set_heading('Activity', 'Last Updated', 'Recent Dataset Date', 'Action');
 		foreach ($results->result() as $activity) {
-			$activity_action = "<a href='#' class='btn-xs btn-primary activity_update' id='activity_update_" . $activity -> activity_id . "' >Manual Entry</a><a href='#' class='btn-xs btn-info activity_upload' id='activity_upload_" . $activity -> activity_id . "' >Upload</a>";
-			$this -> table -> add_row($activity -> activity_name, $activity_action);
+
+			$this -> db -> select_max('upload_date');
+			$logs = $this -> db -> get_where('subprogramlog', array('activity_id' => $activity -> activity_id));
+			foreach ($logs->result() as $log) {
+				if ($log -> upload_date == NULL) {
+					$last_updated = 'Not Uploaded';
+				} else {
+					$last_updated = date("d-m-Y H:i", $log -> upload_date);
+				}
+			}
+			$this -> db -> select_max('dates');
+			$datasets = $this -> db -> get_where('subprogramlog', array('activity_id' => $activity -> activity_id));
+			foreach ($datasets->result() as $dataset) {
+				if ($log -> upload_date == NULL) {
+					$recent_dataset = 'No Recent Data';
+				} else {
+					$recent_dataset = date("d-m-Y", $dataset -> dates);
+				}
+			}
+			$activity_action = "<a href='#' class='btn-xs btn-primary imci_activity_update' id='" . $activity -> activity_id . "' >Manual Entry</a><a href='#' class='btn-xs btn-info imci_activity_upload' id='" . $activity -> activity_id . "' >Upload</a>";
+			$this -> table -> add_row($activity -> activity_name, $last_updated, $recent_dataset, $activity_action);
 		}
 		$activity_table = $this -> table -> generate();
 		return $activity_table;
@@ -59,7 +79,7 @@ class HCMP extends MY_Controller {
 		}
 
 		$series = array("argumentField" => 'date', "valueField" => 'total', "name" => 'Access', 'type' => 'line');
-		
+
 		$finalData = $dataSource;
 		$finalData = json_encode($finalData);
 		$resultArraySize = 10;
@@ -73,6 +93,25 @@ class HCMP extends MY_Controller {
 		$data['dataSource'] = $finalData;
 		$data['series'] = json_encode($series);
 		$this -> load -> view('charts/chart_line', $data);
+	}
+
+	public function hcmp_lead_time() {
+		$results = $this -> hcmp_model -> hcmp_lead_time();
+		$start = 0;
+		foreach ($results->result() as $lead_time) {
+			$ranges[] = array("startValue" => (int)$start, "endValue" => (int)$lead_time -> order_approval, "color" => "#92000A");
+			$ranges[] = array("startValue" => (int)$lead_time -> order_approval, "endValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery, "color" => "#E6E200");
+			$ranges[] = array("startValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery, "endValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update, "color" => "#77DD77");
+
+			$endValue = round((int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update, -1);
+			$value = $endValue;
+		}
+		$ranges = json_encode($ranges);
+		$data['ranges'] = $ranges;
+		$data['value'] = $value;
+		$data['endValue'] = $endValue;
+		$data['container'] = 'chart_line' . rand(0, 1000000);
+		$this -> load -> view('charts/chart_linear_gauge', $data);
 	}
 
 }

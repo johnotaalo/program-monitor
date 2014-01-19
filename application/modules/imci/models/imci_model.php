@@ -8,13 +8,14 @@ class Imci_Model extends MY_Controller {
 
 	public function imci_cadre() {
 		$query = "SELECT 
-    count(cadre) as total,cadre_name as name
+    count(*) as total,f.facilityType as facility_type,c.cadre_name as cadre
 FROM
-    subprogramlog,
-    cadre
+    subprogramlog s,
+    facility f,cadre c
 WHERE
-    subprogramlog.cadre = cadre.cadre_id
-GROUP BY cadre;";
+	c.cadre_id=s.cadre AND
+    s.mfl_code = f.facilityMFC
+GROUP BY facilityType,s.cadre;";
 
 		$cadre = $this -> db -> query($query);
 		return $cadre;
