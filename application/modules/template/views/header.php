@@ -9,7 +9,17 @@
 		<ul class="nav navbar-nav">
 			<li class="dropdown">
 				<a href=""class="dropdown-toggle" data-toggle="dropdown">Sub-Programs<b class="caret"></b></a>
-				<ul class="dropdown-menu">					
+				<ul class="dropdown-menu">	
+						<li class="dropdown-submenu">
+						<a tabindex="-1" href="#">Assessment</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a tabindex="-1" href="<?php echo base_url(); ?>baseline">Baseline</a>
+							</li>
+							
+						</ul>
+						<li class="divider"></li>
+					</li>				
 					<li class="dropdown-submenu">
 						<a tabindex="-1" href="#">Commodity Management</a>
 						<ul class="dropdown-menu">
@@ -32,7 +42,7 @@
 
 		<ul class="nav navbar-nav navbar-right">
 			<div class="navbar-form navbar-left">
-				<?php echo date('l, d M Y')
+				<?php echo date('l, d M Y');
 				?>
 
 				<!--button id="addEvent" class="btn btn-primary">

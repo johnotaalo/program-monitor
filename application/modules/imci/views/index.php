@@ -20,7 +20,7 @@
 						<th>NAMES OF PARTICIPANT</th><th>WORK STATION</th><th>MFL CODE</th><th>CADRE</th><th>ID NUMBER</th>
 					</tr>
 					<tr style="margin-top:10px;font-size:14px">
-						<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th><th>TRAINING</th>
+						<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th>
 					</tr>
 				</table>
 			</ul>
