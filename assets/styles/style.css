@@ -66,9 +66,10 @@ body {
 	list-style: square;
 	font-size: 1.5em;
 }
-.guide{
+.guide,.guide > table{
+	font-family:"Helvetica";
 	overflow-y:hidden;
-	font-size:0.7em !important;
+	font-size:0.8em !important;
 }
 /** Form
  *

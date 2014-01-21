@@ -21,7 +21,6 @@ class IMCI extends MY_Controller {
 	public function upload() {
 		//var_dump($_POST);die;
 		$this -> load -> module('upload');
-		$current_module = 'trainings';
 		$activity_id = $_POST['activity_id'];
 		$this -> upload -> data_upload(0, $activity_id);
 	}
@@ -49,7 +48,7 @@ class IMCI extends MY_Controller {
 				if ($log -> upload_date == NULL) {
 					$last_updated = 'Not Uploaded';
 				} else {
-					$last_updated = date("d-m-Y H:i", $log -> upload_date);
+					$last_updated = date("d-M-Y H:i", $log -> upload_date);
 				}
 			}
 			$this -> db -> select_max('dates');
@@ -58,10 +57,10 @@ class IMCI extends MY_Controller {
 				if ($log -> upload_date == NULL) {
 					$recent_dataset = 'No Recent Data';
 				} else {
-					$recent_dataset = date("d-m-Y", $dataset -> dates);
+					$recent_dataset = date("d-M-Y", $dataset -> dates);
 				}
 			}
-			$activity_action = "<a href='#' class='btn-xs btn-primary imci_activity_update' id='" . $activity -> activity_id . "' >Manual Entry</a><a href='#' class='btn-xs btn-info imci_activity_upload' id='" . $activity -> activity_id . "' >Upload</a>";
+			$activity_action = "<a href='#' class='btn-xs btn-primary imci_manual_update' id='" . $activity -> activity_id . "' >Manual Entry</a><a href='#' class='btn-xs btn-info imci_activity_upload' id='" . $activity -> activity_id . "' >Upload</a>";
 			$this -> table -> add_row($activity -> activity_name, $last_updated, $recent_dataset, $activity_action);
 		}
 		$activity_table = $this -> table -> generate();

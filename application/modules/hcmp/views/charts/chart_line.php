@@ -32,6 +32,6 @@ $("#<?php echo $container;?>").dxChart({
 });
 });
 </script>
-<div id="<?php echo $container;?>" class="graph" style="height:90%">
+<div id="<?php echo $container;?>" class="graph" style="height:80%">
 	
 </div>

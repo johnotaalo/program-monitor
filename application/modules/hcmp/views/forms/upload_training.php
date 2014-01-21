@@ -8,5 +8,5 @@ echo form_open('hcmp/upload', $formAttr);
 	<?php $btnAttr = array('id'=>'upload_button','class'=>'btn btn-default','name'=>'file_1');
 	echo form_upload($btnAttr);?>
 </div>
-
+<input type="hidden" id="activity_id"name= "activity_id">
 <?php echo form_close(); ?>

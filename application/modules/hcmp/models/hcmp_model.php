@@ -18,16 +18,16 @@ WHERE
     access_level.type = 1
         and user.usertype_id = access_level.id
         AND log.user_id = user.id
-        AND start_time_of_event LIKE '2013-09%'
-        AND end_time_of_event LIKE '2013-09%'
+        AND start_time_of_event LIKE '2013%'
+        AND end_time_of_event LIKE '2013%'
 GROUP BY log_time;";
 
 		$log = $this -> db -> query($query, array($month, $month));
 		return $log;
 	}
 
-public function hcmp_lead_time(){
-	$query = "SELECT 
+	public function hcmp_lead_time() {
+		$query = "SELECT 
     ifnull(CEIL(AVG(DATEDIFF(o.`approvalDate`, o.`orderDate`))
                     ),0) AS order_approval,
     ifnull(CEIL(AVG(DATEDIFF(o.`deliverDate`, o.`approvalDate`))),
@@ -47,5 +47,21 @@ WHERE
 
 		$lead_time = $this -> db -> query($query);
 		return $lead_time;
-}
+	}
+
+	public function hcmp_sensitization() {
+		$query = "SELECT 
+   county,count(*) as total
+FROM
+    subprogramlog,
+    activities,
+    subprograms
+WHERE
+    activities.activity_id = subprogramlog.activity_id
+        AND activities.activity_classification = subprograms.sub_program_id AND activity_name='County Sensitization'
+GROUP BY county;";
+		$sensitization = $this -> db -> query($query);
+		return $sensitization;
+	}
+
 }
