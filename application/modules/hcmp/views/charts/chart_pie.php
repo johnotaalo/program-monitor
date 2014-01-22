@@ -5,6 +5,12 @@ var dataSource = <?php echo $dataSource;?>;
 $("#<?php echo $container;?>").dxPieChart({
   
     dataSource: dataSource,
+    label: {
+            visible: true,
+            connector: {
+                visible: true
+            }
+       },
     series: <?php echo $series;?>,
     tooltip:{
         enabled: true,

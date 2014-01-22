@@ -81,7 +81,7 @@ class HCMP extends MY_Controller {
 		$results = $this -> hcmp_model -> hcmp_log($month);
 
 		foreach ($results->result() as $log) {
-			$dataSource[] = array("date" => date("d-M-Y",strtotime($log -> log_time)), "total" => (int)$log -> total);
+			$dataSource[] = array("date" => date("M-Y",strtotime($log -> log_time)), "total" => (int)$log -> total);
 		}
 
 		$series = array("argumentField" => 'date', "valueField" => 'total', "name" => 'Access', 'type' => 'line');
@@ -109,9 +109,9 @@ class HCMP extends MY_Controller {
 		$this -> table -> set_template($tmpl);
 
 		//set table headers
-		$this -> table -> set_heading('Statustic', 'Value');
+		$this -> table -> set_heading('Statistic', 'Value');
 		foreach ($results->result() as $lead_time) {
-			$statistics=array('Order-Approval','Approval-Delivery','Delivery-Update','Lead Time');
+			$statistics=array('Order','Approval','Delivery','Lead Time');
 			$values=array((int)$lead_time -> order_approval , $lead_time -> approval_delivery , $lead_time -> delivery_update,(int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update);
 		}
 		for($x=0;$x<sizeof($statistics);$x++){
@@ -142,16 +142,14 @@ public function hcmp_sensitization(){
 			$dataSource[] = array("county" => $county -> county, "total" => (int)$county -> total);
 		}
 
-		$series = array("argumentField" => 'county', "valueField" => 'total', "name" => 'Participants');
+		$series = array("argumentField" => 'county', "valueField" => 'total', "name" => 'Participants',"type"=>'doughnut');
 
 		$finalData = $dataSource;
 		$finalData = json_encode($finalData);
 		$resultArraySize = 10;
 		$data['argument'] = 'date';
 		$data['resultArraySize'] = $resultArraySize;
-		$data['container'] = 'chart_line' . rand(0, 1000000);
-		$data['title'] = 'UPID Dashboard';
-		$data['legendVisible'] = "false";
+		$data['container'] = 'chart_' . rand(0, 1000000);
 
 		$data['yAxis'] = 'Total';
 		$data['dataSource'] = $finalData;

@@ -30,7 +30,7 @@
 
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-3">
 		<div class="inner">
 			<h4>System Usage</h4>
 			<div id="hcmp_log"></div>
@@ -38,7 +38,7 @@
 	</div>
 	<div class="col-md-3">
 		<div class="inner">
-			<h4>Lead Time (Ordering-Update)</h4>
+			<h4>Lead Time</h4>
 			<div id="lead_time"></div>
 
 		</div>
@@ -47,6 +47,12 @@
 		<div class="inner">
 			<h4>County Sensitization</h4>
 			<div id="hcmp_sensitization"></div>
+
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="inner">
+			<h4>...</h4>
 
 		</div>
 	</div>

@@ -9,7 +9,7 @@ class Hcmp_Model extends MY_Controller {
 	public function hcmp_log($month) {
 		$query = "SELECT 
     count(*) as total,
-    DATE_FORMAT(log.start_time_of_event, '%Y-%m-%d') as log_time
+    DATE_FORMAT(log.start_time_of_event, '%Y-%m') as log_time
 FROM
     kemsa2.log,
     kemsa2.access_level,
