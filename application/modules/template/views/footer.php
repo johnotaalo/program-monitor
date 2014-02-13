@@ -1,7 +1,9 @@
 
-<script src="<?php echo base_url(). 'assets/scripts/bootstrap/bootstrap.js'?>" type="text/javascript"></script>
-<script src="<?php echo base_url(). 'assets/scripts/modernizr.js'?>"></script>
+<script src="<?php echo base_url().'assets/scripts/datatables/paging.js'?>" type="text/javascript"></script>
+<script src="<?php echo base_url().'assets/scripts/modernizr.js'?>"></script>
+
 <script src='<?php echo base_url(); ?>assets/scripts/globalize.min.js'></script>
+<script src="<?php echo base_url(). 'assets/scripts/bootstrap/bootstrap.js'?>" type="text/javascript"></script>
 <script>
 	$(document).ready(function() {
 
@@ -34,7 +36,19 @@
 
 		});
 		
-		
+			$('.dataTable').dataTable({
+		 "sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
+	});
+	
+	/*$().();
+	$().(function(){
+	
+	});*/
+$('.dataTables_filter label input').addClass('form-control');
+$('.dataTables_filter').addClass('form-inline');
+$('.dataTables_length').addClass('form-inline');
+$('.dataTables_length select').addClass('form-control');
+	
 		
 		
 

@@ -100,17 +100,15 @@ class IMCI extends MY_Controller {
 
 	public function load_activity_source($activity) {
 		$results = $this -> global_model -> getSource($activity);
-		
-		$tmpl = array('table_open' => '<div class="table-container"><table border="0" cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
+		//echo '<pre>';print_r($results->result_array());echo '</pre>';
+		$tmpl = array('table_open' => '<div class="table-container"><table border="0" cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
 
 		$this -> table -> set_template($tmpl);
 
 		//set table headers
-		$this -> table -> set_heading('Name Of Participant', 'Work Station', 'MFL Code','Cadre','ID Number','Mobile Number','Email Address', 'Dates','Upload Date');
+		$this -> table -> set_heading('Names Of Participant', 'Work Station', 'MFL Code', 'Cadre', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date');
 		foreach ($results->result() as $activity) {
-		$this -> table -> add_row($activity -> name_of_participant,$activity -> work_station,$activity -> mfl_code,
-		$activity -> cadre,$activity -> id_number,$activity -> mobile_number,
-		$activity -> email_address,$activity -> dates,$activity -> upload_date);
+			$this -> table -> add_row($activity -> names_of_participant, $activity -> work_station, $activity -> mfl_code, $activity -> cadre, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date);
 		}
 		$activity_table = $this -> table -> generate();
 		echo $activity_table;
@@ -142,8 +140,7 @@ class IMCI extends MY_Controller {
 			$count++;
 		}
 		foreach ($series as $ser) {
-			$columns[] = $ser;
-			;
+			$columns[] = $ser; ;
 		}
 		//echo '<pre>';
 		//print_r(json_encode($seriesData));
@@ -170,6 +167,7 @@ class IMCI extends MY_Controller {
 	}
 
 	public function imci_frequency() {
+		$dataSource = $series = $columns = $seriesData = array();
 		$results = $this -> global_model -> getActivities('IMCI');
 		$results = $results -> result_array();
 

@@ -32,6 +32,7 @@ s.sub_program_name = ?;';
 	public function getSourcePerActivity($activity) {
 		$query = 'SELECT 
     names_of_participant,
+    work_station,
     mfl_code,
     cadre,
     id_number,

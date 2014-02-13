@@ -85,6 +85,9 @@ body {
 .btn {
 	margin-top: 10px;
 }
+.btn i{
+	margin-right:5px;
+}
 .modal-footer > button {
 	margin-top: -15px;
 }

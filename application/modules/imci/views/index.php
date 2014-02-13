@@ -85,17 +85,20 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <div class="modal fade" id="imci_files_modal" >
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="width:90%">
 
 		<div class="modal-content">
 
 			<div class="modal-header">
+			
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
-				<h4 class="modal-title">View Source Data</h4>
+				<h4 class="modal-title">View Source Data 	
+					<a class="btn" style="margin-top:-5px"><i class="fi-page-export-csv"></i>Export to Excel</a>
+					<a class="btn" style="margin-top:-5px"><i class="fi-page-export-pdf"></i>Export to PDF</a></h4>
 			</div>
-			<div class="modal-body" id="source_data">
+			<div class="modal-body" style=" height:60%;overflow-y:scroll" id="source_data">
 				
 
 			</div>
