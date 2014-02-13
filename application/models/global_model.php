@@ -16,5 +16,10 @@ class Global_Model extends MY_Model {
 		$activities = $this -> getActivitiesPerProgram($subprogram);
 		return $activities;
 	}
+	
+	public function getSource($activity) {
+		$activities = $this -> getSourcePerActivity($activity);
+		return $activities;
+	}
 
 }

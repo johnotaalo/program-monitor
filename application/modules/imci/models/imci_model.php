@@ -21,4 +21,6 @@ GROUP BY facilityType,s.cadre;";
 		return $cadre;
 	}
 
+	
+
 }

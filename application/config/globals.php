@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-
+$config['project_url'] ='http://'.$_SERVER['SERVER_NAME'].'/mnh';
 /*Tables*/
 $config['user_table'] = 'users';
 $config['access_level_table'] = "access_level";

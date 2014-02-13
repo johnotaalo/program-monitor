@@ -2,7 +2,7 @@
 $(function () {
 var dataSource = <?php echo $dataSource;?>;
 
-$("#chartContainer").dxChart({
+$("#<?php echo $container?>").dxChart({
     dataSource: dataSource,
   	commonSeriesSettings: {
         argumentField: <?php echo $argument?>,
@@ -38,6 +38,6 @@ $("#chartContainer").dxChart({
 });
 });
 </script>
-<div id="chartContainer" class="graph" style="height:90%">
+<div id="<?php echo $container?>" class="graph" style="height:90%">
 	
 </div>

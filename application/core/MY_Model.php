@@ -28,5 +28,23 @@ s.sub_program_name = ?;';
 		$activities = $this -> db -> query($query, $subprogram);
 		return $activities;
 	}
+	
+	public function getSourcePerActivity($activity) {
+		$query = 'SELECT 
+    names_of_participant,
+    mfl_code,
+    cadre,
+    id_number,
+    mobile_number,
+    email_address,
+  from_unixtime(dates, "%d-%m-%Y") as dates,
+    from_unixtime(upload_date,"%d-%m-%Y") as upload_date
+FROM
+    subprogramlog
+WHERE activity_id=?';
+
+		$source = $this -> db -> query($query, (int)$activity);
+		return $source;
+	}
 
 }

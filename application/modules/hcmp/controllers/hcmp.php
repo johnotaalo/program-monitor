@@ -55,19 +55,21 @@ class HCMP extends MY_Controller {
 					$last_updated = date("d-M-Y H:i", $log -> upload_date);
 				}
 			}
-			if ($activity -> activity_name == 'Facility Roll Out'||$activity -> activity_name == 'Performance Monitoring: System Usage'||$activity -> activity_name == 'Performance Monitoring: Program Related (Commodity Management)') {
+			if ($activity -> activity_name == 'Facility Roll Out' || $activity -> activity_name == 'Performance Monitoring: System Usage' || $activity -> activity_name == 'Performance Monitoring: Program Related (Commodity Management)') {
 				$last_updated = date('d-M-Y H:i');
 			}
 			$this -> db -> select_max('dates');
 			$datasets = $this -> db -> get_where('subprogramlog', array('activity_id' => $activity -> activity_id));
 			foreach ($datasets->result() as $dataset) {
-				if ($log -> upload_date == NULL) {
+				if ($dataset -> dates == NULL) {
 					$recent_dataset = 'No Recent Data';
+				} elseif ($dataset -> dates == 0) {
+					$recent_dataset = '';
 				} else {
 					$recent_dataset = date("d-M-Y", $dataset -> dates);
 				}
 			}
-			if ($activity -> activity_name == 'Facility Roll Out'||$activity -> activity_name == 'Performance Monitoring: System Usage'||$activity -> activity_name == 'Performance Monitoring: Program Related (Commodity Management)'){
+			if ($activity -> activity_name == 'Facility Roll Out' || $activity -> activity_name == 'Performance Monitoring: System Usage' || $activity -> activity_name == 'Performance Monitoring: Program Related (Commodity Management)') {
 				$recent_dataset = date('d-M-Y');
 			}
 			$activity_action = "<a href='#' class='btn-xs btn-primary hcmp_manual_update' id='" . $activity -> activity_id . "' >Manual Entry</a><a href='#' class='btn-xs btn-info hcmp_activity_upload' id='" . $activity -> activity_id . "' >Upload</a>";
@@ -81,7 +83,7 @@ class HCMP extends MY_Controller {
 		$results = $this -> hcmp_model -> hcmp_log($month);
 
 		foreach ($results->result() as $log) {
-			$dataSource[] = array("date" => date("M-Y",strtotime($log -> log_time)), "total" => (int)$log -> total);
+			$dataSource[] = array("date" => date("M-Y", strtotime($log -> log_time)), "total" => (int)$log -> total);
 		}
 
 		$series = array("argumentField" => 'date', "valueField" => 'total', "name" => 'Access', 'type' => 'line');
@@ -111,38 +113,39 @@ class HCMP extends MY_Controller {
 		//set table headers
 		$this -> table -> set_heading('Statistic', 'Value');
 		foreach ($results->result() as $lead_time) {
-			$statistics=array('Order','Approval','Delivery','Lead Time');
-			$values=array((int)$lead_time -> order_approval , $lead_time -> approval_delivery , $lead_time -> delivery_update,(int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update);
+			$statistics = array('Order', 'Approval', 'Delivery', 'Lead Time');
+			$values = array((int)$lead_time -> order_approval, $lead_time -> approval_delivery, $lead_time -> delivery_update, (int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update);
 		}
-		for($x=0;$x<sizeof($statistics);$x++){
-			$this -> table -> add_row($statistics[$x],$values[$x]);
+		for ($x = 0; $x < sizeof($statistics); $x++) {
+			$this -> table -> add_row($statistics[$x], $values[$x]);
 		}
 		$lead_time = $this -> table -> generate();
 		echo $lead_time;
 		/*
-		 * 
-		foreach ($results->result() as $lead_time) {
-			$ranges[] = array("startValue" => (int)$start, "endValue" => (int)$lead_time -> order_approval, "color" => "#92000A");
-			$ranges[] = array("startValue" => (int)$lead_time -> order_approval, "endValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery, "color" => "#E6E200");
-			$ranges[] = array("startValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery, "endValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update, "color" => "#77DD77");
+		 *
+		 foreach ($results->result() as $lead_time) {
+		 $ranges[] = array("startValue" => (int)$start, "endValue" => (int)$lead_time -> order_approval, "color" => "#92000A");
+		 $ranges[] = array("startValue" => (int)$lead_time -> order_approval, "endValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery, "color" => "#E6E200");
+		 $ranges[] = array("startValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery, "endValue" => (int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update, "color" => "#77DD77");
 
-			$endValue = round((int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update, -1);
-			$value = $endValue;
-		}
-		$ranges = json_encode($ranges);
-		$data['ranges'] = $ranges;
-		$data['value'] = $value;
-		$data['endValue'] = $endValue;
-		$data['container'] = 'chart_line' . rand(0, 1000000);
-		$this -> load -> view('charts/chart_linear_gauge', $data);*/
+		 $endValue = round((int)$lead_time -> order_approval + $lead_time -> approval_delivery + $lead_time -> delivery_update, -1);
+		 $value = $endValue;
+		 }
+		 $ranges = json_encode($ranges);
+		 $data['ranges'] = $ranges;
+		 $data['value'] = $value;
+		 $data['endValue'] = $endValue;
+		 $data['container'] = 'chart_line' . rand(0, 1000000);
+		 $this -> load -> view('charts/chart_linear_gauge', $data);*/
 	}
-public function hcmp_sensitization(){
-	$results = $this -> hcmp_model -> hcmp_sensitization();
-	foreach ($results->result() as $county) {
+
+	public function hcmp_sensitization() {
+		$results = $this -> hcmp_model -> hcmp_sensitization();
+		foreach ($results->result() as $county) {
 			$dataSource[] = array("county" => $county -> county, "total" => (int)$county -> total);
 		}
 
-		$series = array("argumentField" => 'county', "valueField" => 'total', "name" => 'Participants',"type"=>'doughnut');
+		$series = array("argumentField" => 'county', "valueField" => 'total', "name" => 'Participants', "type" => 'doughnut');
 
 		$finalData = $dataSource;
 		$finalData = json_encode($finalData);
@@ -155,5 +158,6 @@ public function hcmp_sensitization(){
 		$data['dataSource'] = $finalData;
 		$data['series'] = json_encode($series);
 		$this -> load -> view('charts/chart_pie', $data);
-}
+	}
+
 }

@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-default" role="navigation" id="myBar">
 	<a id="setCollapse"href="javascript:;" class="navbar-toggle collapsed"><i class="fa fa-list-ul"></i> </a>
 	<!-- Brand and toggle get grouped for better mobile display -->
@@ -14,7 +15,7 @@
 						<a tabindex="-1" href="#">Assessment</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a tabindex="-1" href="<?php echo base_url(); ?>baseline">Baseline</a>
+								<a class="run-anim" href="#" data-anim="la-anim-1" tabindex="-1" data-link="<?php echo base_url(); ?>baseline">Baseline</a>
 							</li>
 							
 						</ul>
@@ -24,17 +25,17 @@
 						<a tabindex="-1" href="#">Commodity Management</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a tabindex="-1" href="<?php echo base_url(); ?>hcmp">HCMP</a>
+								<a class="run-anim" href="#" data-anim="la-anim-1" tabindex="-1" data-link="<?php echo base_url(); ?>hcmp">HCMP</a>
 							</li>
 							<li>
-								<a tabindex="-1" href="<?php echo base_url(); ?>bundling">Bundling</a>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>bundling">Bundling</a>
 							</li>
 							
 						</ul>
 						<li class="divider"></li>
 					</li>
 					<li>
-						<a href="<?php echo base_url(); ?>imci">IMCI</a>
+						<a class="run-anim" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>imci">IMCI</a>
 					</li>
 				</ul>
 			</li>
@@ -54,3 +55,4 @@
 	</div>
 
 </nav>
+

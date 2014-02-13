@@ -2,7 +2,7 @@
 $(function () {
 var dataSource = <?php echo $dataSource;?>;
 
-$("#chartContainer").dxChart({
+$("#<?php echo $container?>").dxChart({
     dataSource: dataSource,
   
     series: <?php echo $series;?>,
@@ -12,7 +12,10 @@ $("#chartContainer").dxChart({
         }
     },
     tooltip:{
-        enabled: true
+        enabled: true,
+        customizeText: function(value){
+            return value.valueText +' in '+ value.argumentText;
+        }
     },
     //title: "Historic, Current and Future Population",
     legend: {
@@ -28,6 +31,6 @@ $("#chartContainer").dxChart({
 });
 });
 </script>
-<div id="chartContainer" class="graph" style="height:90%">
+<div id="<?php echo $container?>" class="graph" style="height:90%">
 	
 </div>
