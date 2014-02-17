@@ -94,9 +94,10 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
-				<h4 class="modal-title">View Source Data 	
-					<a class="btn" style="margin-top:-5px"><i class="fi-page-export-csv"></i>Export to Excel</a>
-					<a class="btn" style="margin-top:-5px"><i class="fi-page-export-pdf"></i>Export to PDF</a></h4>
+				<h4 class="modal-title">View Source Data (<div style="display:inline-block;font-weight:bold" id="activity_name"></div>) 	
+					<a id="export_csv" class="btn" style="margin-top:-5px" data-link="<?php echo base_url();?>imci/export_Excel/"><i class="fi-page-export-csv"></i>Export to Excel</a>
+					<a id="export_pdf" class="btn" style="margin-top:-5px" data-link="<?php echo base_url();?>imci/export_PDF/"><i class="fi-page-export-pdf"></i>Export to PDF</a>
+				</h4>
 			</div>
 			<div class="modal-body" style=" height:60%;overflow-y:scroll" id="source_data">
 				
@@ -182,6 +183,8 @@
 <script>
 		$(document).ready(function(){
 			
+			var activityID;
+			
 	$(".imci_manual_update").click(function() {
 	$('#imci_manual_update').modal('show');
 	activityID = $(this).attr('id');
@@ -193,10 +196,15 @@
 	
 	
 	$('.imci_activity_source').click(function() {
+		$('#source_data').empty();
+		$('#source_data').append('<div class="la-anim-1-mini"></div>');
+		$('#source_data > .la-anim-1-mini').addClass('la-animate');
+		$('#activity_name').empty();
 		activityID = $(this).attr('id');
 		$('#imci_files_modal').modal('show');
 		$('#imci_files_modal').delay(2000).queue(function( nxt ) {
 		$('#source_data').load("<?php echo base_url();?>imci/load_activity_source/"+activityID);
+			$('#activity_name').load('<?php echo base_url();?>imci/load_activity_name/'+activityID);
 	nxt();
 	});	
 	});
@@ -207,6 +215,7 @@
 	activityID = $(this).attr('id');
 	$('#upload_button').delay(2000).queue(function( nxt ) {
 	$('#activity_id').val(activityID);
+
 	nxt();
 	});
 
@@ -262,6 +271,19 @@
     format: 'dd-m-yyyy',
     autoclose:true
 });
-		
+	
+	$('#export_csv').click(function(){
+		link = $(this).attr('data-link');
+		window.open(link+activityID);		
+	});	
+	
+	$('#export_pdf').click(function(){
+		link = $(this).attr('data-link');
+		window.open(link+activityID);		
+	});	
+	
+	$('.modal-title > a#export_pdf').click(function(){
+		link = $(this).attr('data-link');
+	});	
 		});
 </script>

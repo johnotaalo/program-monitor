@@ -14,6 +14,9 @@ class IMCI extends MY_Controller {
 		$data['contentView'] = "imci/index";
 		$data['title'] = "Program Monitor :: IMCI";
 		$data['brand'] = 'IMCI';
+		$data_to_export = $this -> db -> get('activities');
+		$data_to_export = $data_to_export -> result_array();
+		$data['data_to_export'] = $data_to_export;
 		$data['activity_table'] = $this -> load_activity_list();
 		$this -> template($data);
 	}
@@ -98,10 +101,16 @@ class IMCI extends MY_Controller {
 		return $activity_table;
 	}
 
+	public function load_activity_name($activity_id) {
+		$activityName = $this -> global_model -> getActivityName($activity_id);
+		$activityName = $activityName -> result_array();
+		echo $activityName[0]['activity_name'];
+	}
+
 	public function load_activity_source($activity) {
 		$results = $this -> global_model -> getSource($activity);
 		//echo '<pre>';print_r($results->result_array());echo '</pre>';
-		$tmpl = array('table_open' => '<div class="table-container"><table border="0" cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
+		$tmpl = array('table_open' => '<div class=""><table border="0" cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover dataTable">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
 
 		$this -> table -> set_template($tmpl);
 
@@ -112,6 +121,22 @@ class IMCI extends MY_Controller {
 		}
 		$activity_table = $this -> table -> generate();
 		echo $activity_table;
+	}
+
+	public function load_activity_source_pdf($activity) {
+		$results = $this -> global_model -> getSource($activity);
+		//echo '<pre>';print_r($results->result_array());echo '</pre>';
+		$tmpl = array('table_open' => '<table class="data-table">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table>');
+
+		$this -> table -> set_template($tmpl);
+
+		//set table headers
+		$this -> table -> set_heading('Names Of Participant', 'Work Station', 'MFL Code', 'Cadre', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date');
+		foreach ($results->result() as $activity) {
+			$this -> table -> add_row($activity -> names_of_participant, $activity -> work_station, $activity -> mfl_code, $activity -> cadre, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date);
+		}
+		$activity_table = $this -> table -> generate();
+		return $activity_table;
 	}
 
 	public function imci_cadre() {
@@ -140,7 +165,8 @@ class IMCI extends MY_Controller {
 			$count++;
 		}
 		foreach ($series as $ser) {
-			$columns[] = $ser; ;
+			$columns[] = $ser;
+			;
 		}
 		//echo '<pre>';
 		//print_r(json_encode($seriesData));
@@ -206,6 +232,45 @@ GROUP BY dates";
 	}
 
 	public function testIP() {
+
+	}
+
+	public function export_PDF($activity_id) {
+		$activityName = $this -> global_model -> getActivityName($activity_id);
+		$activityName = $activityName -> result_array();
+		$filename = $activityName[0]['activity_name'];
+
+		$data = $this -> load_activity_source_pdf($activity_id);
+		$this -> load -> module('export');
+
+		$this -> export -> loadPDF($data, $filename);
+	}
+
+	private function make_table($activity_id) {
+		$results = $this -> global_model -> getSource($activity_id);
+
+		$results = $results -> result_array();
+
+		foreach ($results[0] as $key => $value) {
+			$resultData['title'][] = strtoupper(str_replace("_", " ", $key));
+		}
+		$resultData['data'] = $results;
+		return $resultData;
+
+	}
+
+	public function export_Excel($activity_id) {
+		$activityName = $this -> global_model -> getActivityName($activity_id);
+		$activityName = $activityName -> result_array();
+		$resultData = $this -> make_table($activity_id);
+		$this -> load -> module('export');
+		$filename = $activityName[0]['activity_name'];
+		$this -> export -> loadExcel($resultData, $filename);
+		/*foreach ($results as $result) {
+		 foreach ($result as $key => $value) {
+		 $resultData['title'][] = strtoupper(str_replace("_", " ", $key));
+		 }
+		 }*/
 
 	}
 

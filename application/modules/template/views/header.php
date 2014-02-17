@@ -62,7 +62,7 @@
 								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>quantification_forecasting">Quantification & Forecasting</a>
 							</li>
 							<li>
-								<a class="run-anim" href="#" data-anim="la-anim-1" tabindex="-1" data-link="<?php echo base_url(); ?>hcmp">HCMP Rollout</a>
+								<a class="run-anim" href="#" data-anim="la-anim-1" tabindex="-1" data-link="<?php echo base_url(); ?>hcmp">HCMP</a>
 							</li>
 							<li>
 								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>support_supervision">Support Supervision by DPF</a>

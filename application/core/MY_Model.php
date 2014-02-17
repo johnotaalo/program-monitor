@@ -29,20 +29,32 @@ s.sub_program_name = ?;';
 		return $activities;
 	}
 	
-	public function getSourcePerActivity($activity) {
+		public function getActivityOneName($activity) {
 		$query = 'SELECT 
+    activity_name
+FROM
+    activities WHERE activity_id=?;';
+		$activities = $this -> db -> query($query, $activity);
+		return $activities;
+	}
+	
+	public function getSourcePerActivity($activity) {
+		$query = "SELECT 
     names_of_participant,
     work_station,
     mfl_code,
-    cadre,
+    cadre.cadre_name as cadre,
     id_number,
     mobile_number,
     email_address,
-  from_unixtime(dates, "%d-%m-%Y") as dates,
-    from_unixtime(upload_date,"%d-%m-%Y") as upload_date
+    from_unixtime(dates, '%d-%m-%Y') as dates,
+    from_unixtime(upload_date, '%d-%m-%Y') as upload_date
 FROM
-    subprogramlog
-WHERE activity_id=?';
+    subprogramlog,
+    cadre
+WHERE
+    activity_id = ?
+        AND cadre.cadre_id=subprogramlog.cadre;";
 
 		$source = $this -> db -> query($query, (int)$activity);
 		return $source;

@@ -17,6 +17,11 @@ class Global_Model extends MY_Model {
 		return $activities;
 	}
 	
+	public function getActivityName($activity) {
+		$activities = $this -> getActivityOneName($activity);
+		return $activities;
+	}
+	
 	public function getSource($activity) {
 		$activities = $this -> getSourcePerActivity($activity);
 		return $activities;

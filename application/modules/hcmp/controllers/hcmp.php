@@ -80,6 +80,7 @@ class HCMP extends MY_Controller {
 	}
 
 	public function hcmp_log($month) {
+		$dataSource=array();
 		$results = $this -> hcmp_model -> hcmp_log($month);
 
 		foreach ($results->result() as $log) {
@@ -141,6 +142,7 @@ class HCMP extends MY_Controller {
 
 	public function hcmp_sensitization() {
 		$results = $this -> hcmp_model -> hcmp_sensitization();
+		$dataSource=array();
 		foreach ($results->result() as $county) {
 			$dataSource[] = array("county" => $county -> county, "total" => (int)$county -> total);
 		}
