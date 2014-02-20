@@ -66,7 +66,7 @@ class IMCI extends MY_Controller {
 	}
 
 	public function load_activity_list() {
-		$results = $this -> global_model -> getActivities('IMCI');
+		$results = $this -> global_model -> getActivities('IMCI Training');
 		$tmpl = array('table_open' => '<div class="table-container"><table border="0" cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
 
 		$this -> table -> set_template($tmpl);
@@ -194,11 +194,11 @@ class IMCI extends MY_Controller {
 
 	public function imci_frequency() {
 		$dataSource = $series = $columns = $seriesData = array();
-		$results = $this -> global_model -> getActivities('IMCI');
+		$results = $this -> global_model -> getActivities('IMCI Training');
 		$results = $results -> result_array();
 
 		foreach ($results as $activity) {
-			if ($activity['activity_name'] == 'Roll out IMCI Training') {
+			if ($activity['activity_name'] == 'Train an expanded pool of TOTs') {
 				$query = "SELECT 
     dates, COUNT(*) as total
 FROM

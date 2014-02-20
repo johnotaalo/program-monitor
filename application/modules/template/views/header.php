@@ -25,12 +25,17 @@
 						<li class="divider"></li>
 					</li>	
 					<li class="dropdown-submenu">
-						<a tabindex="-1" href="#">Demand Generation</a>
+						<a tabindex="-1" href="#">Demand Generation - Caregiver</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>procurement">...</a>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>merchendise">Merchendise</a>
 							</li>
-							
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>print_media">Print Media</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>mass_media">Mass Media</a>
+							</li>
 							
 						</ul>
 						<li class="divider"></li>
@@ -39,8 +44,42 @@
 						<a tabindex="-1" href="#">Service Provision</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>procurement">...</a>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>imci">IMCI Training</a>
 							</li>
+								<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>imci_followup">IMCI Follow Up & Certification (after 6 weeks)</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>imci_mentorship">IMCI Mentorship</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>iccm">ICCM</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>ort">ORT</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>community_strategy">Community Strategy</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>guidelines_policy">Guidelines and Policy Orientation</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>diarrhoea_management_cmes">Diarrhoea Management CMEs</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>health_talks">Health Talks</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>outreaches">Outreaches</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>support_supervision">Support Supervision</a>
+							</li>
+							<li>
+								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>distribution_of_materials">Distribution of Materials</a>
+							</li>
+						
 							
 							
 						</ul>
@@ -64,9 +103,7 @@
 							<li>
 								<a class="run-anim" href="#" data-anim="la-anim-1" tabindex="-1" data-link="<?php echo base_url(); ?>hcmp">HCMP</a>
 							</li>
-							<li>
-								<a class="run-anim" tabindex="-1" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>support_supervision">Support Supervision by DPF</a>
-							</li>
+							
 							
 							
 						</ul>
@@ -81,11 +118,8 @@
 							
 							
 						</ul>
-						<li class="divider"></li>
 					</li>	
-					<li>
-						<a class="run-anim" href="#" data-anim="la-anim-1" data-link="<?php echo base_url(); ?>imci">IMCI</a>
-					</li>
+					
 					
 				</ul>
 			</li>

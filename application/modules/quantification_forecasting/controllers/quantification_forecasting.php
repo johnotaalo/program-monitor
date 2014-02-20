@@ -12,8 +12,8 @@ class Quantification_Forecasting extends MY_Controller {
 
 	public function index() {
 		$data['contentView'] = "quantification_forecasting/index";
-		$data['title'] = "Program Monitor :: Quantification_Forecasting";
-		$data['brand'] = 'Quantification_Forecasting';
+		$data['title'] = "Program Monitor :: Quantification and Forecasting";
+		$data['brand'] = 'Quantification and Forecasting';
 		$data['activity_table'] = $this -> load_activity_list();
 		$this -> template($data);
 	}
@@ -63,7 +63,7 @@ class Quantification_Forecasting extends MY_Controller {
 	}
 
 	public function load_activity_list() {
-		$results = $this -> global_model -> getActivities('Quantification_Forecasting');
+		$results = $this -> global_model -> getActivities('Quantification and Forecasting');
 		$tmpl = array('table_open' => '<div class="table-container"><table border="0" cellpadding="4" cellspacing="0" class="table table-condensed table-striped table-bordered table-hover">', 'heading_row_start' => '<tr>', 'heading_row_end' => '</tr>', 'heading_cell_start' => '<th>', 'heading_cell_end' => '</th>', 'row_start' => '<tr>', 'row_end' => '</tr>', 'cell_start' => '<td>', 'cell_end' => '</td>', 'row_alt_start' => '<tr>', 'row_alt_end' => '</tr>', 'cell_alt_start' => '<td>', 'cell_alt_end' => '</td>', 'table_close' => '</table></div>');
 
 		$this -> table -> set_template($tmpl);

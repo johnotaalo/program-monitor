@@ -12,8 +12,8 @@ class Support_Supervision extends MY_Controller {
 
 	public function index() {
 		$data['contentView'] = "support_supervision/index";
-		$data['title'] = "Program Monitor :: Support_Supervision";
-		$data['brand'] = 'Support_Supervision';
+		$data['title'] = "Program Monitor :: Support Supervision";
+		$data['brand'] = 'Support Supervision';
 		$data['activity_table'] = $this -> load_activity_list();
 		$this -> template($data);
 	}

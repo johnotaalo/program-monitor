@@ -6,14 +6,8 @@ $("#<?php echo $container?>").dxChart({
     dataSource: dataSource,
   	commonSeriesSettings: {
         argumentField: <?php echo $argument?>,
-        type: <?php echo $type?>,
-        hoverMode: "allArgumentPoints",
-        selectionMode: "allArgumentPoints",
-        label: {
-            visible: <?php echo $label?>,
-            format: "fixedPoint",
-            precision: 0
-        }
+        type: <?php echo $type?>
+        
     },
     series: <?php echo $series;?>,
     argumentAxis:{
@@ -22,7 +16,10 @@ $("#<?php echo $container?>").dxChart({
         }
     },
     tooltip:{
-        enabled: true
+        enabled: true,
+        customizeText: function(value){
+            return value.valueText +' '+ value.seriesName+' in '+ value.argumentText;
+        }
     },
     //title: "Historic, Current and Future Population",
     legend: {
