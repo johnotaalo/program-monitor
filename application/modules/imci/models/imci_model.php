@@ -6,19 +6,19 @@ class Imci_Model extends MY_Controller {
 		parent::__construct();
 	}
 
-	public function imci_cadre() {
+	public function imci_job_title() {
 		$query = "SELECT 
-    count(*) as total,f.facilityType as facility_type,c.cadre_name as cadre
+    count(*) as total,f.facilityType as facility_type,c.job_title_name as job_title
 FROM
     subprogramlog s,
-    facility f,cadre c
+    facility f,job_title c
 WHERE
-	c.cadre_id=s.cadre AND
+	c.job_title_id=s.job_title AND
     s.mfl_code = f.facilityMFC
-GROUP BY facilityType,s.cadre;";
+GROUP BY facilityType,s.job_title;";
 
-		$cadre = $this -> db -> query($query);
-		return $cadre;
+		$job_title = $this -> db -> query($query);
+		return $job_title;
 	}
 
 	

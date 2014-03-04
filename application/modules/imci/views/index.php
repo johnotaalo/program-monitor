@@ -21,10 +21,14 @@
 				</li>
 				<table class="table-bordered" style="width:95%">
 					<tr style="font-size:1.4em">
-						<th>NAMES OF PARTICIPANT</th><th>WORK STATION</th><th>MFL CODE</th><th>CADRE</th><th>ID NUMBER</th>
+						<th>NAMES OF PARTICIPANT</th><th>COUNTY NAME</th><th>SUB-COUNTY NAME</th><th>DESIGNATION</th>
 					</tr>
 					<tr style="margin-top:10px;font-size:1.4em">
-						<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th>
+						<th>FACILITY LOCATION</th><th>WORK STATION</th><th>MFL CODE</th><th>CADRE</th><th>ID NUMBER</th>
+							
+					</tr>
+					<tr style="margin-top:10px;font-size:1.4em">
+						<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th><th>TRAINING LOCATION</th>
 					</tr>
 				</table>
 			</ul>
@@ -37,7 +41,7 @@
 	<div class="col-md-6">
 		<div class="inner">
 			<h4>Training Coverage by Cadre</h4>
-			<div id="imci_cadre">
+			<div id="imci_job_title">
 				<div class="la-anim-1-mini"></div>
 			</div>
 		</div>
@@ -85,7 +89,7 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <div class="modal fade" id="imci_files_modal" >
-	<div class="modal-dialog" style="width:90%">
+	<div class="modal-dialog" style="width:98%">
 
 		<div class="modal-content">
 
@@ -114,7 +118,7 @@
 </div><!-- /.modal -->
 <!-- Add Event modal -->
 <div class="modal fade" id="imci_manual_update" >
-	<div class="modal-dialog" style="width:80%" >
+	<div class="modal-dialog" style="width:95%" >
 
 		<div class="modal-content">
 			<?php echo form_open('imci/manual_entry'); ?>
@@ -129,8 +133,8 @@
 				<table id="activity_table" class="table-bordered table-striped" >
 					<thead>
 						<tr style="font-size:1em">
-							<th>NAMES OF PARTICIPANT</th><th>WORK STATION</th><th>MFL CODE</th><th>CADRE</th><th>ID NUMBER</th>
-							<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th><th>Action</th>
+							<th>NAMES OF PARTICIPANT</th><th>FACILITY NAME</th><th>MFL CODE</th><th>DESIGNATION</th><th>DEPARTMENT</th><th>JOB TITLE</th><th>ID NUMBER</th>
+							<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th><th>TRAINING LOCATION</th><th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -139,13 +143,21 @@
 								<input type="text" value="" name="names_of_participant[]" required aria-required="true" pattern="[A-Za-z]+\s[A-Za-z]+" title="Firstname Lastname" class="form-control participant" placeholder="Person Responsible..." >
 							</td>
 							<td>
-								<input type="text" value="" name="work_station[]" required aria-required="true" title="" class="form-control workstation" placeholder="e.g Kenyatta..." >
+								<select type="text" value="" name="facility_name[]" required aria-required="true" title="" class="form-control facilityname" placeholder="e.g Nairobi..." >
+									<?php echo $facility_list;   ?>
+								</select>
 							</td>
 							<td>
 								<input type="text" value="" name="mfl_code[]" pattern="[0-9]{1,5}"  required aria-required="true" class="form-control mfl_code" placeholder="e.g 12345" >
 							</td>
 							<td>
-								<input type="text" value="" name="cadre[]" required aria-required="true" class="form-control cadre" placeholder="e.g Nurse/Midwife" >
+								<input type="text" value="" name="designation[]" required aria-required="true" class="form-control designation" placeholder="e.g Nurse/Midwife" >
+							</td>
+							<td>
+								<input type="text" value="" name="department[]" required aria-required="true" class="form-control department" placeholder="e.g Nurse/Midwife" >
+							</td>
+							<td>
+								<input type="text" value="" name="job_title[]" required aria-required="true" class="form-control jobtitle" placeholder="e.g Nurse/Midwife" >
 							</td>
 							<td>
 								<input type="text" value="" name="id_number[]" pattern="[0-9]{1,10}" title="Numbers Only" required aria-required="true" class="form-control id_number" placeholder="e.g 23456789..." >
@@ -158,6 +170,9 @@
 							</td>
 							<td>
 								<input type="text" value="" name="dates[]" required aria-required="true" class="form-control datepicker"  >
+							</td>
+							<td>
+								<input type="text" value="" name="training_location[]" required aria-required="true" class="form-control traininglocation" placeholder="" >
 							</td>
 							<td>
 								<a class="btn-xs btn-danger remove">Remove</a>
@@ -225,7 +240,7 @@
 	$('#imci_upload_form').submit();
 	});
 
-	$('#imci_cadre').load('<?php echo base_url(); ?>imci/imci_cadre');
+	$('#imci_job_title').load('<?php echo base_url(); ?>imci/imci_job_title');
 		$('#imci_frequency').load('<?php echo base_url(); ?>imci/imci_frequency');
 
 		$(".add").click(function() {
@@ -285,5 +300,13 @@
 	$('.modal-title > a#export_pdf').click(function(){
 		link = $(this).attr('data-link');
 	});	
+	
+	$('.facilityname').change(function(){
+		val = $(this).val();
+		//alert(val);
+		row = $(this).parent().parent().attr("row_id");
+		$(this).closest('tr').find('.mfl_code').val(val);
+		
+	});
 		});
 </script>

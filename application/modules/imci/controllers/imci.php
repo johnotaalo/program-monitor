@@ -18,6 +18,7 @@ class IMCI extends MY_Controller {
 		$data_to_export = $data_to_export -> result_array();
 		$data['data_to_export'] = $data_to_export;
 		$data['activity_table'] = $this -> load_activity_list();
+		$data['facility_list'] = $this->facility_list();
 		$this -> template($data);
 	}
 
@@ -26,6 +27,7 @@ class IMCI extends MY_Controller {
 		$this -> load -> module('upload');
 		$activity_id = $_POST['activity_id'];
 		$this -> upload -> data_upload(0, $activity_id);
+		redirect('imci');
 	}
 
 	public function manual_entry() {
@@ -33,7 +35,7 @@ class IMCI extends MY_Controller {
 		$data = $this -> input -> post();
 		$activity_id = $data['activity_id_man'];
 		unset($data['activity_id_man']);
-		//echo '<pre>'; print_r($data);echo '</pre>';
+		//	echo '<pre>'; print_r($data);echo '</pre>';
 		foreach ($data as $key => $column) {
 			foreach ($column as $col => $val) {
 				$results[$col][$key] = $val;
@@ -115,9 +117,11 @@ class IMCI extends MY_Controller {
 		$this -> table -> set_template($tmpl);
 
 		//set table headers
-		$this -> table -> set_heading('Names Of Participant', 'Work Station', 'MFL Code', 'Cadre', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date');
+		$this -> table -> set_heading('Names Of Participant', 'Facility Name','MFL Code','Designation','Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 
+		'Dates','Upload Date', 'Training Location');
 		foreach ($results->result() as $activity) {
-			$this -> table -> add_row($activity -> names_of_participant, $activity -> work_station, $activity -> mfl_code, $activity -> cadre, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date);
+			$this -> table -> add_row($activity -> names_of_participant,$activity -> facility_name, $activity -> mfl_code,$activity -> designation,$activity -> department,  $activity -> job_title, $activity -> id_number, $activity -> mobile_number, 
+			$activity -> email_address, $activity -> dates,$activity -> upload_date, $activity -> training_location);
 		}
 		$activity_table = $this -> table -> generate();
 		echo $activity_table;
@@ -130,22 +134,25 @@ class IMCI extends MY_Controller {
 
 		$this -> table -> set_template($tmpl);
 
-		//set table headers
-		$this -> table -> set_heading('Names Of Participant', 'Work Station', 'MFL Code', 'Cadre', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date');
+		///set table headers
+		$this -> table -> set_heading('Names Of Participant', 'Facility Name','MFL Code','Designation','Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 
+		'Dates','Upload Date', 'Training Location');
 		foreach ($results->result() as $activity) {
-			$this -> table -> add_row($activity -> names_of_participant, $activity -> work_station, $activity -> mfl_code, $activity -> cadre, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date);
+			$this -> table -> add_row($activity -> names_of_participant,$activity -> facility_name, $activity -> mfl_code,$activity -> designation,$activity -> department,  $activity -> job_title, $activity -> id_number, $activity -> mobile_number, 
+			$activity -> email_address, $activity -> dates,$activity -> upload_date, $activity -> training_location);
 		}
 		$activity_table = $this -> table -> generate();
 		return $activity_table;
 	}
 
-	public function imci_cadre() {
-		$results = $this -> imci_model -> imci_cadre();
+	public function imci_job_title() {
+		$results = $this -> imci_model -> imci_job_title();
+		//var_dump($results);die;
 		$dataSource = $series = $columns = $seriesData = array();
 
-		foreach ($results->result() as $cadre) {
-			$dataSource[$cadre -> facility_type][] = array("cadre" => $cadre -> cadre, "total" => (int)$cadre -> total);
-			$series[$cadre -> cadre] = array("valueField" => $cadre -> cadre, "name" => $cadre -> cadre);
+		foreach ($results->result() as $job_title) {
+			$dataSource[$job_title -> facility_type][] = array("job_title" => $job_title -> job_title, "total" => (int)$job_title -> total);
+			$series[$job_title -> job_title] = array("valueField" => $job_title -> job_title, "name" => $job_title -> job_title);
 		}
 		unset($dataSource['Nursing Home']);
 		unset($dataSource['Other Hospital']);
@@ -159,14 +166,13 @@ class IMCI extends MY_Controller {
 		foreach ($dataSource as $key => $value) {
 			$seriesData[$count]['facility type'] = $key;
 			foreach ($value as $val) {
-				$seriesData[$count][$val['cadre']] = $val['total'];
+				$seriesData[$count][$val['job_title']] = $val['total'];
 			}
 			//$series[] = array("valueField" => $key, "name" => $key);
 			$count++;
 		}
 		foreach ($series as $ser) {
-			$columns[] = $ser;
-			;
+			$columns[] = $ser; ;
 		}
 		//echo '<pre>';
 		//print_r(json_encode($seriesData));
@@ -177,7 +183,7 @@ class IMCI extends MY_Controller {
 		$finalData = $seriesData;
 		$finalData = json_encode($finalData);
 		$resultArraySize = 10;
-		$data['argument'] = 'date';
+		//$data['argument'] = 'date';
 		$data['resultArraySize'] = $resultArraySize;
 		$data['container'] = 'chart_line' . rand(0, 1000000);
 		$data['title'] = 'UPID Dashboard';

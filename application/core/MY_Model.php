@@ -41,20 +41,24 @@ FROM
 	public function getSourcePerActivity($activity) {
 		$query = "SELECT 
     names_of_participant,
-    work_station,
+    facility_name,
     mfl_code,
-    cadre.cadre_name as cadre,
+    designation,
+    department,
+    training_location,
+   	job_title.job_title_name as job_title,
     id_number,
     mobile_number,
     email_address,
     from_unixtime(dates, '%d-%m-%Y') as dates,
+    training_location,
     from_unixtime(upload_date, '%d-%m-%Y') as upload_date
 FROM
     subprogramlog,
-    cadre
+    job_title
 WHERE
     activity_id = ?
-        AND cadre.cadre_id=subprogramlog.cadre;";
+        AND job_title.job_title_id=subprogramlog.job_title;";
 
 		$source = $this -> db -> query($query, (int)$activity);
 		return $source;

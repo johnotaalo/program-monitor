@@ -52,6 +52,7 @@ body {
 	margin-bottom: 2%;
 	font-size: 0.8em !important;
 	overflow: hidden;
+	
 }
 .inner h3, .inner h4, h3, h4 {
 	font-size: 2em;
@@ -69,7 +70,7 @@ body {
 }
 .guide, .guide > table {
 	font-family: "Helvetica";
-	overflow-y: hidden;
+	overflow-y: auto;
 	font-size: 0.8em !important;
 }
 /** Form
@@ -181,7 +182,6 @@ table {
  */
 
 .reporting {
-	overflow-y: auto;
 	height: 300px;
 	width:100%;
 	padding-bottom:20px;
@@ -246,6 +246,7 @@ table {
 #compare_1, #compare_2 {
 	margin-bottom: 0;
 }
+
 /** Bootstrap 2 Progress Bar */
 	.progress {
   height: 20px;

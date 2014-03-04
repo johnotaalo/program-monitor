@@ -91,7 +91,7 @@ class Support_Supervision extends MY_Controller {
 				}
 			}
 			$activity_action = "<a href='#' class='btn-xs btn-primary support_supervision_manual_update' id='" . $activity -> activity_id . "' >Manual Entry</a><a href='#' class='btn-xs btn-info support_supervision_activity_upload' id='" . $activity -> activity_id . "' >Upload</a>
-			<a href='#' class='btn-xs  support_supervision_activity_source' id='" . $activity -> activity_id . "' >View Source Data</a>";
+			<a href='#' class='btn-xs  support_supervision_activity_source' id='" . $activity -> activity_id . "' >View Source Data</a><a href='#' class='btn-xs btn-info support_supervision_activity_upload' id='" . $activity -> activity_id . "' >Template</a>";
 			$this -> table -> add_row($activity -> activity_name, $last_updated, $recent_dataset, $activity_action);
 		}
 		$activity_table = $this -> table -> generate();

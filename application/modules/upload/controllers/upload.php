@@ -79,8 +79,7 @@ class Upload extends MY_Controller {
 
 		$dataArr['posted'] = 1;
 		$dataArr['contentView'] = 'upload/upload_v';
-		$this -> load -> module('home');
-		$this -> home -> index();
+	
 
 	}
 
@@ -255,9 +254,9 @@ class Upload extends MY_Controller {
 				$currentTable = R::dispense($table);
 
 				//link Cadre Name to Cadre ID
-				$results = $this -> db -> get_where('cadre', array('cadre_name' => $data1['CADRE']));
-				foreach ($results->result() as $cadre) {
-					$data1['CADRE'] = $cadre -> cadre_id;
+				$results = $this -> db -> get_where('job_title', array('job_title_name' => $data1['JOB TITLE']));
+				foreach ($results->result() as $job_title) {
+					$data1['JOB TITLE'] = $job_title -> job_title_id;
 				}
 
 				//convert date to timestamp

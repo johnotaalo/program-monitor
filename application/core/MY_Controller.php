@@ -27,5 +27,17 @@ class  MY_Controller  extends  MX_Controller {
 	public function getActivity_Table($subprogram) {
 		
 	}
+	
+	public function facility_list(){
+		$facility = $this->db->get('facility');
+		$facility = $facility->result_array();
+		$option='<option selected="selected">Please Select Facility</option>';
+		
+		foreach($facility as $fac){
+			$option.='<option value="'.$fac['facilityMFC'].'">'.$fac['facilityName'].'</option>';
+		}
+		
+		return $option;
+	}
 
 }
