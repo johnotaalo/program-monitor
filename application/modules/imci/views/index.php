@@ -143,7 +143,7 @@
 								<input type="text" value="" name="names_of_participant[]" required aria-required="true" pattern="[A-Za-z]+\s[A-Za-z]+" title="Firstname Lastname" class="form-control participant" placeholder="Person Responsible..." >
 							</td>
 							<td>
-								<select type="text" value="" name="facility_name[]" required aria-required="true" title="" class="form-control facilityname" placeholder="e.g Nairobi..." >
+								<select type="text" required aria-required="true" title="" class="form-control facilityoption" placeholder="e.g Nairobi..." >
 									<?php echo $facility_list;   ?>
 								</select>
 							</td>
@@ -154,10 +154,14 @@
 								<input type="text" value="" name="designation[]" required aria-required="true" class="form-control designation" placeholder="e.g Nurse/Midwife" >
 							</td>
 							<td>
-								<input type="text" value="" name="department[]" required aria-required="true" class="form-control department" placeholder="e.g Nurse/Midwife" >
+								<select type="text" required aria-required="true" title="" name="department[]" class="form-control department">
+									<?php echo $department_list;   ?>
+								</select>
 							</td>
 							<td>
-								<input type="text" value="" name="job_title[]" required aria-required="true" class="form-control jobtitle" placeholder="e.g Nurse/Midwife" >
+								<select type="text" required aria-required="true" title="" name="job_title[]" class="form-control job_title">
+									<?php echo $job_title_list;   ?>
+								</select>
 							</td>
 							<td>
 								<input type="text" value="" name="id_number[]" pattern="[0-9]{1,10}" title="Numbers Only" required aria-required="true" class="form-control id_number" placeholder="e.g 23456789..." >
@@ -177,6 +181,7 @@
 							<td>
 								<a class="btn-xs btn-danger remove">Remove</a>
 							</td>
+							<input type="hidden" class="facilityname" name="facility_name[]" value="" >
 						</tr>
 					</tbody>
 				</table>
@@ -301,11 +306,13 @@
 		link = $(this).attr('data-link');
 	});	
 	
-	$('.facilityname').change(function(){
+	$('.facilityoption').change(function(){
 		val = $(this).val();
-		//alert(val);
+		text = $(this).find('option:selected').text();
+		//alert(text);
 		row = $(this).parent().parent().attr("row_id");
 		$(this).closest('tr').find('.mfl_code').val(val);
+		$(this).closest('tr').find('.facilityname').val(text);
 		
 	});
 		});

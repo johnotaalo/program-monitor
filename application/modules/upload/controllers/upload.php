@@ -270,10 +270,7 @@ class Upload extends MY_Controller {
 				//set activity id
 				$data1['ACTIVITY ID'] = $activity_id;
 				//link FacilityName to MFC
-				$results = $this -> db -> get_where('facility', array('facilityName' => $data1['WORK STATION']));
-				foreach ($results->result() as $facility) {
-					$data1['MFL CODE'] = $facility -> facilityMFC;
-				}
+				
 
 				//remove excess columns
 				unset($data1['county']);

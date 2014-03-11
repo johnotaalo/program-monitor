@@ -18,7 +18,9 @@ class IMCI extends MY_Controller {
 		$data_to_export = $data_to_export -> result_array();
 		$data['data_to_export'] = $data_to_export;
 		$data['activity_table'] = $this -> load_activity_list();
-		$data['facility_list'] = $this->facility_list();
+		$data['facility_list'] = $this -> facility_list();
+		$data['department_list'] = $this -> department_list();
+		$data['job_title_list'] = $this -> job_title_list();
 		$this -> template($data);
 	}
 
@@ -117,11 +119,9 @@ class IMCI extends MY_Controller {
 		$this -> table -> set_template($tmpl);
 
 		//set table headers
-		$this -> table -> set_heading('Names Of Participant', 'Facility Name','MFL Code','Designation','Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 
-		'Dates','Upload Date', 'Training Location');
+		$this -> table -> set_heading('Names Of Participant', 'Facility Name', 'MFL Code', 'Designation', 'Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date', 'Training Location');
 		foreach ($results->result() as $activity) {
-			$this -> table -> add_row($activity -> names_of_participant,$activity -> facility_name, $activity -> mfl_code,$activity -> designation,$activity -> department,  $activity -> job_title, $activity -> id_number, $activity -> mobile_number, 
-			$activity -> email_address, $activity -> dates,$activity -> upload_date, $activity -> training_location);
+			$this -> table -> add_row($activity -> names_of_participant, $activity -> facility_name, $activity -> mfl_code, $activity -> designation, $activity -> department, $activity -> job_title, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date, $activity -> training_location);
 		}
 		$activity_table = $this -> table -> generate();
 		echo $activity_table;
@@ -135,11 +135,9 @@ class IMCI extends MY_Controller {
 		$this -> table -> set_template($tmpl);
 
 		///set table headers
-		$this -> table -> set_heading('Names Of Participant', 'Facility Name','MFL Code','Designation','Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 
-		'Dates','Upload Date', 'Training Location');
+		$this -> table -> set_heading('Names Of Participant', 'Facility Name', 'MFL Code', 'Designation', 'Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date', 'Training Location');
 		foreach ($results->result() as $activity) {
-			$this -> table -> add_row($activity -> names_of_participant,$activity -> facility_name, $activity -> mfl_code,$activity -> designation,$activity -> department,  $activity -> job_title, $activity -> id_number, $activity -> mobile_number, 
-			$activity -> email_address, $activity -> dates,$activity -> upload_date, $activity -> training_location);
+			$this -> table -> add_row($activity -> names_of_participant, $activity -> facility_name, $activity -> mfl_code, $activity -> designation, $activity -> department, $activity -> job_title, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date, $activity -> training_location);
 		}
 		$activity_table = $this -> table -> generate();
 		return $activity_table;
@@ -172,7 +170,8 @@ class IMCI extends MY_Controller {
 			$count++;
 		}
 		foreach ($series as $ser) {
-			$columns[] = $ser; ;
+			$columns[] = $ser;
+			;
 		}
 		//echo '<pre>';
 		//print_r(json_encode($seriesData));
