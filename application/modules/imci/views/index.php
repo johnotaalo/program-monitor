@@ -19,18 +19,20 @@
 				<li>
 					Click in <b>Upload</b> to upload an Excel Sheet in the following <u><i>Format</i></u>:
 				</li>
-				<table class="table-bordered" style="width:95%">
-					<tr style="font-size:1.4em">
-						<th>NAMES OF PARTICIPANT</th><th>COUNTY NAME</th><th>SUB-COUNTY NAME</th><th>DESIGNATION</th>
-					</tr>
-					<tr style="margin-top:10px;font-size:1.4em">
-						<th>FACILITY LOCATION</th><th>WORK STATION</th><th>MFL CODE</th><th>CADRE</th><th>ID NUMBER</th>
-							
-					</tr>
-					<tr style="margin-top:10px;font-size:1.4em">
-						<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th><th>TRAINING LOCATION</th>
-					</tr>
-				</table>
+				<ul class="list-group" style="height:70%">
+  					<li class="list-group-item">NAMES OF PARTICIPANT</li>
+ 					<li class="list-group-item">FACILITY NAME</li>
+  					<li class="list-group-item">MFL CODE</li>
+  					<li class="list-group-item">JOB TITLE</li>
+  					<li class="list-group-item">DESIGNATION</li>
+  					<li class="list-group-item">DEPARTMENT</li>
+  					<li class="list-group-item">ID NUMBER</li>
+  					<li class="list-group-item">MOBILE NUMBER</li>
+  					<li class="list-group-item">EMAIL ADDRESS</li>
+  					<li class="list-group-item">DATES</li>
+  					<li class="list-group-item">TRAINING LOCATION</li>
+				</ul>
+				
 			</ul>
 
 		</div>
@@ -40,7 +42,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<div class="inner">
-			<h4>Training Coverage by Cadre</h4>
+			<h4>Training Coverage by Job Title</h4>
 			<div id="imci_job_title">
 				<div class="la-anim-1-mini"></div>
 			</div>
@@ -57,7 +59,10 @@
 	</div>
 	<div class="col-md-3">
 		<div class="inner">
-
+			<h4>Training by County</h4>
+			<div id="imci_training">
+				<div class="la-anim-1-mini"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -121,7 +126,9 @@
 	<div class="modal-dialog" style="width:95%" >
 
 		<div class="modal-content">
-			<?php echo form_open('imci/manual_entry'); ?>
+			<?php 
+			$formAttr = array('id'=>'manual_entry_form');
+			echo form_open('imci/manual_entry',$formAttr); ?>
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
@@ -133,25 +140,22 @@
 				<table id="activity_table" class="table-bordered table-striped" >
 					<thead>
 						<tr style="font-size:1em">
-							<th>NAMES OF PARTICIPANT</th><th>FACILITY NAME</th><th>MFL CODE</th><th>DESIGNATION</th><th>DEPARTMENT</th><th>JOB TITLE</th><th>ID NUMBER</th>
+							<th>NAMES OF PARTICIPANT</th><th>FACILITY NAME</th><th>MFL CODE</th><th>DEPARTMENT</th><th>JOB TITLE</th><th>ID NUMBER</th>
 							<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th><th>TRAINING LOCATION</th><th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr row_id="0">
-							<td>
-								<input type="text" value="" name="names_of_participant[]" required aria-required="true" pattern="[A-Za-z]+\s[A-Za-z]+" title="Firstname Lastname" class="form-control participant" placeholder="Person Responsible..." >
+						<tr id="0">
+							<td width="200">
+								<input  type="text" value="" name="names_of_participant[]" required aria-required="true" pattern="[A-Za-z]+\s[A-Za-z]+" class="form-control participant" placeholder="Person Responsible..." title="Please Enter Participant Name" >
 							</td>
-							<td>
+							<td width="200">
 								<select type="text" required aria-required="true" title="" class="form-control facilityoption" placeholder="e.g Nairobi..." >
 									<?php echo $facility_list;   ?>
 								</select>
 							</td>
 							<td>
-								<input type="text" value="" name="mfl_code[]" pattern="[0-9]{1,5}"  required aria-required="true" class="form-control mfl_code" placeholder="e.g 12345" >
-							</td>
-							<td>
-								<input type="text" value="" name="designation[]" required aria-required="true" class="form-control designation" placeholder="e.g Nurse/Midwife" >
+								<input type="text" value="" readonly="readonly" name="mfl_code[]" pattern="[0-9]{1,5}"  required aria-required="true" class="form-control mfl_code" placeholder="e.g 12345" >
 							</td>
 							<td>
 								<select type="text" required aria-required="true" title="" name="department[]" class="form-control department">
@@ -189,7 +193,7 @@
 			</div>
 			<div class="modal-footer" style="height:45px">
 				<button class="add btn btn-primary" >Add Row</button>
-				<button id="manual-entry" type="submit" class="btn btn-primary">
+				<button type="submit" id="manual-entry" class="btn btn-primary">
 					<i class="fa fa-plus"></i>Update Activity
 				</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -240,13 +244,34 @@
 	});
 
 	});
-
+	
+	/*$("#manual-entry").click(function() {
+		//alert($("form#manual_entry_form :input"));
+		//alert('a');
+		validate_combo('.facilityoption');
+		validate_combo('.department');
+		validate_combo('.job_title');
+		validate_text('.mfl_code');
+		validate_text('.participant');
+		validate_text('.traininglocation');
+		validate_text('.id_number');
+		validate_text('.mobile_number');
+		
+		//console.log($("#manual-entry_form").find('select'));
+		 */
+	//$('#imci_upload_form').submit();
+	//});
+	
 	$("#imci_uploadActivityBtn").click(function() {
 	$('#imci_upload_form').submit();
 	});
 
-	$('#imci_job_title').load('<?php echo base_url(); ?>imci/imci_job_title');
+		//Load Graphs		
+		$('#imci_job_title').load('<?php echo base_url(); ?>imci/imci_job_title');
 		$('#imci_frequency').load('<?php echo base_url(); ?>imci/imci_frequency');
+		$('#imci_training').load('<?php echo base_url(); ?>imci/imci_training_county');
+		
+		
 
 		$(".add").click(function() {
 		//	when add is clicked this function
@@ -255,15 +280,16 @@
 		$table=$('#activity_table');
 		var cloned_object=$table.find('tr:last').clone(true);
 
-		var row_id = cloned_object.attr("row_id");
-		var next_row_id = parseInt(row_id) + 1;
+		var id = cloned_object.attr("id");
+		var next_id = parseInt(id) + 1;
 		
 
-		cloned_object.attr("row_id",next_row_id );
+		cloned_object.attr("id",next_id );
 		cloned_object.find("input").val("");
+		cloned_object.find(":input").css('border-color','#ccc');
 	    //cat_name;
 	   //  cat_name.attr("text",'');
-		//cloned_object.find(".participant").attr("name",'participant['+next_row_id+']');
+		//cloned_object.find(".participant").attr("name",'participant['+next_id+']');
 
 		cloned_object.insertAfter('#activity_table tr:last');
 		$('.remove').show();
@@ -277,7 +303,7 @@
 		});	
 		
 		$('.remove').click(function(){
-		id = $(this).parent().parent().attr("row_id");
+		id = $(this).parent().parent().attr("id");
 		if(id!=0){
 			$(this).parent().parent().remove();
 		}
@@ -287,6 +313,14 @@
 			
 			
 		});
+		
+		//On Change
+		
+		
+		
+		
+		
+		
  $('.datepicker').datepicker({
     format: 'dd-m-yyyy',
     autoclose:true
@@ -310,10 +344,51 @@
 		val = $(this).val();
 		text = $(this).find('option:selected').text();
 		//alert(text);
-		row = $(this).parent().parent().attr("row_id");
+		row = $(this).parent().parent().attr("id");
 		$(this).closest('tr').find('.mfl_code').val(val);
 		$(this).closest('tr').find('.facilityname').val(text);
 		
 	});
+	
+	
+	function validate_combo(combo){
+		tr_id=$(combo).parent().parent().attr('id');
+		value = $('tr#'+tr_id+' td '+ combo).prop("selectedIndex");
+		if(value==0){
+			$(combo).css('border-color','red');
+		}
+		else{
+			$(combo).css('border-color','#ccc');
+		}
+		
+		
+		//return value;
+	};
+	
+	function validate_text(field){
+		tr_id=$(field).parent().parent().attr('id');
+		alert('tr#'+tr_id+' td '+ field);
+		value = $('tr#'+tr_id+' td '+ field).val();
+		//message = $(field).attr('data-msg');
+		
+		if(value==""){
+			$(field).attr.css('border-color','red');
+			$(field).tooltip('show');
+		}
+		else{
+			$(field).css('border-color','#ccc');
+			$(field).tooltip('hide');
+		}
+		
+		
+	};
+	
+	function validate_email(field){
+		
+	};
+	function validate_mobile(field){
+		
+	};
+	
 		});
 </script>

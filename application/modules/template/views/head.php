@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/scripts/modernizr.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/scripts/run_animate.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/scripts/bootstrap/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/scripts/jquery.validate.js"></script>
 <script src="<?php echo base_url().'assets/scripts/datatables/jquery.dataTables.min.js'?>"></script>
 
 

@@ -52,7 +52,6 @@ body {
 	margin-bottom: 2%;
 	font-size: 0.8em !important;
 	overflow: hidden;
-	
 }
 .inner h3, .inner h4, h3, h4 {
 	font-size: 2em;
@@ -69,7 +68,7 @@ body {
 	font-size: 1.5em;
 }
 .guide, .guide > table {
-	font-family: "Helvetica";
+	font-family: "Helvetica-Neue";
 	overflow-y: auto;
 	font-size: 0.8em !important;
 }

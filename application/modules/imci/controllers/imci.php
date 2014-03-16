@@ -119,9 +119,9 @@ class IMCI extends MY_Controller {
 		$this -> table -> set_template($tmpl);
 
 		//set table headers
-		$this -> table -> set_heading('Names Of Participant', 'Facility Name', 'MFL Code', 'Designation', 'Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date', 'Training Location');
+		$this -> table -> set_heading('Names Of Participant', 'Facility Name', 'MFL Code','Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date', 'Training Location');
 		foreach ($results->result() as $activity) {
-			$this -> table -> add_row($activity -> names_of_participant, $activity -> facility_name, $activity -> mfl_code, $activity -> designation, $activity -> department, $activity -> job_title, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date, $activity -> training_location);
+			$this -> table -> add_row($activity -> names_of_participant, $activity -> facility_name, $activity -> mfl_code,  $activity -> department, $activity -> job_title, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date, $activity -> training_location);
 		}
 		$activity_table = $this -> table -> generate();
 		echo $activity_table;
@@ -135,9 +135,9 @@ class IMCI extends MY_Controller {
 		$this -> table -> set_template($tmpl);
 
 		///set table headers
-		$this -> table -> set_heading('Names Of Participant', 'Facility Name', 'MFL Code', 'Designation', 'Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date', 'Training Location');
+		$this -> table -> set_heading('Names Of Participant', 'Facility Name', 'MFL Code', 'Department', 'Job Title', 'ID Number', 'Mobile Number', 'Email Address', 'Dates', 'Upload Date', 'Training Location');
 		foreach ($results->result() as $activity) {
-			$this -> table -> add_row($activity -> names_of_participant, $activity -> facility_name, $activity -> mfl_code, $activity -> designation, $activity -> department, $activity -> job_title, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date, $activity -> training_location);
+			$this -> table -> add_row($activity -> names_of_participant, $activity -> facility_name, $activity -> mfl_code, $activity -> department, $activity -> job_title, $activity -> id_number, $activity -> mobile_number, $activity -> email_address, $activity -> dates, $activity -> upload_date, $activity -> training_location);
 		}
 		$activity_table = $this -> table -> generate();
 		return $activity_table;
@@ -234,6 +234,35 @@ GROUP BY dates";
 		$data['dataSource'] = $finalData;
 		$data['series'] = json_encode($series);
 		$this -> load -> view('imci/charts/chart_line', $data);
+	}
+	
+	public function imci_training_county() {
+		$dataSource = $series = $columns = $seriesData = array();
+		#Assign variables for query
+		$columns = 'COUNT(*) as total,facility.facilityCounty as county';
+		$group_order = 'GROUP BY facility.facilityCounty ORDER BY facility.facilityCounty';
+		$activity = 'IMCI Training';
+		#Run Query to get RESULTS
+		$results = $this -> training_data($columns,$group_order,$activity);
+				
+		
+		foreach ($results->result() as $county) {
+			$dataSource[] = array("county" => $county -> county, "total" => (int)$county -> total);
+		}
+
+		$series = array("argumentField" => 'county', "valueField" => 'total', "name" => 'Participants', "type" => 'doughnut');
+
+		$finalData = $dataSource;
+		$finalData = json_encode($finalData);
+		$resultArraySize = 10;
+		$data['argument'] = 'date';
+		$data['resultArraySize'] = $resultArraySize;
+		$data['container'] = 'chart_' . rand(0, 1000000);
+
+		$data['yAxis'] = 'Total';
+		$data['dataSource'] = $finalData;
+		$data['series'] = json_encode($series);
+		$this -> load -> view('charts/chart_pie', $data);
 	}
 
 	public function testIP() {

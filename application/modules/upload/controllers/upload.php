@@ -65,10 +65,7 @@ class Upload extends MY_Controller {
 		//$data =json_encode($data);
 		//echo($data);die;
 		$data = $this -> formatData($data);
-		//echo "<pre>";
-		//print_r($data);
-		//echo "</pre>";
-		//die ;
+		
 		//$this -> createTables();
 
 		$this -> createAndSetProperties($data, $activity_id);
@@ -79,7 +76,6 @@ class Upload extends MY_Controller {
 
 		$dataArr['posted'] = 1;
 		$dataArr['contentView'] = 'upload/upload_v';
-	
 
 	}
 
@@ -125,9 +121,7 @@ class Upload extends MY_Controller {
 		//echo $highestColumm;
 		$data = $this -> getDataSpecific($arr, '23', '149', 'C');
 
-		echo "<pre>";
-		print_r($data);
-		echo "</pre>";
+		
 		//die;
 		//$this -> createTables();
 		//$this -> createAndSetProperties($data);
@@ -170,7 +164,7 @@ class Upload extends MY_Controller {
 			for ($row = $start; $row < $highestRow; $row++) {
 				$colString = PHPExcel_Cell::stringFromColumnIndex($col - 1);
 				$title = $arr[$start][$colString];
-				if ($title != "") {					
+				if ($title != " ") {
 					//fields you want to save in DB
 					$data[$title][] = $arr[$row][$colString];
 				}
@@ -200,11 +194,15 @@ class Upload extends MY_Controller {
 			$title[] = $key;
 			//$rowCounter = 0;
 			for ($rowCounter = 1; $rowCounter < sizeof($value); $rowCounter++) {
-				$rows['data'][$rowCounter][$key] = $value[$rowCounter];
+				if ($value[$rowCounter] != NULL) {
+					$rows['data'][$rowCounter][$key] = $value[$rowCounter];
+				}
 			}
 
 		}
+		//echo
 		$rows['title'] = $title;
+
 		return $rows;
 
 	}
@@ -250,27 +248,19 @@ class Upload extends MY_Controller {
 		foreach ($dataTables as $table) {
 
 			foreach ($data['data'] as $data1) {
-				//	echo'<pre>';print_r($data1);echo'</pre>';
 				$currentTable = R::dispense($table);
 
-				//link Cadre Name to Cadre ID
-				$results = $this -> db -> get_where('job_title', array('job_title_name' => $data1['JOB TITLE']));
-				foreach ($results->result() as $job_title) {
-					$data1['JOB TITLE'] = $job_title -> job_title_id;
-				}
-
 				//convert date to timestamp
-				$newDate = str_replace('/', '-', $data1['DATES']);
-				$newDate = strtotime($newDate);
-				$data1['DATES'] = $newDate;
+				$data1 = $this -> formatDate($data1, 'DATES');
 
 				//set update time
 				$data1['UPLOAD DATE'] = time();
 
+				$data1 = $this -> addIfNotExists($data1, 'job_title', 'job_title_name', 'JOB TITLE', 'job_title_id');
+
 				//set activity id
 				$data1['ACTIVITY ID'] = $activity_id;
 				//link FacilityName to MFC
-				
 
 				//remove excess columns
 				unset($data1['county']);
@@ -279,7 +269,9 @@ class Upload extends MY_Controller {
 					$valN = strtolower($val);
 					$valN = str_replace(" ", "_", $valN);
 
-					$currentTable -> setAttr($valN, $data1[$val]);
+					if (array_key_exists($val, $data1)) {
+						$currentTable -> setAttr($valN, $data1[$val]);
+					}
 
 				}
 
@@ -287,6 +279,51 @@ class Upload extends MY_Controller {
 			}
 		}
 
+	}
+
+	public function checkifExists($array, $table, $column, $key) {
+		$this -> db -> like($column, $array[$key]);
+		$this -> db -> from($table);
+		$count = $this -> db -> count_all_results();
+		return $count;
+
+	}
+
+	public function addIfNotExists($array, $table, $column, $key, $id) {
+		//link Department Name to Department ID
+		if (array_key_exists($key, $array)) {
+
+			$count = $this -> checkifExists($array, $table, $column, $key);
+			//echo $count;die;
+			if ($count > 0) {
+				$results = $this -> db -> get_where($table, array($column => $array[$key]));
+				foreach ($results->result_array() as $field) {
+					$array[$key] = $field[$id];
+				}
+			} else {
+				$data = array($column => $array[$key]);
+				$this -> db -> insert($table, $data);
+				$results = $this -> db -> get_where($table, array($column => $array[$key]));
+				foreach ($results->result_array() as $field) {
+					$array[$key] = $field[$id];
+				}
+			}
+
+		} else {
+
+		}
+		return $array;
+		//echo '<pre>';print_r($array); echo '</pre>';
+	}
+
+	public function formatDate($array, $key) {
+		if (array_key_exists($key, $array)) {
+			//convert date to timestamp
+			$newDate = str_replace('/', '-', $array[$key]);
+			$newDate = strtotime($newDate);
+			$array[$key] = $newDate;
+		}
+		return $array;
 	}
 
 	/**
@@ -329,5 +366,4 @@ class Upload extends MY_Controller {
 
 	}
 
-	
 }

@@ -26,5 +26,9 @@ class Global_Model extends MY_Model {
 		$activities = $this -> getSourcePerActivity($activity);
 		return $activities;
 	}
+	public function getTrainingData($columns,$group_order,$training){
+		$training_data = $this->training_data($columns, $group_order, $training);
+		return $training_data;
+	}
 
 }

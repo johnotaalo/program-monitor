@@ -6,14 +6,22 @@ $("#<?php echo $container?>").dxChart({
     dataSource: dataSource,
   	commonSeriesSettings: {
         argumentField: <?php echo $argument?>,
-        type: <?php echo $type?>
+        type: <?php echo $type?>,
+         label: {
+            visible: true,
+            connector: {
+                visible: true
+            },
+            customizeText: function(value){
+            	return value.valueText ;
+        	}
+        }    
         
     },
     series: <?php echo $series;?>,
     argumentAxis:{
-        grid:{
-            visible: false
-        }
+     	type: 'continuous',
+        axisDivisionFactor: 1000
     },
     tooltip:{
         enabled: true,

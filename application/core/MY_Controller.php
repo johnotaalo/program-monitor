@@ -46,7 +46,7 @@ class  MY_Controller  extends  MX_Controller {
 		$option = '<option selected="selected">Please Select Department</option>';
 
 		foreach ($facility as $fac) {
-			$option .= '<option value="' . $fac['department_name'] . '">' . $fac['department_name'] . '</option>';
+			$option .= '<option value="' . $fac['department_id'] . '">' . $fac['department_name'] . '</option>';
 		}
 
 		return $option;
@@ -58,10 +58,15 @@ class  MY_Controller  extends  MX_Controller {
 		$option = '<option selected="selected">Please Select Job Title</option>';
 
 		foreach ($facility as $fac) {
-			$option .= '<option value="' . $fac['job_title_name'] . '">' . $fac['job_title_name'] . '</option>';
+			$option .= '<option value="' . $fac['job_title_id'] . '">' . $fac['job_title_name'] . '</option>';
 		}
 
 		return $option;
+	}
+
+	function training_data($columns, $group_order, $training) {
+		$training_data = $this -> global_model -> getTrainingData($columns, $group_order, $training);
+		return $training_data;
 	}
 
 }
