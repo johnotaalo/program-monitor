@@ -19,7 +19,7 @@ class Upload extends MY_Controller {
 		$this -> load -> view('template_v', $dataArr);
 	}
 
-	public function data_upload($activesheet = 0, $activity_id) {//convert .slk file to xlsx for upload
+	public function data_upload($activesheet = 0, $activity_id,$insert_table) {//convert .slk file to xlsx for upload
 
 		//get activity ID
 
@@ -62,13 +62,15 @@ class Upload extends MY_Controller {
 
 		//echo $highestColumm;
 		$data = $this -> getData($arr, $start, $highestColumm, $highestRow);
+		//echo '<pre>';print_r($data);echo '</pre>';die;
 		//$data =json_encode($data);
 		//echo($data);die;
 		$data = $this -> formatData($data);
+		//echo '<pre>';print_r($data);echo '</pre>';die;
 		
 		//$this -> createTables();
 
-		$this -> createAndSetProperties($data, $activity_id);
+		$this -> createAndSetProperties($data, $activity_id,$insert_table);
 		//echo $activity_id;die;
 		$data = $this -> makeTable($data);
 
@@ -161,7 +163,7 @@ class Upload extends MY_Controller {
 		//possible columns
 		for ($col = $start; $col < PHPExcel_Cell::columnIndexFromString($highestColumn) + 1; $col++) {
 
-			for ($row = $start; $row < $highestRow; $row++) {
+			for ($row = $start; $row <= $highestRow; $row++) {
 				$colString = PHPExcel_Cell::stringFromColumnIndex($col - 1);
 				$title = $arr[$start][$colString];
 				if ($title != " ") {
@@ -191,6 +193,7 @@ class Upload extends MY_Controller {
 		$rows = array();
 		//var_dump($data);
 		foreach ($data as $key => $value) {
+			//echo sizeof($value);
 			$title[] = $key;
 			//$rowCounter = 0;
 			for ($rowCounter = 1; $rowCounter < sizeof($value); $rowCounter++) {
@@ -237,8 +240,8 @@ class Upload extends MY_Controller {
 	/**
 	 * Initializes Tables in the Database
 	 */
-	public function createAndSetProperties($data, $activity_id) {
-		$dataTables = array('subprogramlog');
+	public function createAndSetProperties($data, $activity_id,$insert_table) {
+		$dataTables = array($insert_table);
 		$title = $data['title'];
 		//add to title
 		$title[] = 'UPLOAD DATE';
@@ -256,7 +259,7 @@ class Upload extends MY_Controller {
 				//set update time
 				$data1['UPLOAD DATE'] = time();
 
-				$data1 = $this -> addIfNotExists($data1, 'job_title', 'job_title_name', 'JOB TITLE', 'job_title_id');
+				$data1 = $this -> addIfNotExists($data1, 'cadre', 'cadre_name', 'CADRE', 'cadre_id');
 
 				//set activity id
 				$data1['ACTIVITY ID'] = $activity_id;

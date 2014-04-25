@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-default" role="navigation" id="myBar">
+<nav class="project-nav" role="navigation" id="myBar">
 	<a id="setCollapse"href="javascript:;" class="navbar-toggle collapsed"><i class="fa fa-list-ul"></i> </a>
 	<!-- Brand and toggle get grouped for better mobile display -->
 

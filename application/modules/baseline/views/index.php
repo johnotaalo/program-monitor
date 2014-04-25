@@ -1,39 +1,47 @@
 <div class="row">
-	<div class="col-md-3">
-		<div class="inner">
-			<h3>Most Unavailable Equipment</h3>
+
+	<div class="standard-graph">
+	<div class="outer">
+	<h3>Most Unavailable Equipment</h3>
+	<div class="inner">
+			
 			<div id="unavailability_rank">
 				<div class="la-anim-1-mini"></div>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
-		<div class="inner guide">
-			<h3>CH Reporting Rate</h3>
+		
+	</div>
+
+	<div class="standard-graph">
+	<div class="outer">
+	<h3>CH Reporting Rate</h3>
+	<div class="inner scrollable">
+			
 			<div class="reporting" id="ch_reporting">
 				<div class="la-anim-1-mini"></div>
 			</div>
-
 		</div>
 	</div>
-	<div class="col-md-3">
-		<div class="inner guide">
-			<h3>MNH Reporting Rate</h3>
+		
+	</div>
+	<div class="standard-graph">
+	<div class="outer">
+	<h3>MNH Reporting Rate</h3>
+	<div class="inner">
+			
+			
 			<div class="reporting" id="mnh_reporting">
 				<div class="la-anim-1-mini"></div>
 			</div>
-
 		</div>
 	</div>
-	<div class="col-md-3">
-		<div class="inner guide">
 		
-			
-
-		</div>
 	</div>
 
 </div>
+
+
 
 <script>
 	$(document).ready(function(){

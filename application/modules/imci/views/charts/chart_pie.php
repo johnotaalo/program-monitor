@@ -17,11 +17,22 @@ $("#<?php echo $container;?>").dxPieChart({
         }        
         //...
     },
+     title: {
+        text: <?php echo $title?>,
+        verticalAlignment: 'bottom',
+        font: {
+                color: '#3276b1',
+                family: 'SourceSansPro-Regular',
+                opacity: 0.75,
+                size: 16,
+                weight: 200
+            }
+    },
     series: <?php echo $series;?>,
     tooltip:{
         enabled: true,
         customizeText: function(value){
-            return value.argumentText+' ' +value.percentText;
+            return value.argumentText+' : ' +value.percentText;
         }
     },
     legend: {
@@ -30,6 +41,6 @@ $("#<?php echo $container;?>").dxPieChart({
 });
 });
 </script>
-<div id="<?php echo $container;?>" class="graph" style="height:90%">
+<div id="<?php echo $container;?>" class="graph" style="height:100%">
 	
 </div>

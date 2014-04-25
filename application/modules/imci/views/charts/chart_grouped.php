@@ -21,15 +21,28 @@ $("#<?php echo $container?>").dxChart({
     series: <?php echo $series;?>,
     argumentAxis:{
      	type: 'continuous',
-        axisDivisionFactor: 1000
+        axisDivisionFactor: 1000,
+         grid:{
+            visible: false
+        }
     },
     tooltip:{
         enabled: true,
         customizeText: function(value){
-            return value.valueText +' '+ value.seriesName+' in '+ value.argumentText;
+            return value.valueText +' '+ value.seriesName+'(s) in '+ value.argumentText;
         }
     },
-    //title: "Historic, Current and Future Population",
+    title: {
+        text: <?php echo $title?>,
+        verticalAlignment: 'bottom',
+        font: {
+                color: '#3276b1',
+                family: 'SourceSansPro-Regular',
+                opacity: 0.75,
+                size: 16,
+                weight: 200
+            }
+    },
     legend: {
         verticalAlignment: "bottom",
         horizontalAlignment: "center"
@@ -43,6 +56,6 @@ $("#<?php echo $container?>").dxChart({
 });
 });
 </script>
-<div id="<?php echo $container?>" class="graph" style="height:90%">
+<div id="<?php echo $container?>" class="graph" style="height:100%">
 	
 </div>

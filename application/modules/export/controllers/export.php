@@ -69,8 +69,9 @@ table.data-table td {height: 30px;margin: 0px;border-bottom: 1px solid #DDD;}
 		//Looping through the cells
 		$column = 0;
 		foreach ($data['title'] as $cell) {
+			//echo $column . $rowExec; die;
 			$objPHPExcel -> getActiveSheet() -> setCellValueByColumnAndRow($column, $rowExec, $cell);
-			$objPHPExcel -> getActiveSheet() -> getStyle($column . $rowExec) -> getFont() -> setBold(true);
+			$objPHPExcel -> getActiveSheet() -> getStyle(PHPExcel_Cell::stringFromColumnIndex($column) . $rowExec) -> getFont() -> setBold(true) -> setSize(14);
 			$objPHPExcel -> getActiveSheet() -> getColumnDimension(PHPExcel_Cell::stringFromColumnIndex($column)) -> setAutoSize(true);
 
 			$column++;

@@ -15,6 +15,9 @@ class County_Profile extends MY_Controller {
 		$data['title'] = "Program Monitor :: County_Profile";
 		$data['brand'] = 'County Profile';
 		$data['activity_table'] = $this -> load_activity_list();
+		$data['maps']=$this->runMap();
+		$data['tot_number'] = $this -> trained(10);
+		$data['latest_training']=$this->latest_training(10);
 		$this -> template($data);
 	}
 
@@ -60,6 +63,65 @@ class County_Profile extends MY_Controller {
 		$data['show_sidemenu'] = 0;
 		$this -> load -> module('template');
 		$this -> template -> index($data);
+	}
+	public function runMap() {
+		$counties = $this -> global_model -> runMap();
+		//echo '<pre>';	print_r($counties)	;
+		//echo '</pre>';die;
+		$map = array();
+		$datas = array();
+		$status = '';
+		foreach ($counties as $county) {
+			//var_dump($county);
+			$countyMap = (int)$county['county_fusion_map_id'];
+			$countyName = $county['county_name'];
+			$under5 = $county['under_five'];
+			$women = $county['women_of_reproductive_age'];
+
+			//echo $percentage.',';
+
+			/*switch($percentage) {
+				case ($percentage==0) :
+					$status = '#ffffff';
+					break;
+				case ($percentage<20) :
+					$status = '#e93939';
+					break;
+				case ($percentage<40) :
+					$status = '#da8a33';
+					break;
+				case ($percentage<60) :
+					$status = '#dad833';
+					break;
+				case ($percentage<80) :
+					$status = '#91da33';
+					break;
+				case ($percentage<=100) :
+					$status = '#7ada33';
+					break;
+				#case ($percentage===100) :
+				#	$status = '#13b00b';
+				#	break;
+				default :
+					$status = '#ffffff';
+					break;
+			}*/
+			/*
+			$map = array( "baseFontColor" => "000000","canvasBorderColor"=>"ffffff","hoverColor"=>"aaaaaa","fillcolor" => "F7F7F7", "numbersuffix" => "M", "includevalueinlabels" => "1", "labelsepchar" => ":", "baseFontSize" => "9","borderColor"=>'333333',"showBevel"=>"0",'showShadow'=>"0");
+		$styles = array("showBorder"=>0);
+		$color_range = array("color"=>array(array("minvalue"=> "100", "maxvalue"=> "100", "displayvalue"=> "Targeted", "color"=> "FFCC99" )));
+		$finalMap = array('map'=>$map,'colorrange'=>$color_range,'data'=>$datas,'styles'=>$styles);
+		$finalMap = json_encode($finalMap);
+		//echo $finalMap;die;
+		return $finalMap;
+			 */
+			$datas[] = array('id' => $countyMap,'value'=>$countyName,'color'=>'FFCC99' ,'tooltext'=>$countyName.' {br} Under 5:  '.$under5.' {br} Women of Reproductive Age: '.$women,"baseFontColor" => "000000","link"=>"Javascript:run('".$countyName.",".$under5.",".$women."')");
+		}
+		$map = array( "baseFontColor" => "000000","canvasBorderColor"=>"ffffff","hoverColor"=>"aaaaaa","fillcolor" => "F7F7F7", "numbersuffix" => "M", "includevalueinlabels" => "1", "labelsepchar" => ":", "baseFontSize" => "9","borderColor"=>'333333',"showBevel"=>"0",'showShadow'=>"0");
+		$styles = array("showBorder"=>0);
+		$finalMap = array('map'=>$map,'data'=>$datas,'styles'=>$styles);
+		$finalMap = json_encode($finalMap);
+		return $finalMap;
 	}
 
 	public function load_activity_list() {
@@ -115,10 +177,6 @@ class County_Profile extends MY_Controller {
 		$activity_table = $this -> table -> generate();
 		echo $activity_table;
 	}
-
-	
-
-	
 
 	public function testIP() {
 

@@ -30,5 +30,9 @@ class Global_Model extends MY_Model {
 		$training_data = $this->training_data($columns, $group_order, $training);
 		return $training_data;
 	}
+	public function countyMap(){
+		$map = $this->runMap();
+		return $map;
+	}
 
 }

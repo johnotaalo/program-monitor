@@ -46,7 +46,7 @@ FROM
     designation,
     departments.department_name as department,
     training_location,
-    job_title.job_title_name as job_title,
+    cadre.cadre_name as cadre,
     id_number,
     mobile_number,
     email_address,
@@ -55,11 +55,11 @@ FROM
     from_unixtime(upload_date, '%d-%m-%Y') as upload_date
 FROM
     subprogramlog,
-    job_title,
+    cadre,
     departments
 WHERE
     activity_id = ?
-        AND job_title.job_title_id = subprogramlog.job_title
+        AND cadre.cadre_id = subprogramlog.cadre
         AND departments.department_id = subprogramlog.department;";
 
 		$source = $this -> db -> query($query, (int)$activity);
@@ -86,5 +86,22 @@ $facility_county = $this -> db -> query($query,$training);
 //var_dump ($facility_county);die;
 		return $facility_county;
 	}
+/**
+	 * Run County Maps
+	 */
+	public function runMap() {
+		$myData = array();
+		$this->db->select('*');
+		$this->db->from('counties');
+		$this->db->join('county_data','counties.county_id = county_data.county_id');
+		$counties = $this -> db->get();
+		$counties = $counties->result_array();
+		foreach ($counties as $county) {
+			$countyName = $county['county_name'];
+			//$countyName=str_replace("'","", $countyName);
+			$myData[$countyName] = $county;
+		}
 
+		return $myData;
+	}
 }

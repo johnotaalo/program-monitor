@@ -1,0 +1,37 @@
+{
+  "map": {
+    "bordercolor": "005879",
+    "numbersuffix": "",
+    "showCanvasBorder":"0",
+    "includevalueinlabels": "1",
+    "labelsepchar": ": ",
+    "basefontsize": "9",
+    "colorrange": "FF654F"
+  },
+  "data": [
+    {
+      "id": "1",
+      "value": "515"
+    },
+    {
+      "id": "3",
+      "value": "373"
+    },
+    {
+      "id": "47",
+      "value": "3875"
+    },
+    {
+      "id": "33",
+      "value": "727"
+    },
+    {
+      "id": "21",
+      "value": "885"
+    },
+    {
+      "id": "2",
+      "value": "32"
+    }
+  ]
+}

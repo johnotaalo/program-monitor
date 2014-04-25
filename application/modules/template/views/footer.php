@@ -3,7 +3,8 @@
 <script src="<?php echo base_url().'assets/scripts/modernizr.js'?>"></script>
 
 <script src='<?php echo base_url(); ?>assets/scripts/globalize.min.js'></script>
-<script src="<?php echo base_url(). 'assets/scripts/bootstrap/bootstrap.js'?>" type="text/javascript"></script>
+
+
 <script>
 	$(document).ready(function() {
 

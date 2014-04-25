@@ -17,20 +17,30 @@ $("#<?php echo $container?>").dxChart({
             return value.valueText +' in '+ value.argumentText;
         }
     },
-    //title: "Historic, Current and Future Population",
+     title: {
+        text: <?php echo $title?>,
+        verticalAlignment: 'bottom',
+        font: {
+                color: '#3276b1',
+                family: 'SourceSansPro-Regular',
+                opacity: 0.75,
+                size: 16,
+                weight: 200
+            }
+    },
     legend: {
         verticalAlignment: "bottom",
         horizontalAlignment: "center"
     },
     commonPaneSettings: {
         border:{
-            visible: true,
+            visible: false,
             right: false
         }       
     }
 });
 });
 </script>
-<div id="<?php echo $container?>" class="graph" style="height:90%">
+<div id="<?php echo $container?>" class="graph" style="height:100%">
 	
 </div>

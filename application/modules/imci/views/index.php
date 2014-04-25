@@ -1,17 +1,45 @@
 <style>
 .datepicker{z-index:1151 !important;}
 </style>
-
+<div class="main" style="left:0%">
 <div class="row">
-	<div class="col-md-9">
+	<div class="activities">
+	
+	<div class="outer">
+	<h3>Update Activities</h3>
+	
 		<div class="inner">
-			<h3>Update Activities</h3>
-			<?php echo $activity_table; ?>
+			
+			<?php
+echo $activity_table; ?>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="outer">
+	
+	
+		<div class="inner-mini">
+			
+			<div class="stat">
+<div class="icon"><i class="fa fa-user-md"></i></div>
+<div><span class="text">HCWs Trained</span><span class="digit"><?php
+echo $HCW_number ?></span></div></div>
+			<div class="stat"><div class="icon"><i class="fa fa-calendar"></i></div>
+			<div><span class="text">Latest HCW Training</span><span class="digit"><?php
+echo $latest_HCW_training ?></span></div></div>
+			<div class="stat"><div class="icon-alt"><i class="fa fa-user-md"></i></div>
+			<div><span class="text">TOTs Trained</span><span class="digit"><?php
+echo $TOT_number ?></span></div></div>
+			<div class="stat"><div class="icon-alt"><i class="fa fa-calendar"></i></div>
+			<div><span class="text">Latest TOT Training</span><span class="digit"><?php
+echo $latest_TOT_training ?></span></div></div>
+		</div>
+	</div>
+	</div>
+	<div class="guide">	
+	<div class="outer">
+	<h3>Guide</h3>
 		<div class="inner">
-			<h3>Guide</h3>
+			
 			<ul class="guide">
 				<li>
 					Click on <b>Manual Entry</b> to update data per form.
@@ -19,53 +47,141 @@
 				<li>
 					Click in <b>Upload</b> to upload an Excel Sheet in the following <u><i>Format</i></u>:
 				</li>
-				<ul class="list-group" style="height:70%">
-  					<li class="list-group-item">NAMES OF PARTICIPANT</li>
- 					<li class="list-group-item">FACILITY NAME</li>
-  					<li class="list-group-item">MFL CODE</li>
-  					<li class="list-group-item">JOB TITLE</li>
-  					<li class="list-group-item">DESIGNATION</li>
-  					<li class="list-group-item">DEPARTMENT</li>
-  					<li class="list-group-item">ID NUMBER</li>
-  					<li class="list-group-item">MOBILE NUMBER</li>
-  					<li class="list-group-item">EMAIL ADDRESS</li>
-  					<li class="list-group-item">DATES</li>
-  					<li class="list-group-item">TRAINING LOCATION</li>
-				</ul>
+				
+				
 				
 			</ul>
 
+		</div>
+		</div>
+		<div class="outer">
+		<h3>Template</h3>
+		<div class="inner-mini">			
+			<a>Download Template</a>
+
+		</div>
 		</div>
 	</div>
 
 </div>
 <div class="row">
-	<div class="col-md-6">
-		<div class="inner">
-			<h4>Training Coverage by Job Title</h4>
-			<div id="imci_job_title">
-				<div class="la-anim-1-mini"></div>
-			</div>
+
+	<div class="standard-graph">
+	<div class="outer">
+	<h3>Policy/Guideline/Job Aids<i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i></h3>
+	<div class="inner max">
+			<div class="summary"><span class="text">Quantity distributed directly to site</span><span class="digit"></span></div>
+			<div class="summary"><span class="text">Sites distributed to</span><span class="digit"></span></div>
+			<div class="summary"><span class="text">Quantity distributed directly to counties</span><span class="digit"></span></div>
+			<div class="summary"><span class="text">Sites distributed to</span><span class="digit"></span></div>
+			
+			
 		</div>
+		<div class="inner mini" style="display:none"></div>
+	</div>
+		
 	</div>
 
-	<div class="col-md-3">
-		<div class="inner">
-			<h4>Training Frequency</h4>
-			<div id="imci_frequency">
-				<div class="la-anim-1-mini"></div>
-			</div>
+	<div class="standard-graph">
+	<div class="outer">
+	<h3>Orientation<i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i></h3>
+	<div class="inner max">
+		<div class="summary"><span class="text">Targeted sites</span><span class="digit"></span></div>
+			<div class="summary"><span class="text">Oriented sites</span><span class="digit"></span></div>
+			<div class="summary"><span class="text">Public</span><span class="digit"></span></div>
+			<div class="summary"><span class="text">Private</span><span class="digit"></span></div>
+				
+			
 		</div>
+
+		<div class="inner mini" style="display:none"></div>
 	</div>
-	<div class="col-md-3">
-		<div class="inner">
-			<h4>Training by County</h4>
-			<div id="imci_training">
-				<div class="la-anim-1-mini"></div>
-			</div>
+		
+	</div>
+	<div class="standard-graph">
+
+	<div class="outer">
+	<h3>HCW Training <i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i><i class="fa fa-bar-chart-o" style="display:none" data-placement="bottom" title="Click Here for Graphs"></i><i class="fa fa-table" style="display:none" data-placement="bottom" title="Click Here for Tables"></i></h3>
+		<div class="inner max">
+			<?php echo $HCW_mini; ?>
 		</div>
+		<div class="inner mini" style="display:none">
+			<?php echo $HCW_progress; ?>
+		</div>
+
+		<div class="inner mini" style="display:none">
+			<?php echo $HCW_table; ?>
+		</div>
+
+		<div class="inner mini" style="display:none">
+			<?php echo $HCW_Facility_progress; ?>
+		</div>
+		<div class="inner mini" style="display:none">
+			<?php echo $HCW_Facility_table; ?>
+		</div>
+		
+		<div class="inner mini-graph-2" id="training_cadre" style="display:none">
+			
+		</div>
+		<div class="inner mini-graph" id="training_frequency" style="display:none">
+			
+		</div>
+
+		<div class="inner mini-graph" id="training_coverage" style="display:none">
+			
+		</div>
+
+		
+
 	</div>
+		
+	</div>
+		<div class="standard-graph">
+
+	<div class="outer">
+	<h3>TOT Training <i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i><i class="fa fa-bar-chart-o" style="display:none" data-placement="bottom" title="Click Here for Graphs"></i><i class="fa fa-table" style="display:none" data-placement="bottom" title="Click Here for Tables"></i></h3>
+		<div class="inner max">
+			<?php echo $TOT_mini; ?>
+		</div>
+		<div class="inner mini" style="display:none">
+			<?php echo $TOT_progress; ?>
+		</div>
+
+		<div class="inner mini" style="display:none">
+			<?php echo $TOT_table; ?>
+		</div>
+
+		<div class="inner mini" style="display:none">
+			<?php echo $TOT_Facility_progress; ?>
+		</div>
+		<div class="inner mini" style="display:none">
+			<?php echo $TOT_Facility_table; ?>
+		</div>
+
+	</div>
+		
+	</div>
+	
 </div>
+</div>
+<div class="search" style="left:-100%">
+
+<?php echo Modules::run('search/search/index'); ?>
+</div>
+<div class="side-nav">
+
+	<div class="outer">
+		<div class="inner">
+		<ul>
+			<li><a href="#"><i class="fa fa-search" data-toggle="tooltip" data-placement="bottom" title="Click to Search"></i></a></li>
+			<li class="search-close" style="display:none"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Click to Close Search">X</a></li>
+		</ul>
+		</div>
+		
+	</div>
+		
+	</div>
+
 <div class="modal fade" id="imci_upload_activity" >
 	<div class="modal-dialog">
 
@@ -77,8 +193,10 @@
 				</button>
 				<h4 class="modal-title">Upload Activity</h4>
 			</div>
-			<div class="modal-body">
-				<?php $this->load->view('forms/upload_training')?>
+			<div class="modal-body" id="upload_form_here">
+				<script>
+				$('#upload_form_here').load('imci/showUpload');
+				</script>
 
 			</div>
 			<div class="modal-footer" style="height:45px">
@@ -104,8 +222,10 @@
 					&times;
 				</button>
 				<h4 class="modal-title">View Source Data (<div style="display:inline-block;font-weight:bold" id="activity_name"></div>) 	
-					<a id="export_csv" class="btn" style="margin-top:-5px" data-link="<?php echo base_url();?>imci/export_Excel/"><i class="fi-page-export-csv"></i>Export to Excel</a>
-					<a id="export_pdf" class="btn" style="margin-top:-5px" data-link="<?php echo base_url();?>imci/export_PDF/"><i class="fi-page-export-pdf"></i>Export to PDF</a>
+					<a id="export_csv" class="btn" style="margin-top:-5px" data-link="<?php
+echo base_url(); ?>imci/export_Excel/"><i class="fi-page-export-csv"></i>Export to Excel</a>
+					<a id="export_pdf" class="btn" style="margin-top:-5px" data-link="<?php
+echo base_url(); ?>imci/export_PDF/"><i class="fi-page-export-pdf"></i>Export to PDF</a>
 				</h4>
 			</div>
 			<div class="modal-body" style=" height:60%;overflow-y:scroll" id="source_data">
@@ -126,9 +246,9 @@
 	<div class="modal-dialog" style="width:95%" >
 
 		<div class="modal-content">
-			<?php 
-			$formAttr = array('id'=>'manual_entry_form');
-			echo form_open('imci/manual_entry',$formAttr); ?>
+			<?php
+$formAttr = array('id' => 'manual_entry_form');
+echo form_open('imci/manual_entry', $formAttr); ?>
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
@@ -140,7 +260,7 @@
 				<table id="activity_table" class="table-bordered table-striped" >
 					<thead>
 						<tr style="font-size:1em">
-							<th>NAMES OF PARTICIPANT</th><th>FACILITY NAME</th><th>MFL CODE</th><th>DEPARTMENT</th><th>JOB TITLE</th><th>ID NUMBER</th>
+							<th>NAMES OF PARTICIPANT</th><th>FACILITY NAME</th><th>MFL CODE</th><th>DEPARTMENT</th><th>CADRE</th><th>JOB TITLE</th><th>ID NUMBER</th>
 							<th>MOBILE NUMBER</th><th>EMAIL ADDRESS</th><th>DATES</th><th>TRAINING LOCATION</th><th>Action</th>
 						</tr>
 					</thead>
@@ -151,7 +271,8 @@
 							</td>
 							<td width="200">
 								<select type="text" required aria-required="true" title="" class="form-control facilityoption" placeholder="e.g Nairobi..." >
-									<?php echo $facility_list;   ?>
+									<?php
+echo $facility_list; ?>
 								</select>
 							</td>
 							<td>
@@ -159,12 +280,20 @@
 							</td>
 							<td>
 								<select type="text" required aria-required="true" title="" name="department[]" class="form-control department">
-									<?php echo $department_list;   ?>
+									<?php
+echo $department_list; ?>
 								</select>
 							</td>
 							<td>
-								<select type="text" required aria-required="true" title="" name="job_title[]" class="form-control job_title">
-									<?php echo $job_title_list;   ?>
+								<select type="text" required aria-required="true" title="" name="cadre[]" class="form-control cadre">
+									<?php
+echo $cadre_list; ?>
+								</select>
+							</td>
+							<td>
+								<select type="text" required aria-required="true" title="" name="cadre[]" class="form-control cadre">
+									<?php
+echo $cadre_list; ?>
 								</select>
 							</td>
 							<td>
@@ -200,7 +329,8 @@
 					<i class="fa fa-times"></i> Close
 				</button>
 			</div>
-			<?php   echo form_close(); ?>
+			<?php
+echo form_close(); ?>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -227,11 +357,20 @@
 		activityID = $(this).attr('id');
 		$('#imci_files_modal').modal('show');
 		$('#imci_files_modal').delay(2000).queue(function( nxt ) {
-		$('#source_data').load("<?php echo base_url();?>imci/load_activity_source/"+activityID);
-			$('#activity_name').load('<?php echo base_url();?>imci/load_activity_name/'+activityID);
+		$('#source_data').load("<?php
+echo base_url(); ?>imci/load_activity_source/"+activityID);
+			$('#activity_name').load('<?php
+echo base_url(); ?>imci/load_activity_name/'+activityID);
+
 	nxt();
 	});	
+$('#imci_files_modal').delay(4000).queue(function( nxt ) {
+	$(".dataTable").dataTable();
+		
+		nxt();
 	});
+});
+
 	
 	
 	$(".imci_activity_upload").click(function() {
@@ -250,7 +389,7 @@
 		//alert('a');
 		validate_combo('.facilityoption');
 		validate_combo('.department');
-		validate_combo('.job_title');
+		validate_combo('.cadre');
 		validate_text('.mfl_code');
 		validate_text('.participant');
 		validate_text('.traininglocation');
@@ -262,14 +401,18 @@
 	//$('#imci_upload_form').submit();
 	//});
 	
+
 	$("#imci_uploadActivityBtn").click(function() {
 	$('#imci_upload_form').submit();
 	});
 
 		//Load Graphs		
-		$('#imci_job_title').load('<?php echo base_url(); ?>imci/imci_job_title');
-		$('#imci_frequency').load('<?php echo base_url(); ?>imci/imci_frequency');
-		$('#imci_training').load('<?php echo base_url(); ?>imci/imci_training_county');
+		$('#imci_cadre').load('<?php
+echo base_url(); ?>imci/imci_cadre');
+		$('#imci_frequency').load('<?php
+echo base_url(); ?>imci/imci_frequency');
+		$('#imci_training').load('<?php
+echo base_url(); ?>imci/imci_training_county');
 		
 		
 
@@ -382,7 +525,17 @@
 		
 		
 	};
+$('.fa-bar-chart-o').click(function() {
+	var activity_name='Train an expanded pool of HCWs';
+	activity_name = encodeURIComponent(activity_name);
+		var base_url = '<?php echo base_url(); ?>';
+	var function_url_array = ['imci/imci_frequency/'+activity_name,'imci/imci_training_county','imci/imci_cadre'];
+	var container_array = ['training_frequency','training_coverage','training_cadre'];
+	loadGraphSection(base_url, function_url_array, container_array);
+	});
 	
+
+
 	function validate_email(field){
 		
 	};
