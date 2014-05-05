@@ -1,0 +1,3 @@
+INSERT INTO mnh_rest.available_equipments (ae_availability,ae_location,ae_fully_functional,ae_partially_functional,ae_non_functional,ae_created,eq_code,fac_id)
+  SELECT equipAvailability,equipLocation,qtyFullyFunctional,qtyPartiallyFunctional,qtyNonFunctional,createdAt,equipmentID,facilityID
+  FROM mnh_latest.equipments_available;

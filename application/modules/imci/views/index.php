@@ -68,12 +68,11 @@ echo $latest_TOT_training ?></span></div></div>
 
 	<div class="standard-graph">
 	<div class="outer">
-	<h3>Policy/Guideline/Job Aids<i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i></h3>
+	<h3>Policy/Guideline/Job Aids<i data-anim="la-anim-1" data-link="<?php echo base_url(); ?>guidelines_policy" class="fa fa-external-link run-anim" data-toggle="tooltip" data-placement="bottom" title="Click for More"></i><!--i class="fa fa-expand normal" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress normal" data-placement="bottom" title="Click Here to Minimize"></i--></h3>
 	<div class="inner max">
-			<div class="summary"><span class="text">Quantity distributed directly to site</span><span class="digit"></span></div>
-			<div class="summary"><span class="text">Sites distributed to</span><span class="digit"></span></div>
-			<div class="summary"><span class="text">Quantity distributed directly to counties</span><span class="digit"></span></div>
-			<div class="summary"><span class="text">Sites distributed to</span><span class="digit"></span></div>
+			<div class="summary" id="imci_guidelines"><span class="text">IMCI Guidelines Distributed</span><span class="digit"><?php echo $IMCI_guidelines_total; ?></span></div>
+			<div class="summary" id="diarrhoea_guidelines"><span class="text">Diarrhoea Guidelines Distributed</span><span class="digit"><?php echo $Diarrhoea_guidelines_total; ?></span></div>
+			<div class="summary" id="ort_guidelines"><span class="text">ORT Guidelines Distributed</span><span class="digit"><?php echo $ORT_guidelines_total; ?></span></div>
 			
 			
 		</div>
@@ -84,7 +83,7 @@ echo $latest_TOT_training ?></span></div></div>
 
 	<div class="standard-graph">
 	<div class="outer">
-	<h3>Orientation<i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i></h3>
+	<h3>Orientation<i class="fa fa-expand normal" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress normal" data-placement="bottom" title="Click Here to Minimize"></i></h3>
 	<div class="inner max">
 		<div class="summary"><span class="text">Targeted sites</span><span class="digit"></span></div>
 			<div class="summary"><span class="text">Oriented sites</span><span class="digit"></span></div>
@@ -101,7 +100,7 @@ echo $latest_TOT_training ?></span></div></div>
 	<div class="standard-graph">
 
 	<div class="outer">
-	<h3>HCW Training <i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i><i class="fa fa-bar-chart-o" style="display:none" data-placement="bottom" title="Click Here for Graphs"></i><i class="fa fa-table" style="display:none" data-placement="bottom" title="Click Here for Tables"></i></h3>
+	<h3>HCW Training <i class="fa fa-expand normal" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress normal" data-placement="bottom" title="Click Here to Minimize"></i><i class="fa fa-bar-chart-o" style="display:none" data-placement="bottom" title="Click Here for Graphs"></i><i class="fa fa-table" style="display:none" data-placement="bottom" title="Click Here for Tables"></i></h3>
 		<div class="inner max">
 			<?php echo $HCW_mini; ?>
 		</div>
@@ -139,7 +138,7 @@ echo $latest_TOT_training ?></span></div></div>
 		<div class="standard-graph">
 
 	<div class="outer">
-	<h3>TOT Training <i class="fa fa-expand" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress" data-placement="bottom" title="Click Here to Minimize"></i><i class="fa fa-bar-chart-o" style="display:none" data-placement="bottom" title="Click Here for Graphs"></i><i class="fa fa-table" style="display:none" data-placement="bottom" title="Click Here for Tables"></i></h3>
+	<h3>TOT Training <i class="fa fa-expand normal" data-toggle="tooltip" data-placement="bottom" title="Click Here for More"></i><i style="display:none" class="fa fa-compress normal" data-placement="bottom" title="Click Here to Minimize"></i><i class="fa fa-bar-chart-o" style="display:none" data-placement="bottom" title="Click Here for Graphs"></i><i class="fa fa-table" style="display:none" data-placement="bottom" title="Click Here for Tables"></i></h3>
 		<div class="inner max">
 			<?php echo $TOT_mini; ?>
 		</div>
@@ -335,213 +334,9 @@ echo form_close(); ?>
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
-		$(document).ready(function(){
-			
-			var activityID;
-			
-	$(".imci_manual_update").click(function() {
-	$('#imci_manual_update').modal('show');
-	activityID = $(this).attr('id');
-	$('#imci_manual_update').delay(2000).queue(function( nxt ) {
-	$('#activity_id_man').val(activityID);
-	nxt();
-	});
-	});
-	
-	
-	$('.imci_activity_source').click(function() {
-		$('#source_data').empty();
-		$('#source_data').append('<div class="la-anim-1-mini"></div>');
-		$('#source_data > .la-anim-1-mini').addClass('la-animate');
-		$('#activity_name').empty();
-		activityID = $(this).attr('id');
-		$('#imci_files_modal').modal('show');
-		$('#imci_files_modal').delay(2000).queue(function( nxt ) {
-		$('#source_data').load("<?php
-echo base_url(); ?>imci/load_activity_source/"+activityID);
-			$('#activity_name').load('<?php
-echo base_url(); ?>imci/load_activity_name/'+activityID);
-
-	nxt();
-	});	
-$('#imci_files_modal').delay(4000).queue(function( nxt ) {
-	$(".dataTable").dataTable();
-		
-		nxt();
-	});
+		var base_url = '<?php echo base_url();?>';
+		$(document).ready(pageHandler(base_url,'imci'));
+		$('#policy_link').click(function(){
+			window.open(base_url+'guidelines_policy',"_parent");  
 });
-
-	
-	
-	$(".imci_activity_upload").click(function() {
-	$('#imci_upload_activity').modal('show');
-	activityID = $(this).attr('id');
-	$('#upload_button').delay(2000).queue(function( nxt ) {
-	$('#activity_id').val(activityID);
-
-	nxt();
-	});
-
-	});
-	
-	/*$("#manual-entry").click(function() {
-		//alert($("form#manual_entry_form :input"));
-		//alert('a');
-		validate_combo('.facilityoption');
-		validate_combo('.department');
-		validate_combo('.cadre');
-		validate_text('.mfl_code');
-		validate_text('.participant');
-		validate_text('.traininglocation');
-		validate_text('.id_number');
-		validate_text('.mobile_number');
-		
-		//console.log($("#manual-entry_form").find('select'));
-		 */
-	//$('#imci_upload_form').submit();
-	//});
-	
-
-	$("#imci_uploadActivityBtn").click(function() {
-	$('#imci_upload_form').submit();
-	});
-
-		//Load Graphs		
-		$('#imci_cadre').load('<?php
-echo base_url(); ?>imci/imci_cadre');
-		$('#imci_frequency').load('<?php
-echo base_url(); ?>imci/imci_frequency');
-		$('#imci_training').load('<?php
-echo base_url(); ?>imci/imci_training_county');
-		
-		
-
-		$(".add").click(function() {
-		//	when add is clicked this function
- $('.datepicker').datepicker('remove');
-
-		$table=$('#activity_table');
-		var cloned_object=$table.find('tr:last').clone(true);
-
-		var id = cloned_object.attr("id");
-		var next_id = parseInt(id) + 1;
-		
-
-		cloned_object.attr("id",next_id );
-		cloned_object.find("input").val("");
-		cloned_object.find(":input").css('border-color','#ccc');
-	    //cat_name;
-	   //  cat_name.attr("text",'');
-		//cloned_object.find(".participant").attr("name",'participant['+next_id+']');
-
-		cloned_object.insertAfter('#activity_table tr:last');
-		$('.remove').show();
-		
- $('.datepicker').datepicker({
-    format: 'dd-m-yyyy',
-    autoclose:true
-});
-
-		return false;
-		});	
-		
-		$('.remove').click(function(){
-		id = $(this).parent().parent().attr("id");
-		if(id!=0){
-			$(this).parent().parent().remove();
-		}
-		else{
-			alert('This is the first row');
-		}
-			
-			
-		});
-		
-		//On Change
-		
-		
-		
-		
-		
-		
- $('.datepicker').datepicker({
-    format: 'dd-m-yyyy',
-    autoclose:true
-});
-	
-	$('#export_csv').click(function(){
-		link = $(this).attr('data-link');
-		window.open(link+activityID);		
-	});	
-	
-	$('#export_pdf').click(function(){
-		link = $(this).attr('data-link');
-		window.open(link+activityID);		
-	});	
-	
-	$('.modal-title > a#export_pdf').click(function(){
-		link = $(this).attr('data-link');
-	});	
-	
-	$('.facilityoption').change(function(){
-		val = $(this).val();
-		text = $(this).find('option:selected').text();
-		//alert(text);
-		row = $(this).parent().parent().attr("id");
-		$(this).closest('tr').find('.mfl_code').val(val);
-		$(this).closest('tr').find('.facilityname').val(text);
-		
-	});
-	
-	
-	function validate_combo(combo){
-		tr_id=$(combo).parent().parent().attr('id');
-		value = $('tr#'+tr_id+' td '+ combo).prop("selectedIndex");
-		if(value==0){
-			$(combo).css('border-color','red');
-		}
-		else{
-			$(combo).css('border-color','#ccc');
-		}
-		
-		
-		//return value;
-	};
-	
-	function validate_text(field){
-		tr_id=$(field).parent().parent().attr('id');
-		alert('tr#'+tr_id+' td '+ field);
-		value = $('tr#'+tr_id+' td '+ field).val();
-		//message = $(field).attr('data-msg');
-		
-		if(value==""){
-			$(field).attr.css('border-color','red');
-			$(field).tooltip('show');
-		}
-		else{
-			$(field).css('border-color','#ccc');
-			$(field).tooltip('hide');
-		}
-		
-		
-	};
-$('.fa-bar-chart-o').click(function() {
-	var activity_name='Train an expanded pool of HCWs';
-	activity_name = encodeURIComponent(activity_name);
-		var base_url = '<?php echo base_url(); ?>';
-	var function_url_array = ['imci/imci_frequency/'+activity_name,'imci/imci_training_county','imci/imci_cadre'];
-	var container_array = ['training_frequency','training_coverage','training_cadre'];
-	loadGraphSection(base_url, function_url_array, container_array);
-	});
-	
-
-
-	function validate_email(field){
-		
-	};
-	function validate_mobile(field){
-		
-	};
-	
-		});
 </script>

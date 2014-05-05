@@ -16,7 +16,7 @@ class County_Profile extends MY_Controller {
 		$data['brand'] = 'County Profile';
 		$data['activity_table'] = $this -> load_activity_list();
 		$data['maps']=$this->runMap();
-		$data['tot_number'] = $this -> trained(10);
+		$data['tot_number'] = $this -> total(10);
 		$data['latest_training']=$this->latest_training(10);
 		$this -> template($data);
 	}

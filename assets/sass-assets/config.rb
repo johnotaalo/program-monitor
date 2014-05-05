@@ -1,4 +1,5 @@
 require 'bootstrap-sass'
+require 'sass-css-importer'
 # Require any additional compass plugins here.
 
 

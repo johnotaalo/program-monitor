@@ -8,9 +8,11 @@ class IMCI extends MY_Controller
         parent::__construct();
         $this->load->model('global_model');
         $this->load->model('imci_model');
+        $this->load->module('guidelines_policy');
     }
     
     public function index() {
+
         $data['contentView'] = "imci/index";
         $data['title'] = "Program Monitor :: IMCI Training";
         $data['brand'] = 'IMCI';
@@ -22,8 +24,8 @@ class IMCI extends MY_Controller
         $data['department_list'] = $this->department_list();
         $data['cadre_list'] = $this->cadre_list();
         $data['cadre_list'] = $this->cadre_list();
-        $data['HCW_number'] = $this->trained(10);
-        $data['TOT_number'] = $this->trained(8);
+        $data['HCW_number'] = $this->total(10);
+        $data['TOT_number'] = $this->total(8);
         $data['latest_HCW_training'] = $this->latest_training(10);
         $data['latest_TOT_training'] = $this->latest_training(8);
         $data['HCW_mini'] = $this->getHCWData('HCW mini');
@@ -38,10 +40,14 @@ class IMCI extends MY_Controller
         $data['TOT_Facility_progress'] = $this->getTOTData('Facility Progress');
         $data['TOT_Facility_table'] = $this->getTOTData('Facility Table');
         
+        $data['IMCI_guidelines_total'] = $this->guidelines_policy -> total_distributed(35);
+        $data['Diarrhoea_guidelines_total'] = $this->guidelines_policy -> total_distributed(34);
+        $data['ORT_guidelines_total'] = $this->guidelines_policy -> total_distributed(36);
+        
         $this->template($data);
     }
     
-    public function showUpload(){
+    public function showUpload() {
         $this->load->view('forms/upload_training');
     }
     public function upload() {
@@ -112,7 +118,7 @@ class IMCI extends MY_Controller
             $this->db->select_max('dates');
             $datasets = $this->db->get_where('subprogramlog', array('activity_id' => $activity->activity_id));
             foreach ($datasets->result() as $dataset) {
-                if ($log->upload_date == NULL) {
+                if ($dataset->dates == NULL) {
                     $recent_dataset = 'No Recent Data';
                 } else {
                     $recent_dataset = date("d-M-Y", $dataset->dates);
@@ -340,7 +346,7 @@ GROUP BY dates";
         
         //Variables
         $HCW_target = 1500;
-        $HCW_total_trained = $this->trained(10);
+        $HCW_total_trained = $this->total(10);
         $HCW_ratio = round(($HCW_total_trained / $HCW_target) * 100, 2);
         
         $HCW_nairobi_target = 750;
@@ -478,7 +484,7 @@ GROUP BY dates";
         
         //Variables
         $TOT_target = 200;
-        $TOT_total_trained = $this->trained(8);
+        $TOT_total_trained = $this->total(8);
         $TOT_ratio = round(($TOT_total_trained / $TOT_target) * 100, 2);
         
         $TOT_nairobi_target = 100;

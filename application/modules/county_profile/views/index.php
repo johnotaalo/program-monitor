@@ -25,9 +25,11 @@ echo $maps; ?>
 
 	<div class="outer">
 	<div class="inner-mini">
+
 			<div class="stat" id="county">
-				<span class="text"></span><span class="digit"></span>
-			</div>		
+ 			<div class="icon" style="display:none"><i class="fa fa-map-marker" ></i></div>
+				<div><span class="text"></span><span class="digit"></span>
+			</div></div>		
 			<div class="stat" id="under5">
 				<div class="icon" style="display:none" ><i class="fa fa-users"></i></div>
 				<div>
@@ -95,7 +97,7 @@ echo $maps; ?>
 function run(data){
 	$('.stat div').show();
 	newData=data.split(',')
-	$('#county').text(newData[0]);
+	$('#county .text').text(newData[0]);
 	$('#under5 .text').text('Childen Under Five Years');
 	$('#under5 .digit').text(newData[1]);
 	$('#women .text').text('Women of Reproductive Age');

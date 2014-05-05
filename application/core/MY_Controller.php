@@ -17,6 +17,10 @@ class MY_Controller extends MX_Controller
         
     }
     
+    /**
+     * [getSubPrograms description]
+     * @return [type]
+     */
     function getSubPrograms() {
         $results = $this->global_model->getSubPrograms();
         $links = '';
@@ -34,6 +38,10 @@ class MY_Controller extends MX_Controller
     public function getActivity_Table($subprogram) {
     }
     
+    /**
+     * [facility_list description]
+     * @return [type]
+     */
     public function facility_list() {
         $facility = $this->db->get('facility');
         $facility = $facility->result_array();
@@ -46,6 +54,10 @@ class MY_Controller extends MX_Controller
         return $option;
     }
     
+    /**
+     * [department_list description]
+     * @return [type]
+     */
     public function department_list() {
         $facility = $this->db->get('departments');
         $facility = $facility->result_array();
@@ -58,6 +70,10 @@ class MY_Controller extends MX_Controller
         return $option;
     }
     
+    /**
+     * [cadre_list description]
+     * @return [type]
+     */
     public function cadre_list() {
         $facility = $this->db->get('cadre');
         $facility = $facility->result_array();
@@ -78,28 +94,52 @@ class MY_Controller extends MX_Controller
         return $training_data;
     }
     
-    public function trained($activity) {
+    /**
+     * [total description]
+     * @param  [type] $activity
+     * @return [type]
+     */
+    public function total($activity) {
         $this->db->like('activity_id', $activity);
         $this->db->from('subprogramlog');
         $tot = $this->db->count_all_results();
         return $tot;
     }
+    
+    /**
+     * [latest_training description]
+     * @param  [type] $activity
+     * @return [type]
+     */
     public function latest_training($activity) {
         $this->db->select_max('dates');
         $result = $this->db->get_where('subprogramlog', array('activity_id' => $activity));
         $result = $result->result_array();
         $latest_training = date('d-M-Y', $result[0]['dates']);
-       
+        
         $latest_training = ($latest_training == '01-Jan-1970' ? 'N/A' : $latest_training);
         return $latest_training;
     }
+    
+    /**
+     * [total_facilities_trained description]
+     * @param  [type] $activity_id
+     * @return [type]
+     */
     public function total_facilities_trained($activity_id) {
         $query = 'select count(distinct mfl_code) as total FROM subprogramlog WHERE activity_id=?';
-        $result = $this->db->query($query,$activity_id);
+        $result = $this->db->query($query, $activity_id);
         $result = $result->result_array();
         return $result[0]['total'];
     }
-    public function specific_facilities_trained($county,$activity_id) {
+    
+    /**
+     * [specific_facilities_trained description]
+     * @param  [type] $county
+     * @param  [type] $activity_id
+     * @return [type]
+     */
+    public function specific_facilities_trained($county, $activity_id) {
         $query = 'select 
     count(distinct mfl_code) as total
 FROM
@@ -107,11 +147,18 @@ FROM
         JOIN
     facility ON (subprogramlog.mfl_code = facility.facilityMFC
         AND facility.facilityCounty = ?) WHERE activity_id=?';
-        $result = $this->db->query($query, array($county,$activity_id));
+        $result = $this->db->query($query, array($county, $activity_id));
         $result = $result->result_array();
         return $result[0]['total'];
     }
-    public function region_trained($county,$activity_id) {
+    
+    /**
+     * [region_trained description]
+     * @param  [type] $county
+     * @param  [type] $activity_id
+     * @return [type]
+     */
+    public function region_trained($county, $activity_id) {
         $query = 'select 
     count(mfl_code) as total
 FROM
@@ -119,19 +166,26 @@ FROM
         JOIN
     facility ON (subprogramlog.mfl_code = facility.facilityMFC
         AND facility.facilityCounty = ?) WHERE activity_id=?';
-        $result = $this->db->query($query, array($county,$activity_id));
+        $result = $this->db->query($query, array($county, $activity_id));
         $result = $result->result_array();
         return $result[0]['total'];
     }
     
-    public function facility_type_trained($county, $cat,$activity_id) {
+    /**
+     * [facility_type_trained description]
+     * @param  [type] $county
+     * @param  [type] $cat
+     * @param  [type] $activity_id
+     * @return [type]
+     */
+    public function facility_type_trained($county, $cat, $activity_id) {
         switch ($cat) {
             case 'HCW':
                 $distinct = '';
-                
             case 'TOT':
-                $distinct='';
+                $distinct = '';
                 break;
+
             case "Facility":
                 $distinct = 'distinct';
                 break;
@@ -153,7 +207,7 @@ FROM
         JOIN
     facility ON (subprogramlog.mfl_code = facility.facilityMFC AND facilityCounty=?) WHERE activity_id=?
 GROUP BY facilityOwner';
-        $result = $this->db->query($query, array($county,$activity_id));
+        $result = $this->db->query($query, array($county, $activity_id));
         $result = $result->result_array();
         $data['Private'] = $data['Public'] = 0;
         foreach ($result as $arr) {
