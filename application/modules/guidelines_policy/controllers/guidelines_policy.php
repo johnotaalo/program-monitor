@@ -25,7 +25,8 @@ class Guidelines_Policy extends MY_Controller
         $data['IMCI_guidelines_total'] = $this->total_distributed(35);
         $data['Diarrhoea_guidelines_total'] = $this->total_distributed(34);
         $data['ORT_guidelines_total'] = $this->total_distributed(36);
-        $data['IMCI_policy_map'] = $this->runMap(35);
+        $data['IMCI_policy_map_county'] = $this->runMap_County(35);
+        $data['IMCI_policy_map_source'] = $this->runMap_Source(35);
         $data['facility_list'] = $this->facility_list();
         $data['department_list'] = $this->department_list();
         $data['cadre_list'] = $this->cadre_list();
@@ -373,7 +374,7 @@ GROUP BY dates";
     public function distribution($scope, $criteria,$limit) {
         $result = $this->guidelines_policy_model->distribution($scope, $criteria,$limit);
         $result = $result->result_array();
-        
+        $dataSource=array();
         //print_r($result);
        
         switch ($scope) {
@@ -407,14 +408,15 @@ GROUP BY dates";
         $this->load->view('charts/chart_pie', $data);
     }
 
-    public function runMap($activity_id) {
-        $counties = $this -> guidelines_policy_model -> get_total($activity_id);
+    public function runMap_County($activity_id) {
+        $counties = $this -> guidelines_policy_model -> get_total($activity_id,'county');
 
-        //echo '<pre>'; print_r($counties)  ;
-        //echo '</pre>';
+        //echo '<pre>'; var_dump($counties['Baringo'])  ;
+        //echo '</pre>';die;
         $map = array();
         $datas = array();
         $status = '';
+        if(sizeof($counties['Baringo'])>0){
         foreach ($counties as $county) {
             //var_dump($county);
             $countyMap = (int)$county[0]['county_fusion_map_id'];
@@ -462,7 +464,52 @@ GROUP BY dates";
              */
             $datas[] = array('id' => $countyMap,'value'=>$countyName,'color'=>$status ,'tooltext'=>$countyName.' {br} '.$available.' / '.$total,"baseFontColor" => "000000","link"=>"Javascript:runPolicyMap('".$countyName.",".$total.",".$available."')");
         }
+    }
         $map = array( "baseFontColor" => "000000","canvasBorderColor"=>"ffffff","hoverColor"=>"a46658","fillcolor" => "F7F7F7", "numbersuffix" => "M", "includevalueinlabels" => "1", "labelsepchar" => ":", "baseFontSize" => "9","borderColor"=>'333333',"showBevel"=>"0",'showShadow'=>"0");
+        $styles = array("showBorder"=>0);
+        $finalMap = array('map'=>$map,'data'=>$datas,'styles'=>$styles);
+        $finalMap = json_encode($finalMap);
+        return $finalMap;
+    }
+
+    public function runMap_Source($activity_id) {
+        $counties = $this -> guidelines_policy_model -> get_total($activity_id,'source');
+
+       
+        $map = array();
+        $datas = array();
+        $status = '';
+
+        if(sizeof($counties['Baringo'])>0){
+        foreach ($counties as $county) {
+           $size = sizeof($county);
+            $countyMap = (int)$county[ $size-1]['county_fusion_map_id'];
+            $countyName = $county[ $size-1]['county'];
+            $source = $county[ $size-1]['policy_source'];
+            $allocation = $county[ $size-1]['allocations'];
+
+      
+
+            //echo $percentage.',';
+
+            switch($source) {
+                case ($source=='MOH') :
+                    $status = '#5f8b95';
+                    break;
+                case ($source=='PRIVATE') :
+                    $status = '#af8a53';
+                    break;
+                case ($source=='FBO') :
+                    $status = '#ba4d51';
+                    break;
+                default :
+                    $status = '#ffffff';
+                    break;
+            }
+            $datas[] = array('id' => $countyMap,'value'=>$countyName,'color'=>$status ,'tooltext'=>$countyName.' {br} Minority Supplier : '.$source.' ( '.$allocation.' ) ',"baseFontColor" => "000000","link"=>"Javascript:runPolicyMapSource('".json_encode($county)."')");
+        }
+    }
+        $map = array( "baseFontColor" => "000000","canvasBorderColor"=>"ffffff","hoverColor"=>"eb9294","fillcolor" => "F7F7F7", "numbersuffix" => "M", "includevalueinlabels" => "1", "labelsepchar" => ":", "baseFontSize" => "9","borderColor"=>'333333',"showBevel"=>"0",'showShadow'=>"0");
         $styles = array("showBorder"=>0);
         $finalMap = array('map'=>$map,'data'=>$datas,'styles'=>$styles);
         $finalMap = json_encode($finalMap);

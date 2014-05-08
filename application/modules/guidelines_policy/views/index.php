@@ -81,9 +81,9 @@ echo $activity_table; ?>
 		</div>
 		<div class="inner mini full-screen" id="distribution_county_fullscreen" style="display:none;width:40%">
 		<script>
-var map= new FusionMaps ("assets/fusionmaps/Maps/FCMap_KenyaCounty.swf","KenyaMap","100%","100%","0","0");
+var map= new FusionMaps ("<?php echo base_url()?>assets/fusionmaps/Maps/FCMap_KenyaCounty.swf","KenyaMap","100%","100%","0","0");
 map.setJSONData(<?php
-echo $IMCI_policy_map; ?>
+echo $IMCI_policy_map_county; ?>
 	);
 	map.render("distribution_county_fullscreen");
 					</script>
@@ -125,8 +125,59 @@ echo $IMCI_policy_map; ?>
 		<div class="inner max" id="distribution_source">
 		<div class="la-anim-1-mini"></div>
 		</div>
-		<div class="inner mini full-screen" id="" style="display:none">
-		<div class="la-anim-1-mini"></div>
+		<div class="inner mini full-screen" id="distribution_source_fullscreen" style="display:none;width:40%">
+		<script>
+var map= new FusionMaps ("<?php echo base_url()?>assets/fusionmaps/Maps/FCMap_KenyaCounty.swf","KenyaMap2","100%","100%","0","0");
+map.setJSONData(<?php
+echo $IMCI_policy_map_source; ?>
+	);
+	map.render("distribution_source_fullscreen");
+					</script>
+		</div>
+		<div class="inner mini full-screen" id="" style="display:none;width:59%">
+		
+		<div class="stat">
+        <div class="icon"><i class="fa fa-map-marker"></i></div>
+            <div>
+                <span id="county_name_title" class="text">County Name :  </span>
+                <span id="county_name_2" class="digit">N/A</span>
+            </div>
+        </div>
+		
+        <div class="stat">
+        <div class="icon"><i class="fa fa-hospital-o"></i></div>
+            <div>
+                <span id="facility_number_supplied" class="text">Total Guidelines Supplied : </span>
+                <span id="facility_total_supplied_total" class="digit">0</span>
+            </div>
+        </div>
+
+          <div class="stat">
+        <div class="icon"><i class="fa fa-briefcase"></i></div>
+            <div>
+                <span id="facility_number_supplied" class="text">MOH : </span>
+                <span id="facility_total_supplied_moh" class="digit">0</span>
+            </div>
+        </div>
+
+          <div class="stat">
+        <div class="icon"><i class="fa f fa-briefcase"></i></div>
+            <div>
+                <span id="facility_number_supplied" class="text">FBO : </span>
+                <span id="facility_total_supplied_fbo" class="digit">0</span>
+            </div>
+        </div>
+
+          <div class="stat">
+        <div class="icon"><i class="fa  fa-briefcase"></i></div>
+            <div>
+                <span id="facility_number_supplied" class="text">PRIVATE : </span>
+                <span id="facility_total_supplied_private" class="digit">0</span>
+            </div>
+        </div>
+
+       
+		</div>
 		</div>
 
 		</div>
@@ -323,4 +374,22 @@ echo form_close(); ?>
     $('#facility_total_total').text(newData[1]);
     $('#facility_total_supplied').text(newData[2]);
 }
+
+	function runPolicyMapSource(data){
+		total_allocation=0;
+    newData=$.parseJSON(data);
+    $('#facility_total_supplied_moh').text(0);
+    	$('#facility_total_supplied_fbo').text(0);
+    		$('#facility_total_supplied_private').text(0);
+    		
+   $.each(newData, function( k, v ){    	
+    	$('#facility_total_supplied_'+v['policy_source'].toLowerCase()).text(v['allocations']);
+    	$('#county_name_2').text(v['county']);
+    	total_allocation+=parseInt(v['allocations']);
+ 	});
+
+$('#facility_total_supplied_total').text(total_allocation);
+
+ }  
+
 </script>

@@ -59,11 +59,13 @@ class Upload extends MY_Controller
         }
         
         $sheetCount = $objPHPExcel->getSheetCount();
-        $objReader = PHPExcel_IOFactory::createReader('Excel2007');
+
+        $objReader = new PHPExcel_Reader_Excel5();
         $sheetName[0] = '';
         if ($sheetCount > 1) {
             $sheetName = $objReader->listWorksheetNames($_FILES['file_1']['tmp_name']);
         }
+        // print_r( $sheetName);die;
         for ($x = 0; $x < $sheetCount; $x++) {
             
             $arr = $objPHPExcel->setActiveSheetIndex($x)->toArray(null, true, true, true);

@@ -1,3 +1,4 @@
+@charset "IBM437";
 @font-face {
   font-family: Arsenal-Regular;
   src: url("../fonts/Arsenal-Regular.otf");
@@ -18,6 +19,388 @@
   src: url("../fonts/SourceSansPro-Light.otf");
 }
 
+/*! 
+TYPEPLATE
+URL ........... http://typeplate.com
+VERSION ....... 1.1.3
+Github ........ https://github.com/typeplate/bower
+AUTHORS ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
+LICENSE ....... Creative Commmons Attribution 3.0 (http://creativecommons.org/licenses/by/3.0)
+LICENSE URL ... https://github.com/typeplate/bower/blob/master/license.txt
+*/
+@font-face {
+  font-family: "Ampersand";
+  src: local("Georgia"), local("Garamond"), local("Palatino"), local("Book Antiqua");
+  unicode-range: U+0026;
+}
+
+@font-face {
+  font-family: "Ampersand";
+  src: local("Georgia");
+  unicode-range: U+270C;
+}
+
+/* line 385, ../sass/typeplate/_typeplate.scss */
+body {
+  word-wrap: break-word;
+}
+
+/* line 389, ../sass/typeplate/_typeplate.scss */
+pre code {
+  word-wrap: normal;
+}
+
+/**
+ * Dropcap Sass @include
+ * Use the following Sass @include with any selector you feel necessary.
+ *
+	@include dropcap($dropcap-float-position, $dropcap-font-size, $dropcap-font-family, $dropcap-txt-indent, $dropcap-margin, $dropcap-padding, $dropcap-color, $dropcap-line-height, $dropcap-bg);
+ *
+ * Extend this object into your custom stylesheet. Let the variables do the work.
+ *
+ */
+/* line 514, ../sass/typeplate/_typeplate.scss */
+html {
+  font: normal 112.5%/1.65 serif;
+}
+
+/* line 522, ../sass/typeplate/_typeplate.scss */
+body {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+  color: #444444;
+}
+
+/* line 533, ../sass/typeplate/_typeplate.scss */
+small {
+  font-size: 65%;
+}
+
+/* line 557, ../sass/typeplate/_typeplate.scss */
+h1, h2, h3, h4, h5, h6 {
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  margin-top: 0;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.tera {
+  font-size: 117px;
+  font-size: 6.5rem;
+  margin-bottom: 0.2538461538px;
+  margin-bottom: 0.2538461538rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.giga {
+  font-size: 90px;
+  font-size: 5rem;
+  margin-bottom: 0.33px;
+  margin-bottom: 0.33rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.mega {
+  font-size: 72px;
+  font-size: 4rem;
+  margin-bottom: 0.4125px;
+  margin-bottom: 0.4125rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.alpha, h1 {
+  font-size: 60px;
+  font-size: 3.3333333333rem;
+  margin-bottom: 0.495px;
+  margin-bottom: 0.495rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.beta, h2 {
+  font-size: 48px;
+  font-size: 2.6666666667rem;
+  margin-bottom: 0.61875px;
+  margin-bottom: 0.61875rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.gamma, h3 {
+  font-size: 36px;
+  font-size: 2rem;
+  margin-bottom: 0.825px;
+  margin-bottom: 0.825rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.delta, h4 {
+  font-size: 24px;
+  font-size: 1.3333333333rem;
+  margin-bottom: 1.2375px;
+  margin-bottom: 1.2375rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.epsilon, h5 {
+  font-size: 21px;
+  font-size: 1.1666666667rem;
+  margin-bottom: 1.4142857143px;
+  margin-bottom: 1.4142857143rem;
+}
+
+/* line 572, ../sass/typeplate/_typeplate.scss */
+.zeta, h6 {
+  font-size: 18px;
+  font-size: 1rem;
+  margin-bottom: 1.65px;
+  margin-bottom: 1.65rem;
+}
+
+/* line 612, ../sass/typeplate/_typeplate.scss */
+p {
+  margin: auto auto 1.5em;
+}
+/* line 617, ../sass/typeplate/_typeplate.scss */
+p + p {
+  text-indent: 1.5em;
+  margin-top: -1.5em;
+}
+
+/* line 642, ../sass/typeplate/_typeplate.scss */
+abbr,
+acronym,
+blockquote,
+code,
+dir,
+kbd,
+listing,
+plaintext,
+q,
+samp,
+tt,
+var,
+xmp {
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  -o-hyphens: none;
+  hyphens: none;
+}
+
+/* line 650, ../sass/typeplate/_typeplate.scss */
+pre code {
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap;
+}
+
+/* line 655, ../sass/typeplate/_typeplate.scss */
+pre {
+  white-space: pre;
+}
+
+/* line 659, ../sass/typeplate/_typeplate.scss */
+code {
+  white-space: pre;
+  font-family: monospace;
+}
+
+/**
+ * Abbreviations Markup
+ *
+	<abbr title="hyper text markup language">HMTL</abbr>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/* line 675, ../sass/typeplate/_typeplate.scss */
+abbr {
+  font-variant: small-caps;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: gray;
+}
+/* line 677, ../sass/typeplate/_typeplate.scss */
+abbr[title]:hover {
+  cursor: help;
+}
+
+/* line 691, ../sass/typeplate/_typeplate.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #222222;
+}
+
+/* line 701, ../sass/typeplate/_typeplate.scss */
+p + .drop-cap {
+  text-indent: 0;
+  margin-top: 0;
+}
+
+/* line 416, ../sass/typeplate/_typeplate.scss */
+.drop-cap:first-letter {
+  float: left;
+  margin: inherit;
+  padding: inherit;
+  font-size: 4em;
+  font-family: inherit;
+  line-height: 1;
+  text-indent: 0;
+  background: transparent;
+  color: inherit;
+}
+
+/**
+ * Lining Definition Style Markup
+ *
+	<dl class="lining">
+		<dt><b></b></dt>
+		<dd></dd>
+	</dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/* line 455, ../sass/typeplate/_typeplate.scss */
+.lining dt,
+.lining dd {
+  display: inline;
+  margin: 0;
+}
+/* line 462, ../sass/typeplate/_typeplate.scss */
+.lining dt + dt:before,
+.lining dd + dt:before {
+  content: "\A";
+  white-space: pre;
+}
+/* line 470, ../sass/typeplate/_typeplate.scss */
+.lining dd + dd:before {
+  content: ", ";
+}
+/* line 474, ../sass/typeplate/_typeplate.scss */
+.lining dd:before {
+  content: ": ";
+  margin-left: -0.2rem;
+}
+
+/**
+ * Dictionary Definition Style Markup
+ *
+	<dl class="dictionary-style">
+		<dt><b></b></dt>
+			<dd></dd>
+	</dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/* line 482, ../sass/typeplate/_typeplate.scss */
+.dictionary-style dt {
+  display: inline;
+  counter-reset: definitions;
+}
+/* line 486, ../sass/typeplate/_typeplate.scss */
+.dictionary-style dt + dt:before {
+  content: ", ";
+  margin-left: -0.2rem;
+}
+/* line 492, ../sass/typeplate/_typeplate.scss */
+.dictionary-style dd {
+  display: block;
+  counter-increment: definitions;
+}
+/* line 495, ../sass/typeplate/_typeplate.scss */
+.dictionary-style dd:before {
+  content: counter(definitions,decimal) ". ";
+}
+
+/**
+ * Blockquote Markup
+ *
+		<figure>
+			<blockquote cite="">
+				<p></p>
+			</blockquote>
+			<figcaption>
+				<cite>
+					<small><a href=""></a></small>
+				</cite>
+			</figcaption>
+		</figure>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/**
+ * Pull Quotes Markup
+ *
+	<aside class="pull-quote">
+		<blockquote>
+			<p></p>
+		</blockquote>
+	</aside>
+ *
+ * Extend this object into your custom stylesheet.
+ *
+ */
+/* line 785, ../sass/typeplate/_typeplate.scss */
+.pull-quote {
+  position: relative;
+  padding: 1em;
+}
+/* line 357, ../sass/typeplate/_typeplate.scss */
+.pull-quote:before, .pull-quote:after {
+  height: 1em;
+  opacity: 0.5;
+  position: absolute;
+  font-size: 4em;
+  color: #dc976e;
+}
+/* line 364, ../sass/typeplate/_typeplate.scss */
+.pull-quote:before {
+  content: '“';
+  top: 0;
+  left: 0;
+}
+/* line 369, ../sass/typeplate/_typeplate.scss */
+.pull-quote:after {
+  content: '”';
+  bottom: 0;
+  right: 0;
+}
+
+/**
+ * Figures Markup
+ *
+	<figure>
+		<figcaption>
+			<strong>Fig. 4.2 | </strong>Type Anatomy, an excerpt from Mark Boulton's book<cite title="http://designingfortheweb.co.uk/book/part3/part3_chapter11.php">"Designing for the Web"</cite>
+		</figcaption>
+	</figure>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/**
+ * Footnote Markup : Replace 'X' with your unique number for each footnote
+ *
+	<article>
+		<p><sup><a href="#fn-itemX" id="fn-returnX"></a></sup></p>
+		<footer>
+			<ol class="foot-notes">
+				<li id="fn-itemX"><a href="#fn-returnX">↩</a></li>
+			</ol>
+		</footer>
+	</article>
+ *
+ * Extend this object into your markup.
+ *
+ */
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /* line 9, ../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_normalize.scss */
 html {
@@ -9787,18 +10170,18 @@ button.close {
   content: "\f21a";
 }
 
-/* line 25, ../sass/styles.scss */
+/* line 29, ../sass/styles.scss */
 body {
   background: #edf0f1;
   overflow: hidden;
 }
 
-/* line 78, ../sass/styles.scss */
+/* line 82, ../sass/styles.scss */
 li a {
   color: #428bca;
 }
 
-/* line 81, ../sass/styles.scss */
+/* line 85, ../sass/styles.scss */
 h3 {
   margin: 0;
   margin-bottom: 10px;
@@ -9809,7 +10192,7 @@ h3 {
   font-color: #666;
   padding: 5px;
 }
-/* line 92, ../sass/styles.scss */
+/* line 96, ../sass/styles.scss */
 h3 i {
   color: #aaa;
   font-weight: bold;
@@ -9817,28 +10200,28 @@ h3 i {
   cursor: pointer;
   margin-left: 10px;
 }
-/* line 99, ../sass/styles.scss */
+/* line 103, ../sass/styles.scss */
 h3 i.selected {
   color: #333;
 }
-/* line 102, ../sass/styles.scss */
+/* line 106, ../sass/styles.scss */
 h3 i:hover {
   color: #333;
   cursor: hand;
 }
 
-/* line 107, ../sass/styles.scss */
+/* line 111, ../sass/styles.scss */
 .row {
   padding: 0 5% 0 5%;
 }
 
-/* line 110, ../sass/styles.scss */
+/* line 114, ../sass/styles.scss */
 .project-nav {
   background: #384042;
   color: white;
 }
 
-/* line 116, ../sass/styles.scss */
+/* line 120, ../sass/styles.scss */
 .outer {
   background-color: #fff;
   border-radius: 3px;
@@ -9847,18 +10230,18 @@ h3 i:hover {
   font-size: 0.8em !important;
 }
 
-/* line 120, ../sass/styles.scss */
+/* line 124, ../sass/styles.scss */
 .activities {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 125, ../sass/styles.scss */
+/* line 129, ../sass/styles.scss */
 .activities .inner {
   overflow-y: auto;
   height: 30%;
   padding: 0 2% 2% 2%;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .activities .inner form, .activities .inner ul {
   width: 100%;
   height: 90%;
@@ -9866,35 +10249,35 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .activities .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .activities .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .activities .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .activities .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 128, ../sass/styles.scss */
+/* line 132, ../sass/styles.scss */
 .activities .inner-mini {
   overflow-y: auto;
   height: 11%;
   padding: 0 2% 2% 2%;
   overflow: hidden;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .activities .inner-mini form, .activities .inner-mini ul {
   width: 100%;
   height: 90%;
@@ -9902,34 +10285,34 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .activities .inner-mini .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .activities .inner-mini .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .activities .inner-mini .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .activities .inner-mini .summary .progress {
   margin-bottom: 0;
 }
 
-/* line 133, ../sass/styles.scss */
+/* line 137, ../sass/styles.scss */
 .scrollable {
   overflow-y: auto !important;
 }
 
-/* line 136, ../sass/styles.scss */
+/* line 140, ../sass/styles.scss */
 .stat {
   margin-right: 2%;
   font-size: 1.5em;
@@ -9938,19 +10321,19 @@ h3 i:hover {
   font-family: SourceSansPro-Regular;
   text-align: center;
 }
-/* line 144, ../sass/styles.scss */
+/* line 148, ../sass/styles.scss */
 .stat span.digit {
   color: #3276b1 !important;
   font-size: 1.3em;
   margin-left: 15px;
   display: block;
 }
-/* line 150, ../sass/styles.scss */
+/* line 154, ../sass/styles.scss */
 .stat span.text {
   padding-top: 5%;
   display: block;
 }
-/* line 154, ../sass/styles.scss */
+/* line 158, ../sass/styles.scss */
 .stat .icon, .stat .icon-alt {
   float: left;
   margin-top: 5%;
@@ -9962,39 +10345,39 @@ h3 i:hover {
   background: #3276b1 !important;
   color: white;
 }
-/* line 165, ../sass/styles.scss */
+/* line 169, ../sass/styles.scss */
 .stat .icon i, .stat .icon-alt i {
   margin-top: 13px;
   font-size: 1.5em;
 }
-/* line 171, ../sass/styles.scss */
+/* line 175, ../sass/styles.scss */
 .stat .icon-alt {
   background: #5bc0de !important;
 }
-/* line 175, ../sass/styles.scss */
+/* line 179, ../sass/styles.scss */
 .stat div {
   vertical-align: top;
   display: inline-block;
 }
 
-/* line 183, ../sass/styles.scss */
+/* line 187, ../sass/styles.scss */
 #county {
   margin-top: 1%;
   font-size: 1.9em;
 }
 
-/* line 187, ../sass/styles.scss */
+/* line 191, ../sass/styles.scss */
 .guide {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 192, ../sass/styles.scss */
+/* line 196, ../sass/styles.scss */
 .guide .inner {
   overflow-y: auto;
   height: 25%;
   padding: 0 2% 2% 2%;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .guide .inner form, .guide .inner ul {
   width: 100%;
   height: 90%;
@@ -10002,34 +10385,34 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .guide .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .guide .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .guide .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .guide .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 195, ../sass/styles.scss */
+/* line 199, ../sass/styles.scss */
 .guide .inner-mini {
   overflow-y: auto;
   height: 10%;
   padding: 0 2% 2% 2%;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .guide .inner-mini form, .guide .inner-mini ul {
   width: 100%;
   height: 90%;
@@ -10037,41 +10420,41 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .guide .inner-mini .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .guide .inner-mini .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .guide .inner-mini .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .guide .inner-mini .summary .progress {
   margin-bottom: 0;
 }
 
-/* line 200, ../sass/styles.scss */
+/* line 204, ../sass/styles.scss */
 .x-large-graph {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 205, ../sass/styles.scss */
+/* line 209, ../sass/styles.scss */
 .x-large-graph .inner {
   overflow-y: auto;
   height: 35%;
   padding: 0 2% 2% 2%;
   overflow: hidden;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .x-large-graph .inner form, .x-large-graph .inner ul {
   width: 100%;
   height: 90%;
@@ -10079,50 +10462,50 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .x-large-graph .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .x-large-graph .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .x-large-graph .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .x-large-graph .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 209, ../sass/styles.scss */
+/* line 213, ../sass/styles.scss */
 .x-large-graph .inner.mini, .x-large-graph .inner.mini-graph, .x-large-graph .inner.mini-graph-2 {
   width: 24.7%;
   display: inline-block;
   vertical-align: top;
 }
-/* line 214, ../sass/styles.scss */
+/* line 218, ../sass/styles.scss */
 .x-large-graph .inner.mini-graph-2 {
   width: 49%;
 }
 
-/* line 218, ../sass/styles.scss */
+/* line 222, ../sass/styles.scss */
 .large-graph {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 223, ../sass/styles.scss */
+/* line 227, ../sass/styles.scss */
 .large-graph .inner {
   overflow-y: auto;
   height: 35%;
   padding: 0 2% 2% 2%;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .large-graph .inner form, .large-graph .inner ul {
   width: 100%;
   height: 90%;
@@ -10130,43 +10513,43 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .large-graph .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .large-graph .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .large-graph .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .large-graph .inner .summary .progress {
   margin-bottom: 0;
 }
 
-/* line 227, ../sass/styles.scss */
+/* line 231, ../sass/styles.scss */
 .side-nav {
   position: absolute;
   top: 30%;
   left: 0;
   font-size: 2.5em;
 }
-/* line 233, ../sass/styles.scss */
+/* line 237, ../sass/styles.scss */
 .side-nav .inner {
   overflow-y: auto;
   height: 35%;
   padding: 0 2% 2% 2%;
   padding: 0;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .side-nav .inner form, .side-nav .inner ul {
   width: 100%;
   height: 90%;
@@ -10174,56 +10557,56 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .side-nav .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .side-nav .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .side-nav .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .side-nav .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 236, ../sass/styles.scss */
+/* line 240, ../sass/styles.scss */
 .side-nav .inner ul {
   padding: 0;
 }
-/* line 242, ../sass/styles.scss */
+/* line 246, ../sass/styles.scss */
 .side-nav .inner ul li a {
   color: #333;
 }
-/* line 245, ../sass/styles.scss */
+/* line 249, ../sass/styles.scss */
 .side-nav .inner ul li a:hover {
   color: #428bca;
 }
 
-/* line 254, ../sass/styles.scss */
+/* line 258, ../sass/styles.scss */
 .panel-collapse {
   padding: 10px;
 }
 
-/* line 257, ../sass/styles.scss */
+/* line 261, ../sass/styles.scss */
 .panel-body {
   border-top: none !important;
 }
 
-/* line 260, ../sass/styles.scss */
+/* line 264, ../sass/styles.scss */
 .panel-group {
   margin-top: 10px;
 }
 
-/* line 265, ../sass/styles.scss */
+/* line 269, ../sass/styles.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -10233,24 +10616,24 @@ h3 i:hover {
   outline: none;
 }
 
-/* line 273, ../sass/styles.scss */
+/* line 277, ../sass/styles.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 279, ../sass/styles.scss */
+/* line 283, ../sass/styles.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 285, ../sass/styles.scss */
+/* line 289, ../sass/styles.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 289, ../sass/styles.scss */
+/* line 293, ../sass/styles.scss */
 .tt-dropdown-menu {
   background: #fff;
   width: 100%;
@@ -10261,33 +10644,33 @@ h3 i:hover {
   cursor: hand;
 }
 
-/* line 299, ../sass/styles.scss */
+/* line 303, ../sass/styles.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 1.2em;
   line-height: 24px;
 }
 
-/* line 305, ../sass/styles.scss */
+/* line 309, ../sass/styles.scss */
 .tt-suggestion.tt-cursor {
   color: #fff;
   background-color: #3276b1;
 }
 
-/* line 311, ../sass/styles.scss */
+/* line 315, ../sass/styles.scss */
 .tt-suggestion p {
   margin: 0;
 }
 
-/* line 314, ../sass/styles.scss */
+/* line 318, ../sass/styles.scss */
 #search-bar {
   padding-bottom: 1%;
 }
-/* line 317, ../sass/styles.scss */
+/* line 321, ../sass/styles.scss */
 #search-bar span {
   width: 100%;
 }
-/* line 319, ../sass/styles.scss */
+/* line 323, ../sass/styles.scss */
 #search-bar span input {
   width: 100%;
   padding: 8px 12px;
@@ -10296,13 +10679,13 @@ h3 i:hover {
   box-shadow: 0px 1px 5px 0px #d3d3d3;
 }
 
-/* line 331, ../sass/styles.scss */
+/* line 335, ../sass/styles.scss */
 .search-section .inner {
   overflow-y: auto;
   height: 85%;
   padding: 0 2% 2% 2%;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .search-section .inner form, .search-section .inner ul {
   width: 100%;
   height: 90%;
@@ -10310,48 +10693,48 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .search-section .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .search-section .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .search-section .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .search-section .inner .summary .progress {
   margin-bottom: 0;
 }
 
-/* line 335, ../sass/styles.scss */
+/* line 339, ../sass/styles.scss */
 .main, .search {
   position: absolute;
   width: 100%;
   height: 90%;
 }
 
-/* line 340, ../sass/styles.scss */
+/* line 344, ../sass/styles.scss */
 .standard-graph {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 345, ../sass/styles.scss */
+/* line 349, ../sass/styles.scss */
 .standard-graph .inner {
   overflow-y: auto;
   height: 35%;
   padding: 0 2% 2% 2%;
   overflow: hidden;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .standard-graph .inner form, .standard-graph .inner ul {
   width: 100%;
   height: 90%;
@@ -10359,47 +10742,47 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .standard-graph .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .standard-graph .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .standard-graph .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .standard-graph .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 349, ../sass/styles.scss */
+/* line 353, ../sass/styles.scss */
 .standard-graph .inner.mini {
   width: 24.7%;
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 355, ../sass/styles.scss */
+/* line 359, ../sass/styles.scss */
 .standard-graph-lg {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 360, ../sass/styles.scss */
+/* line 364, ../sass/styles.scss */
 .standard-graph-lg .inner {
   overflow-y: auto;
   height: 37.5%;
   padding: 0 2% 2% 2%;
   overflow: hidden;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .standard-graph-lg .inner form, .standard-graph-lg .inner ul {
   width: 100%;
   height: 90%;
@@ -10407,45 +10790,45 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .standard-graph-lg .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .standard-graph-lg .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .standard-graph-lg .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .standard-graph-lg .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 363, ../sass/styles.scss */
+/* line 367, ../sass/styles.scss */
 .standard-graph-lg .inner .graph {
   height: 80% !important;
 }
 
-/* line 369, ../sass/styles.scss */
+/* line 373, ../sass/styles.scss */
 .xx-large-graph {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 374, ../sass/styles.scss */
+/* line 378, ../sass/styles.scss */
 .xx-large-graph .inner {
   overflow-y: auto;
   height: 90%;
   padding: 0 2% 2% 2%;
   overflow: hidden;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .xx-large-graph .inner form, .xx-large-graph .inner ul {
   width: 100%;
   height: 90%;
@@ -10453,50 +10836,50 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .xx-large-graph .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .xx-large-graph .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .xx-large-graph .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .xx-large-graph .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 377, ../sass/styles.scss */
+/* line 381, ../sass/styles.scss */
 .xx-large-graph .inner .graph {
   height: 100% !important;
 }
-/* line 381, ../sass/styles.scss */
+/* line 385, ../sass/styles.scss */
 .xx-large-graph .inner.mini {
   width: 49%;
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 388, ../sass/styles.scss */
+/* line 392, ../sass/styles.scss */
 .map {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 392, ../sass/styles.scss */
+/* line 396, ../sass/styles.scss */
 .map .inner {
   overflow-y: auto;
   height: 62.5%;
   padding: 0 2% 2% 2%;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .map .inner form, .map .inner ul {
   width: 100%;
   height: 90%;
@@ -10504,35 +10887,35 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .map .inner .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .map .inner .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .map .inner .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .map .inner .summary .progress {
   margin-bottom: 0;
 }
-/* line 395, ../sass/styles.scss */
+/* line 399, ../sass/styles.scss */
 .map .inner-mini {
   overflow-y: auto;
   height: 10%;
   padding: 0 2% 2% 2%;
   overflow: hidden;
 }
-/* line 50, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .map .inner-mini form, .map .inner-mini ul {
   width: 100%;
   height: 90%;
@@ -10540,33 +10923,33 @@ h3 i:hover {
   overflow-y: auto;
   font-size: 1em !important;
 }
-/* line 57, ../sass/styles.scss */
+/* line 61, ../sass/styles.scss */
 .map .inner-mini .summary {
   border-bottom: 1px solid whitesmoke;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-/* line 61, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .map .inner-mini .summary .text {
   width: 90%;
 }
-/* line 64, ../sass/styles.scss */
+/* line 68, ../sass/styles.scss */
 .map .inner-mini .summary .digit {
   float: right;
   color: #3276b1 !important;
   font-weight: bold;
   width: 10%;
 }
-/* line 70, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .map .inner-mini .summary .progress {
   margin-bottom: 0;
 }
-/* line 397, ../sass/styles.scss */
+/* line 401, ../sass/styles.scss */
 .map .inner-mini .stat {
   font-size: 1.2em;
 }
 
-/* line 405, ../sass/styles.scss */
+/* line 409, ../sass/styles.scss */
 table {
   width: 90%;
   margin: auto;
@@ -10575,12 +10958,12 @@ table {
 /*
  * DropDown Submenu
  */
-/* line 416, ../sass/styles.scss */
+/* line 420, ../sass/styles.scss */
 .dropdown-submenu {
   position: relative;
 }
 
-/* line 419, ../sass/styles.scss */
+/* line 423, ../sass/styles.scss */
 .dropdown-submenu > .dropdown-menu {
   top: 0;
   left: 100%;
@@ -10591,12 +10974,12 @@ table {
   border-radius: 0 6px 6px 6px;
 }
 
-/* line 428, ../sass/styles.scss */
+/* line 432, ../sass/styles.scss */
 .dropdown-submenu:hover > .dropdown-menu {
   display: block;
 }
 
-/* line 431, ../sass/styles.scss */
+/* line 435, ../sass/styles.scss */
 .dropdown-submenu > a:after {
   display: block;
   content: " ";
@@ -10611,17 +10994,17 @@ table {
   margin-right: -10px;
 }
 
-/* line 444, ../sass/styles.scss */
+/* line 448, ../sass/styles.scss */
 .dropdown-submenu:hover > a:after {
   border-left-color: #ffffff;
 }
 
-/* line 447, ../sass/styles.scss */
+/* line 451, ../sass/styles.scss */
 .dropdown-submenu.pull-left {
   float: none;
 }
 
-/* line 450, ../sass/styles.scss */
+/* line 454, ../sass/styles.scss */
 .dropdown-submenu.pull-left > .dropdown-menu {
   left: -100%;
   margin-left: 10px;
@@ -10630,60 +11013,60 @@ table {
   border-radius: 6px 0 6px 6px;
 }
 
-/* line 458, ../sass/styles.scss */
+/* line 462, ../sass/styles.scss */
 .btn, .dataTables_paginate.paging_full_numbers a, a.paginate_button, a.paginate_active {
   margin-top: 10px;
 }
 
-/* line 461, ../sass/styles.scss */
+/* line 465, ../sass/styles.scss */
 .btn i, .dataTables_paginate.paging_full_numbers a i, a.paginate_button i, a.paginate_active i {
   margin-right: 5px;
 }
 
-/* line 464, ../sass/styles.scss */
+/* line 468, ../sass/styles.scss */
 .modal-footer > button {
   margin-top: -15px;
 }
 
-/* line 467, ../sass/styles.scss */
+/* line 471, ../sass/styles.scss */
 .date {
   padding-right: 2%;
   font-size: 0.8em;
 }
 
-/* line 471, ../sass/styles.scss */
+/* line 475, ../sass/styles.scss */
 .error {
   color: red;
 }
 
-/* line 474, ../sass/styles.scss */
+/* line 478, ../sass/styles.scss */
 .error i {
   padding-right: 10px;
 }
 
-/* line 477, ../sass/styles.scss */
+/* line 481, ../sass/styles.scss */
 td a {
   margin-right: 10px;
 }
 
-/* line 480, ../sass/styles.scss */
+/* line 484, ../sass/styles.scss */
 td a:hover {
   text-decoration: none;
 }
 
-/* line 484, ../sass/styles.scss */
+/* line 488, ../sass/styles.scss */
 .myModal {
   top: 100px !important;
   overflow: hidden !important;
 }
 
-/* line 488, ../sass/styles.scss */
+/* line 492, ../sass/styles.scss */
 .modal {
   top: 150px !important;
   overflow: hidden !important;
 }
 
-/* line 492, ../sass/styles.scss */
+/* line 496, ../sass/styles.scss */
 .navbar-brand {
   font-size: 2em !important;
 }
@@ -10691,12 +11074,12 @@ td a:hover {
 /*
  * DropDown Submenu
  */
-/* line 499, ../sass/styles.scss */
+/* line 503, ../sass/styles.scss */
 .dropdown-submenu {
   position: relative;
 }
 
-/* line 502, ../sass/styles.scss */
+/* line 506, ../sass/styles.scss */
 .dropdown-submenu > .dropdown-menu {
   top: 0;
   left: 100%;
@@ -10707,12 +11090,12 @@ td a:hover {
   border-radius: 0 6px 6px 6px;
 }
 
-/* line 511, ../sass/styles.scss */
+/* line 515, ../sass/styles.scss */
 .dropdown-submenu:hover > .dropdown-menu {
   display: block;
 }
 
-/* line 514, ../sass/styles.scss */
+/* line 518, ../sass/styles.scss */
 .dropdown-submenu > a:after {
   display: block;
   content: " ";
@@ -10727,17 +11110,17 @@ td a:hover {
   margin-right: -10px;
 }
 
-/* line 527, ../sass/styles.scss */
+/* line 531, ../sass/styles.scss */
 .dropdown-submenu:hover > a:after {
   border-left-color: #ffffff;
 }
 
-/* line 530, ../sass/styles.scss */
+/* line 534, ../sass/styles.scss */
 .dropdown-submenu.pull-left {
   float: none;
 }
 
-/* line 533, ../sass/styles.scss */
+/* line 537, ../sass/styles.scss */
 .dropdown-submenu.pull-left > .dropdown-menu {
   left: -100%;
   margin-left: 10px;
@@ -10749,17 +11132,17 @@ td a:hover {
 /**
  * 	Table
  */
-/* line 543, ../sass/styles.scss */
+/* line 547, ../sass/styles.scss */
 table {
   font-size: 1em !important;
 }
 
-/* line 546, ../sass/styles.scss */
+/* line 550, ../sass/styles.scss */
 .remove {
   cursor: pointer;
 }
 
-/* line 549, ../sass/styles.scss */
+/* line 553, ../sass/styles.scss */
 .remove:hover {
   cursor: hand;
 }
@@ -10767,104 +11150,104 @@ table {
 /**
  * 	Extra Divs
  */
-/* line 556, ../sass/styles.scss */
+/* line 560, ../sass/styles.scss */
 .reporting {
   height: 300px;
   width: 100%;
   padding-bottom: 20px;
 }
 
-/* line 561, ../sass/styles.scss */
+/* line 565, ../sass/styles.scss */
 .reporting label, .reportingBar label {
   vertical-align: top;
   display: inline-block;
   width: 40%;
 }
 
-/* line 566, ../sass/styles.scss */
+/* line 570, ../sass/styles.scss */
 .reporting .progress, .reportingBar .progress {
   display: inline-block;
   width: 55%;
   margin-bottom: 0;
 }
 
-/* line 571, ../sass/styles.scss */
+/* line 575, ../sass/styles.scss */
 #countyHeader {
   width: 35%;
 }
 
-/* line 574, ../sass/styles.scss */
+/* line 578, ../sass/styles.scss */
 #countyHeader, #progressHeader {
   background: #e3e3e3;
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 579, ../sass/styles.scss */
+/* line 583, ../sass/styles.scss */
 #progressHeader {
   width: 60%;
 }
 
-/* line 582, ../sass/styles.scss */
+/* line 586, ../sass/styles.scss */
 .progressRow {
   padding: 2%;
   border-bottom: 1px solid #bbbbbb;
 }
 
-/* line 586, ../sass/styles.scss */
+/* line 590, ../sass/styles.scss */
 .reportingLabel {
   width: 30%;
   float: right;
 }
 
-/* line 590, ../sass/styles.scss */
+/* line 594, ../sass/styles.scss */
 .reportingLabel h6 {
   display: inline-block;
 }
 
-/* line 593, ../sass/styles.scss */
+/* line 597, ../sass/styles.scss */
 .reportingBar {
   display: inline-block;
   width: 70%;
 }
 
-/* line 598, ../sass/styles.scss */
+/* line 602, ../sass/styles.scss */
 .statistic, .statistic-free, .statistic-compare {
   color: #666;
   font-weight: 400;
 }
 
-/* line 602, ../sass/styles.scss */
+/* line 606, ../sass/styles.scss */
 .statistic-free {
   padding-right: 5px;
 }
 
-/* line 605, ../sass/styles.scss */
+/* line 609, ../sass/styles.scss */
 .compare {
   color: #666;
   margin: 0;
   cursor: pointer;
 }
 
-/* line 610, ../sass/styles.scss */
+/* line 614, ../sass/styles.scss */
 .compare:hover {
   color: #000;
   cursor: hand;
   text-decoration: underline;
 }
 
-/* line 615, ../sass/styles.scss */
+/* line 619, ../sass/styles.scss */
 #compare_1, #compare_2, #compare_title {
   margin-left: 10px;
 }
 
-/* line 618, ../sass/styles.scss */
+/* line 622, ../sass/styles.scss */
 #compare_1, #compare_2 {
   margin-bottom: 0;
 }
 
 /** Bootstrap 2 Progress Bar */
-/* line 623, ../sass/styles.scss */
+/* line 627, ../sass/styles.scss */
 .progress {
   height: 20px;
   margin-bottom: 20px;
@@ -10885,7 +11268,7 @@ table {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* line 643, ../sass/styles.scss */
+/* line 647, ../sass/styles.scss */
 .progress .bar {
   float: left;
   width: 0;
@@ -10913,14 +11296,14 @@ table {
   transition: width 0.6s ease;
 }
 
-/* line 670, ../sass/styles.scss */
+/* line 674, ../sass/styles.scss */
 .progress .bar + .bar {
   -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -moz-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 
-/* line 676, ../sass/styles.scss */
+/* line 680, ../sass/styles.scss */
 .progress-striped .bar {
   background-color: #149bdf;
   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
@@ -10934,7 +11317,7 @@ table {
   background-size: 40px 40px;
 }
 
-/* line 689, ../sass/styles.scss */
+/* line 693, ../sass/styles.scss */
 .progress.active .bar {
   -webkit-animation: progress-bar-stripes 2s linear infinite;
   -moz-animation: progress-bar-stripes 2s linear infinite;
@@ -10943,7 +11326,7 @@ table {
   animation: progress-bar-stripes 2s linear infinite;
 }
 
-/* line 698, ../sass/styles.scss */
+/* line 702, ../sass/styles.scss */
 .progress-danger .bar,
 .progress .bar-danger {
   background-color: #dd514c;
@@ -10956,7 +11339,7 @@ table {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffc43c35', GradientType=0);
 }
 
-/* line 710, ../sass/styles.scss */
+/* line 714, ../sass/styles.scss */
 .progress-danger.progress-striped .bar,
 .progress-striped .bar-danger {
   background-color: #ee5f5b;
@@ -10967,7 +11350,7 @@ table {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
-/* line 720, ../sass/styles.scss */
+/* line 724, ../sass/styles.scss */
 .progress-success .bar,
 .progress .bar-success {
   background-color: #5eb95e;
@@ -10980,7 +11363,7 @@ table {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff57a957', GradientType=0);
 }
 
-/* line 732, ../sass/styles.scss */
+/* line 736, ../sass/styles.scss */
 .progress-success.progress-striped .bar,
 .progress-striped .bar-success {
   background-color: #62c462;
@@ -10991,7 +11374,7 @@ table {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
-/* line 742, ../sass/styles.scss */
+/* line 746, ../sass/styles.scss */
 .progress-info .bar,
 .progress .bar-info {
   background-color: #4bb1cf;
@@ -11004,7 +11387,7 @@ table {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff339bb9', GradientType=0);
 }
 
-/* line 754, ../sass/styles.scss */
+/* line 758, ../sass/styles.scss */
 .progress-info.progress-striped .bar,
 .progress-striped .bar-info {
   background-color: #5bc0de;
@@ -11015,7 +11398,7 @@ table {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
-/* line 764, ../sass/styles.scss */
+/* line 768, ../sass/styles.scss */
 .progress-warning .bar,
 .progress .bar-warning {
   background-color: #faa732;
@@ -11028,7 +11411,7 @@ table {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
 }
 
-/* line 776, ../sass/styles.scss */
+/* line 780, ../sass/styles.scss */
 .progress-warning.progress-striped .bar,
 .progress-striped .bar-warning {
   background-color: #fbb450;
@@ -11040,35 +11423,35 @@ table {
 }
 
 /**Datatables Override*/
-/* line 786, ../sass/styles.scss */
+/* line 790, ../sass/styles.scss */
 .dataTables_filter {
   display: inline-block !important;
   vertical-align: top !important;
   float: right !important;
 }
 
-/* line 792, ../sass/styles.scss */
+/* line 796, ../sass/styles.scss */
 .dataTables_length {
   display: inline-block !important;
   vertical-align: top !important;
 }
 
-/* line 796, ../sass/styles.scss */
+/* line 800, ../sass/styles.scss */
 .dataTables_info {
   float: left !important;
 }
 
-/* line 799, ../sass/styles.scss */
+/* line 803, ../sass/styles.scss */
 .dataTables_paginate.paging_full_numbers {
   float: right !important;
 }
 
-/* line 802, ../sass/styles.scss */
+/* line 806, ../sass/styles.scss */
 .dataTables_paginate.paging_full_numbers a {
   margin-right: 2px;
 }
 
-/* line 808, ../sass/styles.scss */
+/* line 812, ../sass/styles.scss */
 a.paginate_button, a.paginate_active {
   margin-right: 2px;
 }

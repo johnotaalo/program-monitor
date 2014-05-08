@@ -18,8 +18,12 @@
 // customize bootstrap variables here:
 $navbar-default-link-color:#fff;
 $navbar-default-link-hover-color:#ccc;
+@import "bourbon/bourbon";
+@import "typeplate/typeplate";
+@import "typeplate/vars-typeplate";
 @import "variables";
 @import "bootstrap";
+
 @import "CSS:../../styles/foundation/foundation-icons";
 
 body{

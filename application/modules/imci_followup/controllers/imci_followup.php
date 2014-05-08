@@ -20,6 +20,9 @@ class IMCI_Followup extends MY_Controller {
 		$data['activity_table'] = $this -> load_activity_list();
 		$this -> template($data);
 	}
+	public function showUpload() {
+        $this->load->view('forms/upload_training');
+    }
 
 	public function upload() {
 		//var_dump($_POST);die;

@@ -58,12 +58,23 @@ LIMIT 10
         return $result;
     }
     
-    public function get_total($activity_id) {
+    public function get_total($activity_id,$criteria) {
         $counties = $this->db->get('counties');
-        
-        foreach ($counties->result_array() as $county) {
+
+        switch($criteria){
+            case 'county':
+             foreach ($counties->result_array() as $county) {
             $data[$county['county_name']] = $this->total_distributed_map($activity_id, $county['county_name']);
         }
+            break;
+            case 'source':
+             foreach ($counties->result_array() as $county) {
+            $data[$county['county_name']] = $this->total_source_map($activity_id, $county['county_name']);
+        }
+            break;
+        }
+        
+       
         return $data;
     }
     
@@ -91,7 +102,7 @@ FROM
         AND f.fac_county = "'.$county.'"
     JOIN counties c ON f.fac_county = c.county_name
     WHERE
-        activity_id = 35 and allocations != ""
+        activity_id = ? and allocations != ""
     GROUP BY f.fac_county
     ORDER BY total DESC) as available,
     (SELECT 
@@ -115,6 +126,38 @@ WHERE
         
         $result = $this->db->query($query, $activity_id);
         return $result;
+    }
+
+    /**
+     * [total_distributed description]
+     * @param  [type] $activity_id
+     * @return [type]
+     */
+    public function total_source_map($activity_id, $county) {
+        
+        $query = 'SELECT 
+    available.policy_source,
+    available.county,
+    available.county_fusion_map_id,
+    available.allocations
+FROM
+    (SELECT 
+        sum(allocations) as allocations,
+            fac_county as county,
+            c.county_fusion_map_id as county_fusion_map_id,
+            policy_source
+    FROM
+        subprogramlog s
+    JOIN facilities f ON f.fac_mfl = s.mfl_code
+        AND f.fac_county = "'.$county.'"
+    JOIN counties c ON f.fac_county = c.county_name
+    WHERE
+        activity_id = ? and allocations != ""
+    GROUP BY s.policy_source
+    ORDER BY allocations DESC) as available;';
+        
+        $result = $this->db->query($query, $activity_id);
+        return $result->result_array();
     }
 
 }

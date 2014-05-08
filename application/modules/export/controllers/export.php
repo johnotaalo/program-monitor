@@ -27,19 +27,48 @@ class Export extends MY_Controller {
 table.data-table th {border: none;color: #fff;text-align: center;background-color:#DDD;border: 1px solid #DDD;border-top: none;max-width: 450px;}
 table.data-table td, table th {padding: 4px;}
 table.data-table td {height: 30px;margin: 0px;border-bottom: 1px solid #DDD;}
+
+tbody tr:nth-child(even){
+	background:#eee;
+}
+table{
+	font-size:16px;
+}
+th{
+	background:#dfa487;
+	text-align:left;
+}
+textarea{
+	border:#fff;
+}
+.shaded{
+	background:#bbb;
+}
+tr, th, td{
+	margin:0 0 0 0;
+	border:none;
+}
+label,textarea{
+	display:block;
+}
+table{
+	width:1000px;
+}
+.bordered{
+	border:2px solid #666;
+}
 </style>
 		');
 		$html = ($data);
 		$this -> load -> library('mpdf');
 	$this -> mpdf = new mPDF('', 'A4-L', 0, '', 15, 15, 16, 16, 9, 9, '');
-	//	$this -> mpdf -> SetTitle('<em>'.$report_name.'</em>');
-	//	$this -> mpdf -> SetHTMLHeader('<em>'.$report_name.'</em>');
-	//	$this -> mpdf -> SetHTMLFooter('<em>'.$report_name.'</em>');
+	$this -> mpdf -> SetHTMLFooter('<span></span><b style="margin-left:900px">{PAGENO} of {nb}</b>');
+
 		$this -> mpdf -> simpleTables = true;
 	//	$this -> mpdf -> WriteHTML($stylesheet, 1);
 		$this -> mpdf -> WriteHTML($stylesheet.$html);
 		$report_name = $filename . ".pdf";
-		$this -> mpdf -> Output($report_name, 'D');
+		$this -> mpdf -> Output($report_name, 'I');
 	}
 
 	#Load PDF

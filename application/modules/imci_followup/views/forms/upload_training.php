@@ -1,6 +1,6 @@
 <?php
-$formAttr = array('enctype' => 'multipart/form-data', 'name' => 'upload_form', 'id' => "imci_upload_form");
-echo form_open('imci/upload', $formAttr);
+$formAttr = array('enctype' => 'multipart/form-data', 'name' => 'upload_form', 'id' => "imci_followup_upload_form");
+echo form_open('imci_followup/upload', $formAttr);
 ?>
 <label>Training Sign Sheet</label>
 <?php echo form_error('training_sign_sheet'); ?>
