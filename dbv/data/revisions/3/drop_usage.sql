@@ -1,1 +1,0 @@
-DROP TABLE `log_usage_stock_out`;
